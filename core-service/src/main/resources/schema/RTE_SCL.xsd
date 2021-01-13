@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="https://www.rte-france.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.rte-france.com"    elementFormDefault="qualified">
+
+
+
+    <xs:simpleType name="tRteIedType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SCU"/>
+            <xs:enumeration value="BCU"/>
+            <xs:enumeration value="MU"/>
+            <xs:enumeration value="SAMU"/>
+            <xs:enumeration value="PROT"/>
+            <xs:enumeration value="TAC"/>
+            <xs:enumeration value="PX"/>
+            <xs:enumeration value="PDIS"/>
+            <xs:enumeration value="PDB"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="RteIedType" type="tRteIedType"/>
+
+    <xs:complexType name="tRteICDHeader" mixed="true">
+        <xs:attribute name="rteIEDType" type="tRteIedType" use="required"/>
+        <xs:attribute name="nomFournisseur" type="xs:string" use="required"/>
+        <xs:attribute name="modeleIED" type="xs:string" use="required"/>
+        <xs:attribute name="hwRev" type="xs:string" use="required"/>
+        <xs:attribute name="swRev" type="xs:string" use="required"/>
+        <xs:attribute name="headerId" type="xs:string" use="required"/>
+        <xs:attribute name="headerVersion" type="xs:string"/>
+        <xs:attribute name="headerRevision" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:element name="RTE-ICD-HEADER" type="tRteICDHeader"/>
+
+    <!-- main -->
+    <xs:element name="RTE-SCL">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="RTE-ICD-HEADER"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
