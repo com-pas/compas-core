@@ -11,6 +11,6 @@
     <name>COMPAS-CORE</name>
 
     <modules>
-        <module>core-service</module>
+        <module>core-commons</module>
     </modules>
 </project>
