@@ -12,7 +12,7 @@
     <artifactId>core-commons</artifactId>
 
 
-    <name>COMPAS COMMONS</name>
+    <name>CORE COMMONS</name>
 
     <properties>
         <java.version>11</java.version>

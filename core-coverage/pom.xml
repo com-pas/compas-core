@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>core-coverage</artifactId>
-    <name>SCT-Coverage</name>
+    <name>CORE Coverage</name>
 
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
