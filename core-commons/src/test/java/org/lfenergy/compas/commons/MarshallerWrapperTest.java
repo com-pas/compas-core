@@ -1,31 +1,20 @@
 package org.lfenergy.compas.commons;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.lfenergy.compas.scl.SCL;
 import org.lfenergy.compas.scl.THeader;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-class MarshallerWrapperTest {
 
-
-
-    @Autowired
-    private MarshallerWrapper marshallerWrapper;
+public class MarshallerWrapperTest {
 
     @Test
-    void testShouldReturnOKWhenMarshallAndUnmarshall() {
-
+    public void testShouldReturnOKWhenMarshallAndUnmarshall() throws Exception {
+        MarshallerWrapper marshallerWrapper = createWrapper("classpath:application.yml");
         SCL scl = createSCD(UUID.randomUUID(),"1.0","1.0");
         String xml = marshallerWrapper.marshall(scl);
 
@@ -36,7 +25,8 @@ class MarshallerWrapperTest {
     }
 
     @Test
-    void testShouldReturnNOKWhenMarshallCauseWrongSCLVersion() {
+    public void testShouldReturnNOKWhenMarshallCauseWrongSCLVersion() throws Exception {
+        MarshallerWrapper marshallerWrapper = createWrapper("classpath:application.properties");
         SCL scl = createSCD(UUID.randomUUID(),"1.0","1.0");
         scl.setVersion("2000");
 
@@ -44,14 +34,19 @@ class MarshallerWrapperTest {
     }
 
     @Test
-    void testShouldReturnNOKWhenUnmarshallCauseWrongSCLVersion() {
+    public void testShouldReturnNOKWhenUnmarshallCauseWrongSCLVersion() throws Exception {
         final String PAYLOAD =
             "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<SCL version=\"2000\" revision=\"B\" release=\"4\" xmlns=\"http://www.iec.ch/61850/2003/SCL\">\n" +
             "    <Header id=\"c44577af-1827-4e8c-9240-735a0ec47738\" version=\"1.0\" revision=\"1.0\"/>\n" +
             "</SCL>";
 
+        MarshallerWrapper marshallerWrapper = createWrapper("classpath:application.yml");
         assertThrows(Exception.class, () -> marshallerWrapper.unmarshall(PAYLOAD.getBytes()));
+    }
+
+    private MarshallerWrapper createWrapper(String path) throws Exception {
+        return (new MarshallerWrapper.Builder()).withProperties(path).build();
     }
 
     private SCL createSCD(UUID uuid, String hRevision, String hVersion){
@@ -66,6 +61,5 @@ class MarshallerWrapperTest {
         scl.setHeader(tHeader);
 
         return scl;
-
     }
 }

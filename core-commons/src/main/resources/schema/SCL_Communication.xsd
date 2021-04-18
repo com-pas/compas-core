@@ -2,10 +2,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scl="http://www.iec.ch/61850/2003/SCL" xmlns="http://www.iec.ch/61850/2003/SCL" targetNamespace="http://www.iec.ch/61850/2003/SCL" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2007B4">
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
-			COPYRIGHT (c) IEC, 2018. This version of this XSD is part of IEC 61850-6:2009/AMD1:2018; see the IEC 61850-6:2009/AMD1:2018 for full legal notices. In case of any differences between the here-below code and the IEC published content, the here-below definition supersedes the IEC publication; it may contain updates. See history files. The whole document has to be taken into account to have a full description of this code component.
-			See www.iec.ch/CCv1 for copyright details.
-		</xs:documentation>
-		<xs:documentation xml:lang="en">
 			SCL schema version "2007" revision "B" release 4,  for IEC 61850-6 Ed. 2.1. 2018-01-22
 			Supersedes "2007B3".
 		</xs:documentation>

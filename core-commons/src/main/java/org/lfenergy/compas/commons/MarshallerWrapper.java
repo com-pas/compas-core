@@ -4,28 +4,41 @@
 
 package org.lfenergy.compas.commons;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeType;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import lombok.NoArgsConstructor;
 import org.lfenergy.compas.scl.SCL;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.lang.NonNull;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.stereotype.Component;
 
+import javax.xml.bind.Marshaller;
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.InvalidPropertiesFormatException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
-@Getter
-@Setter
-@Component
+
 public class MarshallerWrapper {
 
-    @Autowired
+    private static final String PREFIX = "compas.scl.schema.paths";
     private Jaxb2Marshaller marshaller;
 
+    private MarshallerWrapper(){}
 
     public String marshall(final SCL obj){
         StringWriter sw = new StringWriter();
@@ -42,5 +55,99 @@ public class MarshallerWrapper {
     public SCL unmarshall(final byte[] xml) {
         ByteArrayInputStream input = new ByteArrayInputStream( xml);
         return unmarshall(input);
+    }
+
+    @NoArgsConstructor
+    public static class Builder {
+        private String propPath;
+
+        public Builder withProperties(String propPath){
+            this.propPath = propPath;
+            return this;
+        }
+
+        public Jaxb2Marshaller jaxb2Marshaller(@NonNull Map<String, String> nsPathMap) throws Exception {
+            Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
+            DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
+            jaxb2Marshaller.setMarshallerProperties(Collections.singletonMap(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE));
+            jaxb2Marshaller.setClassesToBeBound(SCL.class);
+            List<Resource> resources = new ArrayList<>();
+            if(!nsPathMap.isEmpty()) {
+                nsPathMap.forEach((k, v) -> {
+                    Resource resource = resourceLoader.getResource(v);
+                    if(resource.exists())
+                        resources.add(resource);
+                });
+            } else {
+                Resource resource = resourceLoader.getResource(CommonConstants.XML_DEFAULT_XSD_PATH);
+                if(resource.exists())
+                    resources.add(resource);
+            }
+
+            if(!resources.isEmpty()) {
+                jaxb2Marshaller.setSchemas(resources.toArray(Resource[]::new));
+            }
+            jaxb2Marshaller.afterPropertiesSet();
+
+            return jaxb2Marshaller;
+        }
+
+        public MarshallerWrapper build() throws Exception {
+            DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
+            Resource propResource = defaultResourceLoader.getResource(propPath);
+            Map<String, String> nsPathMap = new HashMap<>();
+
+            if(propResource.exists()){
+                if(propPath.endsWith(".yml") || propPath.endsWith(".yaml")) {
+                    ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+                    JsonNode jsonNode = objectMapper.readTree(propResource.getFile());
+                    nsPathMap = getXSDProperties(jsonNode);
+
+                } else if(propPath.endsWith(".properties")){
+                    Properties properties = new Properties();
+                    try(InputStream input = new FileInputStream(propResource.getFile())) {
+                        properties.load(input);
+                        nsPathMap = getXSDProperties(properties);
+                    }
+                }
+            } else {
+                throw new InvalidPropertiesFormatException("XSD properties are missing!");
+            }
+            MarshallerWrapper marshallerWrapper = new MarshallerWrapper();
+            marshallerWrapper.marshaller = jaxb2Marshaller(nsPathMap);
+
+            return marshallerWrapper;
+        }
+
+        protected Map<String, String> getXSDProperties(Properties properties){
+            Map<String, String> nsPathMap = new HashMap<>();
+            Iterator<Object> it = properties.keys().asIterator();
+            while(it.hasNext()){
+                String key = (String) it.next();
+                if(!key.contains(PREFIX)) continue;
+
+                String prefix = key.substring(PREFIX.length() + 1);
+                nsPathMap.put(prefix,properties.getProperty(key));
+            }
+
+            return nsPathMap;
+        }
+        protected Map<String, String> getXSDProperties(JsonNode jsonNode) throws InvalidPropertiesFormatException {
+            Map<String, String> nsPathMap = new HashMap<>();
+            JsonNode pathsNode = jsonNode.at("/compas/scl/schema/paths");
+            if(pathsNode == null || pathsNode.isNull() || pathsNode.getNodeType() != JsonNodeType.ARRAY){
+                throw new InvalidPropertiesFormatException("XSD properties are missing!");
+            }
+            Iterator<JsonNode> it =pathsNode.elements();
+            while(it.hasNext()) {
+                JsonNode node = it.next();
+                Iterator<String> fieldIt = node.fieldNames();
+                while(fieldIt.hasNext()) {
+                    String prefix = fieldIt.next();
+                    nsPathMap.put(prefix, node.get(prefix).textValue());
+                }
+            }
+            return nsPathMap;
+        }
     }
 }

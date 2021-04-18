@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CommonConstantsTest {
+public class CommonConstantsTest {
 
     @Test
-    void testShouldReturnNOKWhenConstructClassCauseForbidden() {
+    public void testShouldReturnNOKWhenConstructClassCauseForbidden() {
         assertThrows(UnsupportedOperationException.class, () -> new CommonConstants());
     }
 

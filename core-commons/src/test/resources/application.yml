@@ -1,10 +1,5 @@
 ## YAML Template.
 ---
-spring:
-  #profile
-  profiles:
-    active: test
-
 compas:
   scl:
     schema:
