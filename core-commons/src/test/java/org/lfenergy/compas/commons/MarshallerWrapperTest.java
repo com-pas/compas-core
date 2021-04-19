@@ -1,6 +1,9 @@
+// SPDX-FileCopyrightText: 2020 RTE FRANCE
+//
+// SPDX-License-Identifier: Apache-2.0
+
 package org.lfenergy.compas.commons;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.lfenergy.compas.scl.SCL;
 import org.lfenergy.compas.scl.THeader;
