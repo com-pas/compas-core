@@ -21,6 +21,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -60,9 +61,17 @@ public class MarshallerWrapper {
     @NoArgsConstructor
     public static class Builder {
         private String propPath;
+        private Map<String, String> schemaMap = new HashMap<>();
 
         public Builder withProperties(String propPath){
             this.propPath = propPath;
+            this.schemaMap.clear();
+            return this;
+        }
+
+        public Builder withSchemaMap(Map<String, String> schemaMap){
+            this.schemaMap = schemaMap;
+            propPath = null;
             return this;
         }
 
@@ -92,45 +101,52 @@ public class MarshallerWrapper {
             return jaxb2Marshaller;
         }
 
-        public MarshallerWrapper build() throws Exception {
-            DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
-            Resource propResource = defaultResourceLoader.getResource(propPath);
-            Map<String, String> nsPathMap = new HashMap<>();
+        protected void fillNsPathMap() throws IOException {
+            if(!schemaMap.isEmpty()) return;
+            if(propPath == null || propPath.trim().isEmpty()){
+                schemaMap.put("scl","classpath:schema/SCL.xsd");
+            } else {
 
-            if(propResource.exists()){
-                if(propPath.endsWith(".yml") || propPath.endsWith(".yaml")) {
-                    ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
-                    JsonNode jsonNode = objectMapper.readTree(propResource.getFile());
-                    nsPathMap = getXSDProperties(jsonNode);
+                DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
+                Resource propResource = defaultResourceLoader.getResource(propPath);
+                if (propResource.exists()) {
+                    if (propPath.endsWith(".yml") || propPath.endsWith(".yaml")) {
+                        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+                        JsonNode jsonNode = objectMapper.readTree(propResource.getFile());
+                        schemaMap = getXSDProperties(jsonNode);
 
-                } else if(propPath.endsWith(".properties")){
-                    Properties properties = new Properties();
-                    try(InputStream input = new FileInputStream(propResource.getFile())) {
-                        properties.load(input);
-                        nsPathMap = getXSDProperties(properties);
+                    } else if (propPath.endsWith(".properties")) {
+                        Properties properties = new Properties();
+                        try (InputStream input = new FileInputStream(propResource.getFile())) {
+                            properties.load(input);
+                            schemaMap = getXSDProperties(properties);
+                        }
                     }
                 }
-            } else {
-                throw new InvalidPropertiesFormatException("XSD properties are missing!");
+            }
+        }
+
+        public MarshallerWrapper build() throws Exception {
+            if(schemaMap.isEmpty()) {
+                fillNsPathMap();
             }
             MarshallerWrapper marshallerWrapper = new MarshallerWrapper();
-            marshallerWrapper.marshaller = jaxb2Marshaller(nsPathMap);
+            marshallerWrapper.marshaller = jaxb2Marshaller(schemaMap);
 
             return marshallerWrapper;
         }
 
         protected Map<String, String> getXSDProperties(Properties properties){
-            Map<String, String> nsPathMap = new HashMap<>();
             Iterator<Object> it = properties.keys().asIterator();
             while(it.hasNext()){
                 String key = (String) it.next();
                 if(!key.contains(PREFIX)) continue;
 
                 String prefix = key.substring(PREFIX.length() + 1);
-                nsPathMap.put(prefix,properties.getProperty(key));
+                schemaMap.put(prefix,properties.getProperty(key));
             }
 
-            return nsPathMap;
+            return schemaMap;
         }
         protected Map<String, String> getXSDProperties(JsonNode jsonNode) throws InvalidPropertiesFormatException {
             Map<String, String> nsPathMap = new HashMap<>();
