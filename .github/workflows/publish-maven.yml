@@ -7,8 +7,6 @@ name: GitHub Packages with Maven
 on:
   push:
     branches: [ develop ]
-  pull_request:
-    branches: [ develop ]
 
 jobs:
   build:
