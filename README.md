@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021 Alliander N.V.
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 [![REUSE status](https://api.reuse.software/badge/github.com/com-pas/compas-core)](https://api.reuse.software/info/github.com/com-pas/compas-core)
 
 # Core components
