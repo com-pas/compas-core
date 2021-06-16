@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: 2021 Alliander N.V.
+
+SPDX-License-Identifier: Apache-2.0
+-->
 <xs:schema xmlns="https://www.lfenergy.org/compas/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:annotation>
     	<xs:documentation xml:lang="en">
