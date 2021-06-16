@@ -33,6 +33,7 @@ SPDX-License-Identifier: Apache-2.0
     <modules>
         <module>core-commons</module>
         <module>core-coverage</module>
+        <module>scl-extension</module>
     </modules>
     <build>
         <pluginManagement>
