@@ -5,6 +5,7 @@
 name: GitHub Packages with Maven
 
 on:
+  workflow_dispatch
   push:
     branches: [ develop ]
 
