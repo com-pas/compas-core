@@ -4,7 +4,9 @@
 
 name: GitHub Packages with Maven
 
-on: push
+on:
+  push:
+    branches: [ develop ]
 
 jobs:
   build:
@@ -19,6 +21,6 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
     - name: Build with Maven
-      run: mvn -B clean deploy 
+      run: mvn -B clean deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
