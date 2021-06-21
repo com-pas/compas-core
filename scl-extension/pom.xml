@@ -46,7 +46,7 @@ SPDX-License-Identifier: Apache-2.0
                 </executions>
                 <configuration>
                     <schemaDirectory>src/main/resources/xsd</schemaDirectory>
-                    <generatePackage>org.lfenergy.compas.scl</generatePackage>
+                    <generatePackage>org.lfenergy.compas.scl.compas</generatePackage>
                 </configuration>
             </plugin>
         </plugins>

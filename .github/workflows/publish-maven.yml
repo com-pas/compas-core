@@ -4,9 +4,7 @@
 
 name: GitHub Packages with Maven
 
-on:
-  push:
-    branches: [ develop ]
+on: push
 
 jobs:
   build:
