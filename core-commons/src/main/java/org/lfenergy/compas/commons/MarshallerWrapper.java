@@ -79,7 +79,7 @@ public class MarshallerWrapper {
             Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
             DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
             jaxb2Marshaller.setMarshallerProperties(Collections.singletonMap(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE));
-            jaxb2Marshaller.setContextPaths("org.lfenergy.compas.scl.compas", "org.lfenergy.compas.scl");
+            jaxb2Marshaller.setContextPaths("org.lfenergy.compas.scl.extensions", "org.lfenergy.compas.scl");
             List<Resource> resources = new ArrayList<>();
             if(!nsPathMap.isEmpty()) {
                 nsPathMap.forEach((k, v) -> {
