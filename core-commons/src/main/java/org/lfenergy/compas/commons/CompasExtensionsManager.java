@@ -12,18 +12,35 @@ import javax.xml.bind.JAXBElement;
 import java.util.Optional;
 
 import static org.lfenergy.compas.scl.extensions.common.CompasExtensionsConstants.COMPAS_SCL_EXTENSION_TYPE;
+import static org.lfenergy.compas.scl.extensions.common.CompasExtensionsField.SCL_NAME_EXTENSION;
 
 public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
 
     public Optional<TPrivate> getCompasPrivate(SCL scl) {
-        return scl.getPrivate()
+        if (scl != null) {
+            return scl.getPrivate()
+                    .stream()
+                    .filter(tPrivate -> tPrivate.getType().equals(COMPAS_SCL_EXTENSION_TYPE))
+                    .findFirst();
+        }
+        return Optional.empty();
+    }
+
+    public Optional<String> getCompasName(TPrivate compasPrivate) {
+        var compasElement = getCompasElement(compasPrivate, SCL_NAME_EXTENSION);
+        return compasElement
                 .stream()
-                .filter(tPrivate -> tPrivate.getType().equals(COMPAS_SCL_EXTENSION_TYPE))
+                .map(JAXBElement::getValue)
+                .filter(value -> value instanceof String)
+                .map(value -> (String) value)
                 .findFirst();
     }
 
     public Optional<JAXBElement> getCompasElement(TPrivate compasPrivate, CompasExtensionsField field) {
-        return getCompasElement(compasPrivate.getContent(), field);
+        if (compasPrivate != null) {
+            return getCompasElement(compasPrivate.getContent(), field);
+        }
+        return Optional.empty();
     }
 
     public TPrivate createCompasPrivate() {

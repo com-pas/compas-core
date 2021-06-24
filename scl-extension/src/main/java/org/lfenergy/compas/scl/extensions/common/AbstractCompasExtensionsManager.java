@@ -12,10 +12,13 @@ import static org.lfenergy.compas.scl.extensions.common.CompasExtensionsConstant
 
 public abstract class AbstractCompasExtensionsManager {
     protected Optional<JAXBElement> getCompasElement(List<Object> content, CompasExtensionsField field) {
-        return content.stream()
-                .filter(element -> element instanceof JAXBElement)
-                .map(element -> (JAXBElement) element)
-                .filter(element -> element.getName().equals(new QName(COMPAS_EXTENSION_NS, field.getFieldName())))
-                .findFirst();
+        if (content != null) {
+            return content.stream()
+                    .filter(element -> element instanceof JAXBElement)
+                    .map(element -> (JAXBElement) element)
+                    .filter(element -> element.getName().equals(new QName(COMPAS_EXTENSION_NS, field.getFieldName())))
+                    .findFirst();
+        }
+        return Optional.empty();
     }
 }
