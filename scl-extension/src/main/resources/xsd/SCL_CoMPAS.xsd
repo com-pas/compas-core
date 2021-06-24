@@ -14,15 +14,15 @@ SPDX-License-Identifier: Apache-2.0
 		</xs:documentation>
 	</xs:annotation>
 	<!-- 
-	SCL Filename element.
+	SCL Name element.
 	-->
-	<xs:simpleType name="tSclFilename">
+	<xs:simpleType name="tSclName">
 		<xs:annotation>
-			<xs:documentation>Name of the SCL configuration file, extension excluded</xs:documentation>
+			<xs:documentation>Name of the SCL configuration, extension excluded</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:normalizedString"/>
 	</xs:simpleType>
-	<xs:element name="SclFilename" type="tSclFilename"/>
+	<xs:element name="SclName" type="tSclName"/>
 	<!-- 
 	SCL File Type element.
 	-->
