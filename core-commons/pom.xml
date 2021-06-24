@@ -100,11 +100,6 @@ SPDX-License-Identifier: Apache-2.0
             <artifactId>jakarta.annotation-api</artifactId>
             <version>1.3.5</version>
         </dependency>
-        <dependency>
-            <groupId>org.lfenergy.compas</groupId>
-            <artifactId>scl-extension</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
