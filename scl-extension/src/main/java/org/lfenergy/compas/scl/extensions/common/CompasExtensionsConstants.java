@@ -4,6 +4,9 @@
 package org.lfenergy.compas.scl.extensions.common;
 
 public class CompasExtensionsConstants {
+
+    private CompasExtensionsConstants() {}
+
     public static final String COMPAS_EXTENSION_NS = "https://www.lfenergy.org/compas/v1";
 
     public static final String COMPAS_SCL_EXTENSION_TYPE = "compas_scl";
