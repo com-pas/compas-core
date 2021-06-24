@@ -14,8 +14,8 @@ public abstract class AbstractCompasExtensionsManager {
     protected Optional<JAXBElement> getCompasElement(List<Object> content, CompasExtensionsField field) {
         if (content != null) {
             return content.stream()
-                    .filter(element -> element instanceof JAXBElement)
-                    .map(element -> (JAXBElement) element)
+                    .filter(JAXBElement.class::isInstance)
+                    .map(JAXBElement.class::cast)
                     .filter(element -> element.getName().equals(new QName(COMPAS_EXTENSION_NS, field.getFieldName())))
                     .findFirst();
         }

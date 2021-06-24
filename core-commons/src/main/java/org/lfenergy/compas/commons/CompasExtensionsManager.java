@@ -31,8 +31,8 @@ public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
         return compasElement
                 .stream()
                 .map(JAXBElement::getValue)
-                .filter(value -> value instanceof String)
-                .map(value -> (String) value)
+                .filter(String.class::isInstance)
+                .map(String.class::cast)
                 .findFirst();
     }
 
