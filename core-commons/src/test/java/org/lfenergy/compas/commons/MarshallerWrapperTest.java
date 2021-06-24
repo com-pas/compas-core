@@ -12,51 +12,51 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
-public class MarshallerWrapperTest {
-
+class MarshallerWrapperTest {
     @Test
-    public void testShouldReturnOKWhenMarshallAndUnmarshall() throws Exception {
+    void testShouldReturnOKWhenMarshallAndUnmarshall() throws Exception {
         MarshallerWrapper marshallerWrapper = createWrapper("classpath:application.yml");
-        SCL scl = createSCD(UUID.randomUUID(),"1.0","1.0");
+        SCL scl = createSCD(UUID.randomUUID(), "1.0", "1.0");
         String xml = marshallerWrapper.marshall(scl);
 
         scl = marshallerWrapper.unmarshall(xml.getBytes());
-        assertEquals("2007",scl.getVersion());
-        assertEquals("B",scl.getRevision());
-        assertEquals(4,scl.getRelease());
+        assertEquals("2007", scl.getVersion());
+        assertEquals("B", scl.getRevision());
+        assertEquals(4, scl.getRelease());
     }
 
     @Test
-    public void testShouldReturnOKWhenMarshallAndUnmarshallWithMapInitialization() throws Exception {
+    void testShouldReturnOKWhenMarshallAndUnmarshallWithMapInitialization() throws Exception {
 
-        MarshallerWrapper marshallerWrapper = createWrapper(Collections.singletonMap("scl","classpath:schema/SCL.xsd"));
-        SCL scl = createSCD(UUID.randomUUID(),"1.0","1.0");
+        MarshallerWrapper marshallerWrapper = createWrapper(Collections.singletonMap("scl", "classpath:schema/SCL.xsd"));
+        SCL scl = createSCD(UUID.randomUUID(), "1.0", "1.0");
         String xml = marshallerWrapper.marshall(scl);
 
         scl = marshallerWrapper.unmarshall(xml.getBytes());
-        assertEquals("2007",scl.getVersion());
-        assertEquals("B",scl.getRevision());
-        assertEquals(4,scl.getRelease());
+        assertEquals("2007", scl.getVersion());
+        assertEquals("B", scl.getRevision());
+        assertEquals(4, scl.getRelease());
     }
+
     @Test
-    public void testShouldReturnNOKWhenMarshallCauseWrongSCLVersion() throws Exception {
+    void testShouldReturnNOKWhenMarshallCauseWrongSCLVersion() throws Exception {
         MarshallerWrapper marshallerWrapper = createWrapper("classpath:application.properties");
-        SCL scl = createSCD(UUID.randomUUID(),"1.0","1.0");
+        SCL scl = createSCD(UUID.randomUUID(), "1.0", "1.0");
         scl.setVersion("2000");
 
         assertThrows(Exception.class, () -> marshallerWrapper.marshall(scl));
     }
 
     @Test
-    public void testShouldReturnNOKWhenUnmarshallCauseWrongSCLVersion() throws Exception {
+    void testShouldReturnNOKWhenUnmarshallCauseWrongSCLVersion() throws Exception {
         final String PAYLOAD =
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<SCL version=\"2000\" revision=\"B\" release=\"4\" xmlns=\"http://www.iec.ch/61850/2003/SCL\">\n" +
-            "    <Header id=\"c44577af-1827-4e8c-9240-735a0ec47738\" version=\"1.0\" revision=\"1.0\"/>\n" +
-            "</SCL>";
+                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        "<SCL version=\"2000\" revision=\"B\" release=\"4\" xmlns=\"http://www.iec.ch/61850/2003/SCL\">\n" +
+                        "    <Header id=\"c44577af-1827-4e8c-9240-735a0ec47738\" version=\"1.0\" revision=\"1.0\"/>\n" +
+                        "</SCL>";
 
         MarshallerWrapper marshallerWrapper = createWrapper("");
         assertThrows(Exception.class, () -> marshallerWrapper.unmarshall(PAYLOAD.getBytes()));

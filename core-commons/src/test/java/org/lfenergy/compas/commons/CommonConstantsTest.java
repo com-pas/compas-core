@@ -6,13 +6,11 @@ package org.lfenergy.compas.commons;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class CommonConstantsTest {
-
+class CommonConstantsTest {
     @Test
-    public void testShouldReturnNOKWhenConstructClassCauseForbidden() {
+    void testShouldReturnNOKWhenConstructClassCauseForbidden() {
         assertThrows(UnsupportedOperationException.class, () -> new CommonConstants());
     }
-
 }
