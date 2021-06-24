@@ -11,6 +11,19 @@ import java.util.Optional;
 import static org.lfenergy.compas.scl.extensions.common.CompasExtensionsConstants.COMPAS_EXTENSION_NS;
 
 public abstract class AbstractCompasExtensionsManager {
+    protected <T> Optional<T> getCompasValue(List<Object> content, CompasExtensionsField field, Class<T> clazz) {
+        if (content != null) {
+            return getCompasElement(content, field)
+                    .stream()
+                    .map(JAXBElement::getValue)
+                    .filter(clazz::isInstance)
+                    .map(clazz::cast)
+                    .findFirst();
+        }
+        return Optional.empty();
+    }
+
+    @SuppressWarnings("rawtypes")
     protected Optional<JAXBElement> getCompasElement(List<Object> content, CompasExtensionsField field) {
         if (content != null) {
             return content.stream()
