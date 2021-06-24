@@ -42,9 +42,9 @@ public class CompasExtensionsManagerTest {
 
     @Test
     void getCompasElement_WhenCalledNullPassed_ThenNoNameReturned() {
-        var compaselement = manager.getCompasElement(null, SCL_NAME_EXTENSION);
+        var compasElement = manager.getCompasElement(null, SCL_NAME_EXTENSION);
 
-        assertFalse(compaselement.isPresent());
+        assertFalse(compasElement.isPresent());
     }
 
     @Test
@@ -52,9 +52,9 @@ public class CompasExtensionsManagerTest {
         var scl = readSCL("scl_without_name_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
-        var compaselement = manager.getCompasElement(compasPrivate.get(), SCL_NAME_EXTENSION);
+        var compasElement = manager.getCompasElement(compasPrivate.get(), SCL_NAME_EXTENSION);
 
-        assertFalse(compaselement.isPresent());
+        assertFalse(compasElement.isPresent());
     }
 
     @Test
@@ -62,10 +62,10 @@ public class CompasExtensionsManagerTest {
         var scl = readSCL("scl_with_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
-        var compaselement = manager.getCompasElement(compasPrivate.get(), SCL_NAME_EXTENSION);
+        var compasElement = manager.getCompasElement(compasPrivate.get(), SCL_NAME_EXTENSION);
 
-        assertTrue(compaselement.isPresent());
-        assertEquals("project", compaselement.get().getValue().toString());
+        assertTrue(compasElement.isPresent());
+        assertEquals("project", compasElement.get().getValue().toString());
     }
 
     @Test
@@ -73,9 +73,9 @@ public class CompasExtensionsManagerTest {
         var scl = readSCL("scl_without_type_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
-        var compaselement = manager.getCompasElement(compasPrivate.get(), SCL_FILETYPE_EXTENSION);
+        var compasElement = manager.getCompasElement(compasPrivate.get(), SCL_FILETYPE_EXTENSION);
 
-        assertFalse(compaselement.isPresent());
+        assertFalse(compasElement.isPresent());
     }
 
     @Test
@@ -83,10 +83,10 @@ public class CompasExtensionsManagerTest {
         var scl = readSCL("scl_with_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
-        var compaselement = manager.getCompasElement(compasPrivate.get(), SCL_FILETYPE_EXTENSION);
+        var compasElement = manager.getCompasElement(compasPrivate.get(), SCL_FILETYPE_EXTENSION);
 
-        assertTrue(compaselement.isPresent());
-        assertEquals(TSclFileType.CID, compaselement.get().getValue());
+        assertTrue(compasElement.isPresent());
+        assertEquals(TSclFileType.CID, compasElement.get().getValue());
     }
 
     @Test
