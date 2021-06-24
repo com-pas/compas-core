@@ -12,7 +12,7 @@ import static org.lfenergy.compas.scl.extensions.common.CompasExtensionsField.SC
 import static org.lfenergy.compas.scl.extensions.common.CompasExtensionsField.SCL_NAME_EXTENSION;
 import static org.lfenergy.compas.util.ReadTestFile.readSCL;
 
-class CompasExtensionsManagerTest {
+public class CompasExtensionsManagerTest {
     private CompasExtensionsManager manager = new CompasExtensionsManager();
 
     @Test
