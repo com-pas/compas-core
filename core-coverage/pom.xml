@@ -46,8 +46,8 @@ SPDX-License-Identifier: Apache-2.0
                 </configuration>
                 <executions>
                     <execution>
-                        <id>report-aggregate</id>
-                        <phase>test</phase>
+                        <id>report</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>report-aggregate</goal>
                         </goals>
