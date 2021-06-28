@@ -17,7 +17,7 @@ SPDX-License-Identifier: Apache-2.0
     <artifactId>core-commons</artifactId>
 
 
-    <name>CORE COMMONS</name>
+    <name>Core Commons</name>
 
     <properties>
         <java.version>11</java.version>
