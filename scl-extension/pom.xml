@@ -20,6 +20,7 @@ SPDX-License-Identifier: Apache-2.0
 
     <properties>
         <java.version>11</java.version>
+        <sonar.coverage.jacoco.xmlReportPaths>${basedir}/../${aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <dependencies>
