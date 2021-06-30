@@ -4,8 +4,9 @@
 package org.lfenergy.compas.scl.extensions.commons;
 
 public class CompasExtensionsConstants {
-
-    private CompasExtensionsConstants() {}
+    CompasExtensionsConstants() {
+        throw new UnsupportedOperationException("CompasExtensionsConstants class");
+    }
 
     public static final String COMPAS_EXTENSION_NS = "https://www.lfenergy.org/compas/v1";
 

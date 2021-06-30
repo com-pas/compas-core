@@ -1,11 +1,9 @@
 // SPDX-FileCopyrightText: 2020 RTE FRANCE
 //
 // SPDX-License-Identifier: Apache-2.0
-
 package org.lfenergy.compas.scl.commons;
 
 public class CommonConstants {
-
     CommonConstants() {
         throw new UnsupportedOperationException("CommonConstants class");
     }

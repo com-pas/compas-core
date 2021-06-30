@@ -1,16 +1,15 @@
 // SPDX-FileCopyrightText: 2020 RTE FRANCE
 //
 // SPDX-License-Identifier: Apache-2.0
-
 package org.lfenergy.compas.scl.commons;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class CommonConstantsTest {
+class SclConstantsTest {
     @Test
     void testShouldReturnNOKWhenConstructClassCauseForbidden() {
-        assertThrows(UnsupportedOperationException.class, () -> new CommonConstants());
+        assertThrows(UnsupportedOperationException.class, CommonConstants::new);
     }
 }
