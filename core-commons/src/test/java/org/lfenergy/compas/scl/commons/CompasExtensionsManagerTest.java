@@ -1,16 +1,16 @@
 // SPDX-FileCopyrightText: 2021 Alliander N.V.
 //
 // SPDX-License-Identifier: Apache-2.0
-package org.lfenergy.compas.commons;
+package org.lfenergy.compas.scl.commons;
 
 import org.junit.jupiter.api.Test;
-import org.lfenergy.compas.scl.extensions.TSclFileType;
+import org.lfenergy.compas.scl.extensions.model.TSclFileType;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.lfenergy.compas.scl.extensions.common.CompasExtensionsConstants.COMPAS_SCL_EXTENSION_TYPE;
-import static org.lfenergy.compas.scl.extensions.common.CompasExtensionsField.SCL_FILETYPE_EXTENSION;
-import static org.lfenergy.compas.scl.extensions.common.CompasExtensionsField.SCL_NAME_EXTENSION;
-import static org.lfenergy.compas.util.ReadTestFile.readSCL;
+import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsConstants.COMPAS_SCL_EXTENSION_TYPE;
+import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_FILETYPE_EXTENSION;
+import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_NAME_EXTENSION;
+import static org.lfenergy.compas.scl.util.ReadTestFile.readSCL;
 
 class CompasExtensionsManagerTest {
     private CompasExtensionsManager manager = new CompasExtensionsManager();

@@ -1,18 +1,18 @@
 // SPDX-FileCopyrightText: 2021 Alliander N.V.
 //
 // SPDX-License-Identifier: Apache-2.0
-package org.lfenergy.compas.commons;
+package org.lfenergy.compas.scl.commons;
 
-import org.lfenergy.compas.scl.SCL;
-import org.lfenergy.compas.scl.TPrivate;
-import org.lfenergy.compas.scl.extensions.common.AbstractCompasExtensionsManager;
-import org.lfenergy.compas.scl.extensions.common.CompasExtensionsField;
+import org.lfenergy.compas.scl.extensions.commons.AbstractCompasExtensionsManager;
+import org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField;
+import org.lfenergy.compas.scl.model.SCL;
+import org.lfenergy.compas.scl.model.TPrivate;
 
 import javax.xml.bind.JAXBElement;
 import java.util.Optional;
 
-import static org.lfenergy.compas.scl.extensions.common.CompasExtensionsConstants.COMPAS_SCL_EXTENSION_TYPE;
-import static org.lfenergy.compas.scl.extensions.common.CompasExtensionsField.SCL_NAME_EXTENSION;
+import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsConstants.COMPAS_SCL_EXTENSION_TYPE;
+import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_NAME_EXTENSION;
 
 public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
 

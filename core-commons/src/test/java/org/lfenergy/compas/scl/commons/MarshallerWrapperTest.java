@@ -2,11 +2,11 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package org.lfenergy.compas.commons;
+package org.lfenergy.compas.scl.commons;
 
 import org.junit.jupiter.api.Test;
-import org.lfenergy.compas.scl.SCL;
-import org.lfenergy.compas.scl.THeader;
+import org.lfenergy.compas.scl.model.SCL;
+import org.lfenergy.compas.scl.model.THeader;
 
 import java.util.Collections;
 import java.util.Map;

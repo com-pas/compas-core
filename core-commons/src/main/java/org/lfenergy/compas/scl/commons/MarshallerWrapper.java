@@ -2,14 +2,14 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package org.lfenergy.compas.commons;
+package org.lfenergy.compas.scl.commons;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import lombok.NoArgsConstructor;
-import org.lfenergy.compas.scl.SCL;
+import org.lfenergy.compas.scl.model.SCL;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.lang.NonNull;
@@ -19,19 +19,8 @@ import javax.xml.bind.Marshaller;
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.InvalidPropertiesFormatException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.io.*;
+import java.util.*;
 
 
 public class MarshallerWrapper {
@@ -79,7 +68,7 @@ public class MarshallerWrapper {
             Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
             DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
             jaxb2Marshaller.setMarshallerProperties(Collections.singletonMap(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE));
-            jaxb2Marshaller.setContextPaths("org.lfenergy.compas.scl.extensions", "org.lfenergy.compas.scl");
+            jaxb2Marshaller.setContextPaths("org.lfenergy.compas.scl.extensions.model", "org.lfenergy.compas.scl.model");
             List<Resource> resources = new ArrayList<>();
             if(!nsPathMap.isEmpty()) {
                 nsPathMap.forEach((k, v) -> {
