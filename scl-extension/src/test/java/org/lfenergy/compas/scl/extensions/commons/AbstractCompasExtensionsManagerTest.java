@@ -41,6 +41,30 @@ class AbstractCompasExtensionsManagerTest {
         assertFalse(result.isPresent());
     }
 
+    @Test
+    void getCompasValue_WhenNullPassedAsList_ThenEmptyOptionalReturned() {
+        var result = manager.getCompasValue(null, SCL_NAME_EXTENSION, String.class);
+
+        assertFalse(result.isPresent());
+    }
+
+    @Test
+    void getCompasValue_WhenCalledWithListContainingSclName_ThenSclNameReturned() {
+        var elements = createElements(true);
+        var result = manager.getCompasValue(elements, SCL_NAME_EXTENSION, String.class);
+
+        assertTrue(result.isPresent());
+        assertEquals("project", result.get());
+    }
+
+    @Test
+    void getCompasValue_WhenCalledWithListNotContainingSclName_ThenEmptyOptionalReturned() {
+        var elements = createElements(false);
+        var result = manager.getCompasValue(elements, SCL_NAME_EXTENSION, String.class);
+
+        assertFalse(result.isPresent());
+    }
+
     private List<Object> createElements(boolean withSclName) {
         var elements = new ArrayList<>();
 

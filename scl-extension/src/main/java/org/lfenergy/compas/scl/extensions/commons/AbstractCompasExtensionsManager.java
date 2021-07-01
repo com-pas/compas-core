@@ -9,6 +9,19 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class AbstractCompasExtensionsManager {
+    protected <T> Optional<T> getCompasValue(List<Object> content, CompasExtensionsField field, Class<T> clazz) {
+        if (content != null) {
+            return getCompasElement(content, field)
+                    .stream()
+                    .map(JAXBElement::getValue)
+                    .filter(clazz::isInstance)
+                    .map(clazz::cast)
+                    .findFirst();
+        }
+        return Optional.empty();
+    }
+
+    @SuppressWarnings("rawtypes")
     protected Optional<JAXBElement> getCompasElement(List<Object> content, CompasExtensionsField field) {
         if (content != null) {
             return content.stream()

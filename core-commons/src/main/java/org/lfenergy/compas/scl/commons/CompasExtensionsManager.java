@@ -5,6 +5,7 @@ package org.lfenergy.compas.scl.commons;
 
 import org.lfenergy.compas.scl.extensions.commons.AbstractCompasExtensionsManager;
 import org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField;
+import org.lfenergy.compas.scl.extensions.model.TSclFileType;
 import org.lfenergy.compas.scl.model.SCL;
 import org.lfenergy.compas.scl.model.TPrivate;
 
@@ -12,6 +13,7 @@ import javax.xml.bind.JAXBElement;
 import java.util.Optional;
 
 import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsConstants.COMPAS_SCL_EXTENSION_TYPE;
+import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_FILETYPE_EXTENSION;
 import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_NAME_EXTENSION;
 
 public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
@@ -27,15 +29,21 @@ public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
     }
 
     public Optional<String> getCompasSclName(TPrivate compasPrivate) {
-        var compasElement = getCompasElement(compasPrivate, SCL_NAME_EXTENSION);
-        return compasElement
-                .stream()
-                .map(JAXBElement::getValue)
-                .filter(String.class::isInstance)
-                .map(String.class::cast)
-                .findFirst();
+        return getCompasValue(compasPrivate, SCL_NAME_EXTENSION, String.class);
     }
 
+    public Optional<TSclFileType> getCompasSclFileType(TPrivate compasPrivate) {
+        return getCompasValue(compasPrivate, SCL_FILETYPE_EXTENSION, TSclFileType.class);
+    }
+
+    private <T> Optional<T> getCompasValue(TPrivate compasPrivate, CompasExtensionsField field, Class<T> clazz) {
+        if (compasPrivate != null) {
+            return getCompasValue(compasPrivate.getContent(), field, clazz);
+        }
+        return Optional.empty();
+    }
+
+    @SuppressWarnings("rawtypes")
     public Optional<JAXBElement> getCompasElement(TPrivate compasPrivate, CompasExtensionsField field) {
         if (compasPrivate != null) {
             return getCompasElement(compasPrivate.getContent(), field);
