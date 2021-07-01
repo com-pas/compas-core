@@ -2,11 +2,11 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package org.lfenergy.compas.commons;
+package org.lfenergy.compas.scl.commons;
 
 import org.junit.jupiter.api.Test;
-import org.lfenergy.compas.scl.SCL;
-import org.lfenergy.compas.scl.THeader;
+import org.lfenergy.compas.scl.model.SCL;
+import org.lfenergy.compas.scl.model.THeader;
 
 import java.util.Collections;
 import java.util.Map;
@@ -31,7 +31,7 @@ class MarshallerWrapperTest {
     @Test
     void testShouldReturnOKWhenMarshallAndUnmarshallWithMapInitialization() throws Exception {
 
-        MarshallerWrapper marshallerWrapper = createWrapper(Collections.singletonMap("scl", "classpath:schema/SCL.xsd"));
+        MarshallerWrapper marshallerWrapper = createWrapper(Collections.singletonMap(SclConstants.XML_DEFAULT_NS_PREFIX, SclConstants.XML_DEFAULT_XSD_PATH));
         SCL scl = createSCD(UUID.randomUUID(), "1.0", "1.0");
         String xml = marshallerWrapper.marshall(scl);
 

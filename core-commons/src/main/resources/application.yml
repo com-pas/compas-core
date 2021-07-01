@@ -8,4 +8,4 @@ compas:
   scl:
     schema:
       paths: ## Define all schemas (namespace) path here : (alias: "path")
-        - scl: "classpath:schema/SCL.xsd"
+        - scl: "classpath:xsd/SCL.xsd"

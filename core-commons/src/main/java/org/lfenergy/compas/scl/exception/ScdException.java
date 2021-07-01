@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package org.lfenergy.compas.exception;
+package org.lfenergy.compas.scl.exception;
 
 public class ScdException extends Exception{
     public ScdException(String msg) {
