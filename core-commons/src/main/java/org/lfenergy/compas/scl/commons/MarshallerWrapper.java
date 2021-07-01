@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import lombok.NoArgsConstructor;
+import org.lfenergy.compas.scl.extensions.commons.CompasExtensionsConstants;
 import org.lfenergy.compas.scl.model.SCL;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
@@ -24,8 +25,8 @@ import java.util.*;
 
 
 public class MarshallerWrapper {
-
     private static final String PREFIX = "compas.scl.schema.paths";
+
     private Jaxb2Marshaller marshaller;
 
     private MarshallerWrapper(){}
@@ -68,7 +69,7 @@ public class MarshallerWrapper {
             Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
             DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
             jaxb2Marshaller.setMarshallerProperties(Collections.singletonMap(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE));
-            jaxb2Marshaller.setContextPaths("org.lfenergy.compas.scl.extensions.model", "org.lfenergy.compas.scl.model");
+            jaxb2Marshaller.setContextPaths(SclConstants.JAXB_CONTEXT_PATH, CompasExtensionsConstants.JAXB_CONTEXT_PATH);
             List<Resource> resources = new ArrayList<>();
             if(!nsPathMap.isEmpty()) {
                 nsPathMap.forEach((k, v) -> {
@@ -77,7 +78,7 @@ public class MarshallerWrapper {
                         resources.add(resource);
                 });
             } else {
-                Resource resource = resourceLoader.getResource(CommonConstants.XML_DEFAULT_XSD_PATH);
+                Resource resource = resourceLoader.getResource(SclConstants.XML_DEFAULT_XSD_PATH);
                 if(resource.exists())
                     resources.add(resource);
             }
@@ -91,10 +92,10 @@ public class MarshallerWrapper {
         }
 
         protected void fillNsPathMap() throws IOException {
-            if(!schemaMap.isEmpty()) return;
-            if(propPath == null || propPath.trim().isEmpty()){
-                schemaMap.put("scl","classpath:schema/SCL.xsd");
-                schemaMap.put("compas","classpath:xsd/SCL_CoMPAS.xsd");
+            if (!schemaMap.isEmpty()) return;
+            if (propPath == null || propPath.trim().isEmpty()) {
+                schemaMap.put(SclConstants.XML_DEFAULT_NS_PREFIX, SclConstants.XML_DEFAULT_XSD_PATH);
+                schemaMap.put(CompasExtensionsConstants.XML_DEFAULT_NS_PREFIX, CompasExtensionsConstants.XML_DEFAULT_XSD_PATH);
             } else {
 
                 DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();

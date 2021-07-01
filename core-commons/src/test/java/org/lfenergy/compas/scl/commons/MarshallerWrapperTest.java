@@ -31,7 +31,7 @@ class MarshallerWrapperTest {
     @Test
     void testShouldReturnOKWhenMarshallAndUnmarshallWithMapInitialization() throws Exception {
 
-        MarshallerWrapper marshallerWrapper = createWrapper(Collections.singletonMap("scl", "classpath:schema/SCL.xsd"));
+        MarshallerWrapper marshallerWrapper = createWrapper(Collections.singletonMap("scl", "classpath:xsd/SCL.xsd"));
         SCL scl = createSCD(UUID.randomUUID(), "1.0", "1.0");
         String xml = marshallerWrapper.marshall(scl);
 

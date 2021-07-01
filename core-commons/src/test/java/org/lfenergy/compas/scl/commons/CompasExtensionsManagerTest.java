@@ -13,6 +13,8 @@ import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.S
 import static org.lfenergy.compas.scl.util.ReadTestFile.readSCL;
 
 class CompasExtensionsManagerTest {
+    private static final String COMPAS_PRIVATE_NOTFOUND = "No Compas Private Element found";
+
     private CompasExtensionsManager manager = new CompasExtensionsManager();
 
     @Test
@@ -48,34 +50,40 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasElement_WhenCalledWithoutName_ThenNoNameReturned() throws Exception {
-        var scl = readSCL("scl_without_name_compas_private.scd");
+    void getCompasElement_WhenCalledWithoutSclName_ThenNoSclNameReturned() throws Exception {
+        var scl = readSCL("scl_without_sclname_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
-        var compasElement = manager.getCompasElement(compasPrivate.get(), SCL_NAME_EXTENSION);
+        compasPrivate.ifPresentOrElse(tPrivate -> {
+            var compasElement = manager.getCompasElement(tPrivate, SCL_NAME_EXTENSION);
 
-        assertFalse(compasElement.isPresent());
+            assertFalse(compasElement.isPresent());
+        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
     }
 
     @Test
-    void getCompasElement_WhenCalledWithName_ThenNameReturned() throws Exception {
+    void getCompasElement_WhenCalledWithSclName_ThenSclNameReturned() throws Exception {
         var scl = readSCL("scl_with_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
-        var compasElement = manager.getCompasElement(compasPrivate.get(), SCL_NAME_EXTENSION);
+        compasPrivate.ifPresentOrElse(tPrivate -> {
+            var compasElement = manager.getCompasElement(tPrivate, SCL_NAME_EXTENSION);
 
-        assertTrue(compasElement.isPresent());
-        assertEquals("project", compasElement.get().getValue().toString());
+            assertTrue(compasElement.isPresent());
+            assertEquals("project", compasElement.get().getValue().toString());
+        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
     }
 
     @Test
-    void getCompasElement_WhenCalledWithoutType_ThenNoNameReturned() throws Exception {
-        var scl = readSCL("scl_without_type_compas_private.scd");
+    void getCompasElement_WhenCalledWithoutFileType_ThenNoFileTypeReturned() throws Exception {
+        var scl = readSCL("scl_without_filetype_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
-        var compasElement = manager.getCompasElement(compasPrivate.get(), SCL_FILETYPE_EXTENSION);
+        compasPrivate.ifPresentOrElse(tPrivate -> {
+            var compasElement = manager.getCompasElement(tPrivate, SCL_FILETYPE_EXTENSION);
 
-        assertFalse(compasElement.isPresent());
+            assertFalse(compasElement.isPresent());
+        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
     }
 
     @Test
@@ -83,10 +91,37 @@ class CompasExtensionsManagerTest {
         var scl = readSCL("scl_with_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
-        var compasElement = manager.getCompasElement(compasPrivate.get(), SCL_FILETYPE_EXTENSION);
+        compasPrivate.ifPresentOrElse(tPrivate -> {
+            var compasElement = manager.getCompasElement(tPrivate, SCL_FILETYPE_EXTENSION);
 
-        assertTrue(compasElement.isPresent());
-        assertEquals(TSclFileType.CID, compasElement.get().getValue());
+            assertTrue(compasElement.isPresent());
+            assertEquals(TSclFileType.CID, compasElement.get().getValue());
+        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+    }
+
+    @Test
+    void getCompasSclName_WhenCalledWithsclName_TheSclNameReturned() throws Exception {
+        var scl = readSCL("scl_with_compas_private.scd");
+        var compasPrivate = manager.getCompasPrivate(scl);
+
+        compasPrivate.ifPresentOrElse(tPrivate -> {
+            var sclName = manager.getCompasSclName(compasPrivate.get());
+
+            assertTrue(sclName.isPresent());
+            assertEquals("project", sclName.get());
+        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+    }
+
+    @Test
+    void getCompasSclName_WhenCalledWithNosclName_TheEmptyOptionalReturned() throws Exception {
+        var scl = readSCL("scl_without_sclname_compas_private.scd");
+        var compasPrivate = manager.getCompasPrivate(scl);
+
+        compasPrivate.ifPresentOrElse(tPrivate -> {
+            var sclName = manager.getCompasSclName(compasPrivate.get());
+
+            assertFalse(sclName.isPresent());
+        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
     }
 
     @Test

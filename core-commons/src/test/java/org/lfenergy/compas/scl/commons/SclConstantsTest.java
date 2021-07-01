@@ -10,6 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class SclConstantsTest {
     @Test
     void testShouldReturnNOKWhenConstructClassCauseForbidden() {
-        assertThrows(UnsupportedOperationException.class, CommonConstants::new);
+        assertThrows(UnsupportedOperationException.class, SclConstants::new);
     }
 }

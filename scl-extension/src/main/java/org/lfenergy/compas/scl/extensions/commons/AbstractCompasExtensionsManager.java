@@ -14,7 +14,7 @@ public abstract class AbstractCompasExtensionsManager {
             return content.stream()
                     .filter(JAXBElement.class::isInstance)
                     .map(JAXBElement.class::cast)
-                    .filter(element -> element.getName().equals(new QName(CompasExtensionsConstants.COMPAS_EXTENSION_NS, field.getFieldName())))
+                    .filter(element -> element.getName().equals(new QName(CompasExtensionsConstants.COMPAS_EXTENSION_NS_URI, field.getFieldName())))
                     .findFirst();
         }
         return Optional.empty();

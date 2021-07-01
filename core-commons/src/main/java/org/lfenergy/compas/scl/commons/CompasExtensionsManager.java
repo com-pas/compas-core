@@ -26,7 +26,7 @@ public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
         return Optional.empty();
     }
 
-    public Optional<String> getCompasName(TPrivate compasPrivate) {
+    public Optional<String> getCompasSclName(TPrivate compasPrivate) {
         var compasElement = getCompasElement(compasPrivate, SCL_NAME_EXTENSION);
         return compasElement
                 .stream()

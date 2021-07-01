@@ -100,7 +100,7 @@ SPDX-License-Identifier: Apache-2.0
                     </execution>
                 </executions>
                 <configuration>
-                    <schemaDirectory>src/main/resources/schema</schemaDirectory>
+                    <schemaDirectory>src/main/resources/xsd</schemaDirectory>
                     <generatePackage>org.lfenergy.compas.scl.model</generatePackage>
                 </configuration>
             </plugin>
