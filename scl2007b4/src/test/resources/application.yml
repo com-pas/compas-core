@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2021 RTE FRANCE
+#
+# SPDX-License-Identifier: Apache-2.0
+
+## YAML Template.
+---
+compas:
+  scl:
+    schema:
+      paths: ## Define all schemas (namespace) path here : (alias: "path")
+        - scl: "classpath:xsd/SCL2007B4/SCL.xsd"

@@ -9,9 +9,9 @@ SPDX-License-Identifier: Apache-2.0
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.lfenergy.compas</groupId>
+    <groupId>org.lfenergy.compas.core</groupId>
     <artifactId>compas-core</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>local-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -19,6 +19,7 @@ SPDX-License-Identifier: Apache-2.0
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <compas.scl.xsd.version>0.0.1</compas.scl.xsd.version>
         <junit.jupiter.version>5.7.2</junit.jupiter.version>
     </properties>
 
@@ -29,23 +30,37 @@ SPDX-License-Identifier: Apache-2.0
             <url>https://maven.pkg.github.com/com-pas/compas-core</url>
         </repository>
     </distributionManagement>
-         
+
+    <repositories>
+        <repository>
+            <id>github-packages-compas</id>
+            <name>Github Packages CoMPAS</name>
+            <url>https://maven.pkg.github.com/com-pas/*</url>
+        </repository>
+    </repositories>
+
     <modules>
         <module>scl-extension</module>
-        <module>core-commons</module>
+        <module>scl2007b4</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.lfenergy.compas</groupId>
+                <groupId>org.lfenergy.compas.core</groupId>
                 <artifactId>core-commons</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.lfenergy.compas</groupId>
+                <groupId>org.lfenergy.compas.core</groupId>
                 <artifactId>scl-extension</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.lfenergy.compas.xsd</groupId>
+                <artifactId>compas-scl-xsd</artifactId>
+                <version>${compas.scl.xsd.version}</version>
             </dependency>
 
             <dependency>
@@ -74,6 +89,12 @@ SPDX-License-Identifier: Apache-2.0
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.1</version>
                 </plugin>
@@ -82,6 +103,12 @@ SPDX-License-Identifier: Apache-2.0
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.22.2</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.2.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -106,6 +133,21 @@ SPDX-License-Identifier: Apache-2.0
                             <groupId>org.jacoco</groupId>
                             <artifactId>jacoco-maven-plugin</artifactId>
                             <version>${jacoco.version}</version>
+                            <executions>
+                                <execution>
+                                    <id>jacoco-initialize</id>
+                                    <goals>
+                                        <goal>prepare-agent</goal>
+                                    </goals>
+                                </execution>
+                                <execution>
+                                    <id>jacoco-report</id>
+                                    <phase>verify</phase>
+                                    <goals>
+                                        <goal>report</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
                         </plugin>
                     </plugins>
                 </pluginManagement>
@@ -114,21 +156,56 @@ SPDX-License-Identifier: Apache-2.0
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>jacoco-initialize</id>
-                                <goals>
-                                    <goal>prepare-agent</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>jacoco-report</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>report</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>release</id>
+
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-source-plugin</artifactId>
+                            <version>3.2.0</version>
+                            <executions>
+                                <execution>
+                                    <id>attach-sources</id>
+                                    <goals>
+                                        <goal>jar</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-javadoc-plugin</artifactId>
+                            <version>3.3.0</version>
+                            <executions>
+                                <execution>
+                                    <id>attach-javadocs</id>
+                                    <goals>
+                                        <goal>jar</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
                     </plugin>
                 </plugins>
             </build>
