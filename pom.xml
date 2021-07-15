@@ -40,7 +40,10 @@ SPDX-License-Identifier: Apache-2.0
     </repositories>
 
     <modules>
+        <module>commons</module>
         <module>scl-extension</module>
+        <module>scl2003</module>
+        <module>scl2007b</module>
         <module>scl2007b4</module>
     </modules>
 

@@ -14,11 +14,11 @@ SPDX-License-Identifier: Apache-2.0
         <version>local-SNAPSHOT</version>
     </parent>
 
-    <artifactId>scl2007b4</artifactId>
+    <artifactId>scl2007b</artifactId>
     <packaging>jar</packaging>
 
     <properties>
-        <sonar.coverage.exclusions>org/lfenergy/compas/scl2007b4/model/**/*</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>org/lfenergy/compas/scl2007b/model/**/*</sonar.coverage.exclusions>
     </properties>
 
     <dependencies>
@@ -129,8 +129,8 @@ SPDX-License-Identifier: Apache-2.0
                     </execution>
                 </executions>
                 <configuration>
-                    <generatePackage>org.lfenergy.compas.scl2007b4.model</generatePackage>
-                    <schemaDirectory>${project.build.directory}/xsd/SCL2007B4</schemaDirectory>
+                    <generatePackage>org.lfenergy.compas.scl2007b.model</generatePackage>
+                    <schemaDirectory>${project.build.directory}/xsd/SCL2007B</schemaDirectory>
                     <schemaIncludes>
                         <schemaInclude>SCL*.xsd</schemaInclude>
                     </schemaIncludes>
