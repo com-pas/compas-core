@@ -111,7 +111,6 @@ public abstract class MarshallerWrapper<T> {
                 var objectMapper = new ObjectMapper(new YAMLFactory());
                 var jsonNode = objectMapper.readTree(inputStream);
 
-                ;
                 var pathsNode = jsonNode.at(COMPAS_SCL_SCHEMAS_JSONPATH);
                 if (pathsNode != null && pathsNode.getNodeType() == JsonNodeType.ARRAY) {
                     Iterable<JsonNode> nodes = pathsNode::elements;

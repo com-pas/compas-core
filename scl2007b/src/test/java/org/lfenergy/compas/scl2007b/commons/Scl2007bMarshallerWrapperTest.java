@@ -49,25 +49,25 @@ class Scl2007bMarshallerWrapperTest {
     @Test
     void unmarshaller_WhenUnmarshallWithInvalidXML_ThenExceptionIsThrown() {
         var marshallerWrapper = createMarshallerWrapper();
-        var xml = "<invalid></invalid>";
+        var xml = "<invalid></invalid>".getBytes();
 
         // Next convert the XML String back again to a SCL Class.
         var exception = assertThrows(CompasException.class,
-                () -> marshallerWrapper.unmarshall(xml.getBytes()));
+                () -> marshallerWrapper.unmarshall(xml));
         assertEquals(UNMARSHAL_ERROR_CODE, exception.getErrorCode());
     }
 
     @Test
     void unmarshall_WhenXMLContainsWrongVersionRevision_ThenShouldThrowException() {
-        final String payload =
-                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+        var payload =
+                ("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                         "<SCL version=\"2000\" revision=\"A\" xmlns=\"http://www.iec.ch/61850/2003/SCL\">\n" +
                         "    <Header id=\"c44577af-1827-4e8c-9240-735a0ec47738\" version=\"1.0\" revision=\"1.0\"/>\n" +
-                        "</SCL>";
+                        "</SCL>").getBytes();
 
         var marshallerWrapper = createMarshallerWrapper();
         var exception = assertThrows(CompasException.class,
-                () -> marshallerWrapper.unmarshall(payload.getBytes()));
+                () -> marshallerWrapper.unmarshall(payload));
         assertEquals(UNMARSHAL_ERROR_CODE, exception.getErrorCode());
     }
 

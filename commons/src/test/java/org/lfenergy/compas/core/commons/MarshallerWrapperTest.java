@@ -32,43 +32,51 @@ class MarshallerWrapperTest {
 
     @Test
     void unmarshaller_WhenUnmarshallWithInvalidXML_ThenExceptionIsThrown() {
-        var xml = "<invalid></invalid>";
+        var marshallerWrapper = new XmlElementPojoMarshallerWrapper.Builder().build();
+        var xml = "<invalid></invalid>".getBytes();
 
         // Next convert the XML String back again to a SCL Class.
-        var exception = assertThrows(CompasException.class,
-                () -> new XmlElementPojoMarshallerWrapper.Builder().build().unmarshall(xml.getBytes()));
+        var exception = assertThrows(CompasException.class, () -> marshallerWrapper.unmarshall(xml));
         assertEquals(UNMARSHAL_ERROR_CODE, exception.getErrorCode());
     }
 
     @Test
     void marshaller_WhenInitializedWithEmptyConfig_ThenExceptionIsThrown() {
+        var marshallerWrapperBuilder =
+                new XmlElementPojoMarshallerWrapper.Builder().withProperties("invalid-configs/marshaller-empty-config.yml");
+
         // Expected that creation to fail, because there are no schemas configured.
-        var exception = assertThrows(CompasException.class,
-                () -> new XmlElementPojoMarshallerWrapper.Builder().withProperties("invalid-configs/marshaller-empty-config.yml").build());
+        var exception = assertThrows(CompasException.class, () -> marshallerWrapperBuilder.build());
         assertEquals(CONFIGURATION_ERROR_CODE, exception.getErrorCode());
     }
 
     @Test
     void marshaller_WhenInitializedWithInvalidConfig_ThenExceptionIsThrown() {
+        var marshallerWrapperBuilder =
+                new XmlElementPojoMarshallerWrapper.Builder().withProperties("invalid-configs/marshaller-invalid-config.yml");
+
         // Expected that creation to fail, because this configuration is invalid.
-        var exception = assertThrows(CompasException.class,
-                () -> new XmlElementPojoMarshallerWrapper.Builder().withProperties("invalid-configs/marshaller-invalid-config.yml").build());
+        var exception = assertThrows(CompasException.class, () -> marshallerWrapperBuilder.build());
         assertEquals(PROPERTY_ERROR_ERROR_CODE, exception.getErrorCode());
     }
 
     @Test
     void marshaller_WhenInitializedWithInvalidContextPath_ThenExceptionIsThrown() {
+        var marshallerWrapperBuilder =
+                new XmlElementPojoMarshallerWrapper.Builder().withProperties("invalid-configs/marshaller-invalid-contextpath-config.yml");
+
         // Expected that creation to fail, because this configuration is invalid.
-        var exception = assertThrows(CompasException.class,
-                () -> new XmlElementPojoMarshallerWrapper.Builder().withProperties("invalid-configs/marshaller-invalid-contextpath-config.yml").build());
+        var exception = assertThrows(CompasException.class, () -> marshallerWrapperBuilder.build());
         assertEquals(CREATION_ERROR_CODE, exception.getErrorCode());
     }
 
     @Test
     void marshaller_WhenInitializedWithInvalidXsdPath_ThenExceptionIsThrown() {
+        var marshallerWrapperBuilder =
+                new XmlElementPojoMarshallerWrapper.Builder().withProperties("invalid-configs/marshaller-invalid-xsdpath-config.yml");
+
         // Expected that creation to fail, because this configuration is invalid.
-        var exception = assertThrows(CompasException.class,
-                () -> new XmlElementPojoMarshallerWrapper.Builder().withProperties("invalid-configs/marshaller-invalid-xsdpath-config.yml").build());
+        var exception = assertThrows(CompasException.class, () -> marshallerWrapperBuilder.build());
         assertEquals(RESOURCE_NOT_FOUND_ERROR_CODE, exception.getErrorCode());
     }
 

@@ -34,11 +34,11 @@ class Scl2003MarshallerWrapperTest {
     @Test
     void unmarshaller_WhenUnmarshallWithInvalidXML_ThenExceptionIsThrown() {
         var marshallerWrapper = createMarshallerWrapper();
-        var xml = "<invalid></invalid>";
+        var xml = "<invalid></invalid>".getBytes();
 
         // Next convert the XML String back again to a SCL Class.
         var exception = assertThrows(CompasException.class,
-                () -> marshallerWrapper.unmarshall(xml.getBytes()));
+                () -> marshallerWrapper.unmarshall(xml));
         assertEquals(UNMARSHAL_ERROR_CODE, exception.getErrorCode());
     }
 
