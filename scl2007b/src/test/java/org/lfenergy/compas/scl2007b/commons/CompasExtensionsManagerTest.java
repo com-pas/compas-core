@@ -18,7 +18,7 @@ class CompasExtensionsManagerTest {
     private final CompasExtensionsManager manager = new CompasExtensionsManager();
 
     @Test
-    void getCompasPrivate_WhenCalledWithPrivate_ThenCompasPrivateReturned() throws Exception {
+    void getCompasPrivate_WhenCalledWithPrivate_ThenCompasPrivateReturned() {
         var scl = readSCL("scl_with_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
@@ -34,7 +34,7 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasPrivate_WhenCalledWithoutPrivate_ThenNoCompasPrivateReturned() throws Exception {
+    void getCompasPrivate_WhenCalledWithoutPrivate_ThenNoCompasPrivateReturned() {
         var scl = readSCL("scl_without_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
@@ -50,7 +50,7 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasElement_WhenCalledWithoutSclName_ThenNoSclNameReturned() throws Exception {
+    void getCompasElement_WhenCalledWithoutSclName_ThenNoSclNameReturned() {
         var scl = readSCL("scl_without_sclname_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
@@ -62,7 +62,7 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasElement_WhenCalledWithSclName_ThenSclNameReturned() throws Exception {
+    void getCompasElement_WhenCalledWithSclName_ThenSclNameReturned() {
         var scl = readSCL("scl_with_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
@@ -75,7 +75,7 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasElement_WhenCalledWithoutFileType_ThenNoFileTypeReturned() throws Exception {
+    void getCompasElement_WhenCalledWithoutFileType_ThenNoFileTypeReturned() {
         var scl = readSCL("scl_without_filetype_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
@@ -87,7 +87,7 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasElement_WhenCalledWithFileType_ThenFileTypeReturned() throws Exception {
+    void getCompasElement_WhenCalledWithFileType_ThenFileTypeReturned() {
         var scl = readSCL("scl_with_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
@@ -107,7 +107,7 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasSclName_WhenCalledWithsclName_TheSclNameReturned() throws Exception {
+    void getCompasSclName_WhenCalledWithsclName_TheSclNameReturned() {
         var scl = readSCL("scl_with_compas_private.scd");
         var compasPrivate = manager.getCompasPrivate(scl);
 
@@ -120,7 +120,7 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasSclName_WhenCalledWithNosclName_TheEmptyOptionalReturned() throws Exception {
+    void getCompasSclName_WhenCalledWithNosclName_TheEmptyOptionalReturned() {
         var scl = readSCL("scl_without_sclname_compas_private.scd");
         var compasPrivate = manager.getCompasPrivate(scl);
 
@@ -139,7 +139,7 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasSclFileType_WhenCalledWithSclType_ThenSclTypeReturned() throws Exception {
+    void getCompasSclFileType_WhenCalledWithSclType_ThenSclTypeReturned() {
         var scl = readSCL("scl_with_compas_private.scd");
         var compasPrivate = manager.getCompasPrivate(scl);
 
@@ -152,7 +152,7 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasSclFileType_WhenCalledWithoutType_ThenNoTypeReturned() throws Exception {
+    void getCompasSclFileType_WhenCalledWithoutType_ThenNoTypeReturned() {
         var scl = readSCL("scl_without_filetype_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);

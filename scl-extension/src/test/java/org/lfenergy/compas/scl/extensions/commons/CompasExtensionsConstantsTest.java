@@ -9,8 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CompasExtensionsConstantsTest {
     @Test
-    void testShouldReturnNOKWhenConstructClassCauseForbidden() {
+    void constructor_WhenConstructorCalled_ThenShouldThrowExceptionCauseForbidden() {
         assertThrows(UnsupportedOperationException.class, CompasExtensionsConstants::new);
     }
-
 }
