@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2021 Alliander N.V.
 //
 // SPDX-License-Identifier: Apache-2.0
-package org.lfenergy.compas.commons.exception;
+package org.lfenergy.compas.core.commons.exception;
 
 public class CompasException extends RuntimeException {
     private final String errorCode;

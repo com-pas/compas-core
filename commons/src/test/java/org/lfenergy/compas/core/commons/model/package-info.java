@@ -2,6 +2,6 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 @XmlSchema(namespace = "https://www.lfenergy.org/compas/example", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package org.lfenergy.compas.commons.model;
+package org.lfenergy.compas.core.commons.model;
 
 import javax.xml.bind.annotation.XmlSchema;

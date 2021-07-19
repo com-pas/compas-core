@@ -1,19 +1,19 @@
 // SPDX-FileCopyrightText: 2021 Alliander N.V.
 //
 // SPDX-License-Identifier: Apache-2.0
-package org.lfenergy.compas.commons;
+package org.lfenergy.compas.core.commons;
 
 import org.junit.jupiter.api.Test;
-import org.lfenergy.compas.commons.exception.CompasException;
-import org.lfenergy.compas.commons.model.XmlElementAPojo;
-import org.lfenergy.compas.commons.model.XmlElementBPojo;
+import org.lfenergy.compas.core.commons.exception.CompasException;
+import org.lfenergy.compas.core.commons.model.XmlElementAPojo;
+import org.lfenergy.compas.core.commons.model.XmlElementBPojo;
 
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.lfenergy.compas.commons.exception.CompasErrorCode.*;
+import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.*;
 
 class MarshallerWrapperTest {
     @Test

@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: 2021 Alliander N.V.
 //
 // SPDX-License-Identifier: Apache-2.0
-package org.lfenergy.compas.commons;
+package org.lfenergy.compas.core.commons;
 
-import org.lfenergy.compas.commons.exception.CompasException;
+import org.lfenergy.compas.core.commons.exception.CompasException;
 
 import java.net.URL;
 import java.util.Optional;
 
-import static org.lfenergy.compas.commons.exception.CompasErrorCode.NO_CLASS_LOADER_ERROR_CODE;
+import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.NO_CLASS_LOADER_ERROR_CODE;
 
 public class Resources {
     Resources() {

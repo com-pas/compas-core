@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.lfenergy.compas.scl2007b4.commons;
 
-import org.lfenergy.compas.commons.MarshallerWrapper;
+import org.lfenergy.compas.core.commons.MarshallerWrapper;
 import org.lfenergy.compas.scl2007b4.model.SCL;
 
 import javax.xml.bind.Marshaller;

@@ -4,7 +4,7 @@
 package org.lfenergy.compas.scl2007b.commons;
 
 import org.junit.jupiter.api.Test;
-import org.lfenergy.compas.commons.exception.CompasException;
+import org.lfenergy.compas.core.commons.exception.CompasException;
 import org.lfenergy.compas.scl.extensions.commons.CompasExtensionsConstants;
 import org.lfenergy.compas.scl.extensions.model.ObjectFactory;
 import org.lfenergy.compas.scl2007b.model.SCL;
@@ -14,8 +14,8 @@ import org.lfenergy.compas.scl2007b.model.TPrivate;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.lfenergy.compas.commons.exception.CompasErrorCode.MARSHAL_ERROR_CODE;
-import static org.lfenergy.compas.commons.exception.CompasErrorCode.UNMARSHAL_ERROR_CODE;
+import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.MARSHAL_ERROR_CODE;
+import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.UNMARSHAL_ERROR_CODE;
 
 class Scl2007bMarshallerWrapperTest {
     @Test

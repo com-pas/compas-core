@@ -1,17 +1,17 @@
 // SPDX-FileCopyrightText: 2021 Alliander N.V.
 //
 // SPDX-License-Identifier: Apache-2.0
-package org.lfenergy.compas.commons.model;
+package org.lfenergy.compas.core.commons.model;
 
 import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "XmlElementBPojo")
-public class XmlElementBPojo {
+@XmlRootElement(name = "XmlElementAPojo")
+public class XmlElementAPojo {
     @XmlAttribute(name = "id", required = true)
     public String id;
-    @XmlElement(name = "Name")
-    public String name;
+    @XmlElement(name = "Other")
+    public XmlElementBPojo other;
 
     public String getId() {
         return id;
@@ -21,11 +21,11 @@ public class XmlElementBPojo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public XmlElementBPojo getOther() {
+        return other;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOther(XmlElementBPojo other) {
+        this.other = other;
     }
 }

@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: 2021 Alliander N.V.
 //
 // SPDX-License-Identifier: Apache-2.0
-package org.lfenergy.compas.commons;
+package org.lfenergy.compas.core.commons;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.lfenergy.compas.commons.exception.CompasException;
+import org.lfenergy.compas.core.commons.exception.CompasException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.lfenergy.compas.commons.exception.CompasErrorCode.*;
+import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.*;
 
 public abstract class MarshallerWrapper<T> {
     private static final Logger LOGGER = LoggerFactory.getLogger(MarshallerWrapper.class);
