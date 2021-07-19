@@ -17,7 +17,6 @@ import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.S
 import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_NAME_EXTENSION;
 
 public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
-
     public Optional<TPrivate> getCompasPrivate(SCL scl) {
         if (scl != null) {
             return scl.getPrivate()
