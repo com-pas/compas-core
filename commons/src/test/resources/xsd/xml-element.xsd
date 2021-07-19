@@ -1,9 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 SPDX-FileCopyrightText: 2021 Alliander N.V.
 
 SPDX-License-Identifier: Apache-2.0
 -->
-<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns="https://www.lfenergy.org/compas/example" xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="https://www.lfenergy.org/compas/example"
            elementFormDefault="qualified" finalDefault="extension" version="1.7">

@@ -11,4 +11,4 @@ compas:
     schemas:
       - xsdPath: "xsd/xml-element.xsd"
         namespace: "https://www.lfenergy.org/compas/example"
-        contextPath: "org.lfenergy.compas.commons.model"
+        contextPath: "org.lfenergy.compas.core.commons.model"
