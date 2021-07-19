@@ -55,7 +55,7 @@ public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
         // Creating a private
         var tPrivate = new TPrivate();
         // Setting the type (required for a SCL private element)
-        tPrivate.setType("compas_scl");
+        tPrivate.setType(COMPAS_SCL_EXTENSION_TYPE);
         return tPrivate;
     }
 }

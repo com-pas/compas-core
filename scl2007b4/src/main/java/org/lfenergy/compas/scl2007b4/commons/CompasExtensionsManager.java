@@ -17,7 +17,6 @@ import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.S
 import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_NAME_EXTENSION;
 
 public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
-
     public Optional<TPrivate> getCompasPrivate(SCL scl) {
         if (scl != null) {
             return scl.getPrivate()
@@ -28,12 +27,12 @@ public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
         return Optional.empty();
     }
 
-    public Optional<String> getCompasSclName(TPrivate compasPrivate) {
-        return getCompasValue(compasPrivate, SCL_NAME_EXTENSION, String.class);
-    }
-
     public Optional<TSclFileType> getCompasSclFileType(TPrivate compasPrivate) {
         return getCompasValue(compasPrivate, SCL_FILETYPE_EXTENSION, TSclFileType.class);
+    }
+
+    public Optional<String> getCompasSclName(TPrivate compasPrivate) {
+        return getCompasValue(compasPrivate, SCL_NAME_EXTENSION, String.class);
     }
 
     private <T> Optional<T> getCompasValue(TPrivate compasPrivate, CompasExtensionsField field, Class<T> clazz) {
@@ -55,7 +54,7 @@ public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
         // Creating a private
         var tPrivate = new TPrivate();
         // Setting the type (required for a SCL private element)
-        tPrivate.setType("compas_scl");
+        tPrivate.setType(COMPAS_SCL_EXTENSION_TYPE);
         return tPrivate;
     }
 }
