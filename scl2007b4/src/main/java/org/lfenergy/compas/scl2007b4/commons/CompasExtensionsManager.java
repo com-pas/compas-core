@@ -35,17 +35,17 @@ public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
         return getCompasValue(compasPrivate, SCL_NAME_EXTENSION, String.class);
     }
 
-    private <T> Optional<T> getCompasValue(TPrivate compasPrivate, CompasExtensionsField field, Class<T> clazz) {
-        if (compasPrivate != null) {
-            return getCompasValue(compasPrivate.getContent(), field, clazz);
-        }
-        return Optional.empty();
-    }
-
     @SuppressWarnings("rawtypes")
     public Optional<JAXBElement> getCompasElement(TPrivate compasPrivate, CompasExtensionsField field) {
         if (compasPrivate != null) {
             return getCompasElement(compasPrivate.getContent(), field);
+        }
+        return Optional.empty();
+    }
+
+    private <T> Optional<T> getCompasValue(TPrivate compasPrivate, CompasExtensionsField field, Class<T> clazz) {
+        if (compasPrivate != null) {
+            return getCompasValue(compasPrivate.getContent(), field, clazz);
         }
         return Optional.empty();
     }
