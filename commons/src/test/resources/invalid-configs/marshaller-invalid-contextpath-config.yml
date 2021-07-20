@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2021 Alliander N.V.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+## YAML Template.
+---
+compas:
+  scl:
+    schemas:
+      - xsdPath: "xsd/xml-element.xsd"
+        namespace: "https://www.lfenergy.org/compas/v1"
+        contextPath: "org.lfenergy.compas.scl.extensions.model.unknown"

@@ -13,12 +13,12 @@ import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.S
 import static org.lfenergy.compas.scl2007b4.util.ReadTestFile.readSCL;
 
 class CompasExtensionsManagerTest {
-    private static final String COMPAS_PRIVATE_NOTFOUND = "No Compas Private Element found";
+    private static final String COMPAS_PRIVATE_NOT_FOUND = "No Compas Private Element found";
 
     private final CompasExtensionsManager manager = new CompasExtensionsManager();
 
     @Test
-    void getCompasPrivate_WhenCalledWithPrivate_ThenCompasPrivateReturned() throws Exception {
+    void getCompasPrivate_WhenCalledWithPrivate_ThenCompasPrivateReturned() {
         var scl = readSCL("scl_with_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
@@ -34,7 +34,7 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasPrivate_WhenCalledWithoutPrivate_ThenNoCompasPrivateReturned() throws Exception {
+    void getCompasPrivate_WhenCalledWithoutPrivate_ThenNoCompasPrivateReturned() {
         var scl = readSCL("scl_without_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
@@ -50,7 +50,7 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasElement_WhenCalledWithoutSclName_ThenNoSclNameReturned() throws Exception {
+    void getCompasElement_WhenCalledWithoutSclName_ThenNoSclNameReturned() {
         var scl = readSCL("scl_without_sclname_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
@@ -58,11 +58,11 @@ class CompasExtensionsManagerTest {
             var compasElement = manager.getCompasElement(tPrivate, SCL_NAME_EXTENSION);
 
             assertFalse(compasElement.isPresent());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
-    void getCompasElement_WhenCalledWithSclName_ThenSclNameReturned() throws Exception {
+    void getCompasElement_WhenCalledWithSclName_ThenSclNameReturned() {
         var scl = readSCL("scl_with_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
@@ -71,11 +71,11 @@ class CompasExtensionsManagerTest {
 
             assertTrue(compasElement.isPresent());
             assertEquals("project", compasElement.get().getValue().toString());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
-    void getCompasElement_WhenCalledWithoutFileType_ThenNoFileTypeReturned() throws Exception {
+    void getCompasElement_WhenCalledWithoutFileType_ThenNoFileTypeReturned() {
         var scl = readSCL("scl_without_filetype_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
@@ -83,11 +83,11 @@ class CompasExtensionsManagerTest {
             var compasElement = manager.getCompasElement(tPrivate, SCL_FILETYPE_EXTENSION);
 
             assertFalse(compasElement.isPresent());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
-    void getCompasElement_WhenCalledWithFileType_ThenFileTypeReturned() throws Exception {
+    void getCompasElement_WhenCalledWithFileType_ThenFileTypeReturned() {
         var scl = readSCL("scl_with_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
@@ -96,7 +96,7 @@ class CompasExtensionsManagerTest {
 
             assertTrue(compasElement.isPresent());
             assertEquals(TSclFileType.CID, compasElement.get().getValue());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
@@ -107,7 +107,7 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasSclName_WhenCalledWithsclName_TheSclNameReturned() throws Exception {
+    void getCompasSclName_WhenCalledWithsclName_TheSclNameReturned() {
         var scl = readSCL("scl_with_compas_private.scd");
         var compasPrivate = manager.getCompasPrivate(scl);
 
@@ -116,11 +116,11 @@ class CompasExtensionsManagerTest {
 
             assertTrue(sclName.isPresent());
             assertEquals("project", sclName.get());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
-    void getCompasSclName_WhenCalledWithNosclName_TheEmptyOptionalReturned() throws Exception {
+    void getCompasSclName_WhenCalledWithNosclName_TheEmptyOptionalReturned() {
         var scl = readSCL("scl_without_sclname_compas_private.scd");
         var compasPrivate = manager.getCompasPrivate(scl);
 
@@ -128,7 +128,7 @@ class CompasExtensionsManagerTest {
             var sclName = manager.getCompasSclName(tPrivate);
 
             assertFalse(sclName.isPresent());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
@@ -139,7 +139,7 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getCompasSclFileType_WhenCalledWithSclType_ThenSclTypeReturned() throws Exception {
+    void getCompasSclFileType_WhenCalledWithSclType_ThenSclTypeReturned() {
         var scl = readSCL("scl_with_compas_private.scd");
         var compasPrivate = manager.getCompasPrivate(scl);
 
@@ -148,11 +148,11 @@ class CompasExtensionsManagerTest {
 
             assertTrue(sclFileType.isPresent());
             assertEquals(TSclFileType.CID, sclFileType.get());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
-    void getCompasSclFileType_WhenCalledWithoutType_ThenNoTypeReturned() throws Exception {
+    void getCompasSclFileType_WhenCalledWithoutType_ThenNoTypeReturned() {
         var scl = readSCL("scl_without_filetype_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
@@ -160,7 +160,7 @@ class CompasExtensionsManagerTest {
             var sclFileType = manager.getCompasSclFileType(tPrivate);
 
             assertFalse(sclFileType.isPresent());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test

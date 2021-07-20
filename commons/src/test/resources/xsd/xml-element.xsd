@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: 2021 Alliander N.V.
+
+SPDX-License-Identifier: Apache-2.0
+-->
+<xs:schema xmlns="https://www.lfenergy.org/compas/example" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://www.lfenergy.org/compas/example"
+           elementFormDefault="qualified" finalDefault="extension" version="1.7">
+    <xs:complexType name="XmlElementBPojo">
+        <xs:sequence>
+            <xs:element name="Name" type="xs:normalizedString"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:normalizedString" use="required"/>
+    </xs:complexType>
+
+    <xs:element name="XmlElementAPojo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Other" type="XmlElementBPojo" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:normalizedString" use="required"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
