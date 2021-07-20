@@ -13,7 +13,7 @@ import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.S
 import static org.lfenergy.compas.scl2003.util.ReadTestFile.readSCL;
 
 class CompasExtensionsManagerTest {
-    private static final String COMPAS_PRIVATE_NOTFOUND = "No Compas Private Element found";
+    private static final String COMPAS_PRIVATE_NOT_FOUND = "No Compas Private Element found";
 
     private final CompasExtensionsManager manager = new CompasExtensionsManager();
 
@@ -58,7 +58,7 @@ class CompasExtensionsManagerTest {
             var compasElement = manager.getCompasElement(tPrivate, SCL_NAME_EXTENSION);
 
             assertFalse(compasElement.isPresent());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
@@ -71,7 +71,7 @@ class CompasExtensionsManagerTest {
 
             assertTrue(compasElement.isPresent());
             assertEquals("project", compasElement.get().getValue().toString());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
@@ -83,7 +83,7 @@ class CompasExtensionsManagerTest {
             var compasElement = manager.getCompasElement(tPrivate, SCL_FILETYPE_EXTENSION);
 
             assertFalse(compasElement.isPresent());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
@@ -96,7 +96,7 @@ class CompasExtensionsManagerTest {
 
             assertTrue(compasElement.isPresent());
             assertEquals(TSclFileType.CID, compasElement.get().getValue());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
@@ -116,7 +116,7 @@ class CompasExtensionsManagerTest {
 
             assertTrue(sclName.isPresent());
             assertEquals("project", sclName.get());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
@@ -128,7 +128,7 @@ class CompasExtensionsManagerTest {
             var sclName = manager.getCompasSclName(tPrivate);
 
             assertFalse(sclName.isPresent());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
@@ -148,7 +148,7 @@ class CompasExtensionsManagerTest {
 
             assertTrue(sclFileType.isPresent());
             assertEquals(TSclFileType.CID, sclFileType.get());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
@@ -160,7 +160,7 @@ class CompasExtensionsManagerTest {
             var sclFileType = manager.getCompasSclFileType(tPrivate);
 
             assertFalse(sclFileType.isPresent());
-        }, () -> fail(COMPAS_PRIVATE_NOTFOUND));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
     @Test
