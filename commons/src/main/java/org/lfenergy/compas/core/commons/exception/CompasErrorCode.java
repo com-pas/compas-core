@@ -16,4 +16,7 @@ public class CompasErrorCode {
     public static final String UNMARSHAL_ERROR_CODE = "CORE-0006";
     public static final String MARSHAL_ERROR_CODE = "CORE-0007";
     public static final String INVALID_YML_ERROR_CODE = "CORE-0008";
+
+    public static final String CONVERT_TO_STRING_ERROR = "CORE-1000";
+    public static final String CONVERT_TO_ELEMENT_ERROR = "CORE-1001";
 }
