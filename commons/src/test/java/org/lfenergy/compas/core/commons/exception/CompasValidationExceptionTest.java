@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.NO_CLASS_LOADER_ERROR_CODE;
 
-class CompasExceptionTest {
+class CompasValidationExceptionTest {
     @Test
     void constructor_WhenCalledWithOnlyMessage_ThenMessageCanBeRetrieved() {
         var expectedMessage = "The message";
-        var exception = new CompasException(NO_CLASS_LOADER_ERROR_CODE, expectedMessage);
+        var exception = new CompasValidationException(NO_CLASS_LOADER_ERROR_CODE, expectedMessage);
 
         assertEquals(NO_CLASS_LOADER_ERROR_CODE, exception.getErrorCode());
         assertEquals(expectedMessage, exception.getMessage());
@@ -22,7 +22,7 @@ class CompasExceptionTest {
     void constructor_WhenCalledWithMessageAndThrowable_ThenMessageAndThrowableCanBeRetrieved() {
         var expectedMessage = "The message";
         var expectedThrowable = new NullPointerException();
-        var exception = new CompasException(NO_CLASS_LOADER_ERROR_CODE, expectedMessage, expectedThrowable);
+        var exception = new CompasValidationException(NO_CLASS_LOADER_ERROR_CODE, expectedMessage, expectedThrowable);
 
         assertEquals(NO_CLASS_LOADER_ERROR_CODE, exception.getErrorCode());
         assertEquals(expectedMessage, exception.getMessage());

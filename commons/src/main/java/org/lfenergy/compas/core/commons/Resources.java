@@ -16,8 +16,8 @@ public class Resources {
     }
 
     public static Optional<URL> getResource(String resourceName) {
-        ClassLoader loader = getClassLoader();
-        URL url = loader.getResource(resourceName);
+        var loader = getClassLoader();
+        var url = loader.getResource(resourceName);
         return Optional.ofNullable(url);
     }
 

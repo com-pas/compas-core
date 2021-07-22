@@ -81,10 +81,10 @@ class MarshallerWrapperTest {
     }
 
     private XmlElementAPojo createPOJO() {
-        XmlElementAPojo aPojo = new XmlElementAPojo();
+        var aPojo = new XmlElementAPojo();
         aPojo.setId(UUID.randomUUID().toString());
 
-        XmlElementBPojo bPojo = new XmlElementBPojo();
+        var bPojo = new XmlElementBPojo();
         bPojo.setId(UUID.randomUUID().toString());
         bPojo.setName("SOMENAME");
         aPojo.setOther(bPojo);
