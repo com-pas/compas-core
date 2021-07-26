@@ -8,12 +8,7 @@ SPDX-License-Identifier: Apache-2.0
               xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
               xmlns:namespace="http://jaxb2-commons.dev.java.net/namespace-prefix"
               xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <jxb:bindings schemaLocation="../../../target/xsd/SCL2003/SCL.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../../../target/xsd/SCL2007B/SCL.xsd" node="/xs:schema">
         <namespace:prefix name=""/>
-    </jxb:bindings>
-    <jxb:bindings schemaLocation="../../../target/xsd/SCL2003/SCL_IED.xsd" node="/xs:schema">
-        <jxb:bindings node="//xs:complexType[@name='tSMVSettings']//xs:attribute[@name='smpRate']">
-            <jxb:property name="smpRateSetting"/>
-        </jxb:bindings>
     </jxb:bindings>
 </jxb:bindings>

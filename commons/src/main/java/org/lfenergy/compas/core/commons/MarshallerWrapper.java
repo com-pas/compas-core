@@ -105,11 +105,11 @@ public abstract class MarshallerWrapper<T> {
             var schemaConfigs = new ArrayList<SchemaConfig>();
             try {
                 // Search for the YAml File on the classpath.
-                var inputStream = Resources.getResource(yamlFilePath)
+                var source = Resources.getResource(yamlFilePath)
                         .orElseThrow(() -> new CompasException(RESOURCE_NOT_FOUND_ERROR_CODE,
                                 String.format("Resource %s not found", yamlFilePath)));
                 var objectMapper = new ObjectMapper(new YAMLFactory());
-                var jsonNode = objectMapper.readTree(inputStream);
+                var jsonNode = objectMapper.readTree(source);
 
                 var pathsNode = jsonNode.at(COMPAS_SCL_SCHEMAS_JSONPATH);
                 if (pathsNode != null && pathsNode.getNodeType() == JsonNodeType.ARRAY) {
