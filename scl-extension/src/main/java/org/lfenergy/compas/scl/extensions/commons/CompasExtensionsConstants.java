@@ -3,6 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.lfenergy.compas.scl.extensions.commons;
 
+/**
+ * Some standard constants that can be used in code to reference CoMPAS Extensions.
+ */
 public class CompasExtensionsConstants {
     CompasExtensionsConstants() {
         throw new UnsupportedOperationException("CompasExtensionsConstants class");
