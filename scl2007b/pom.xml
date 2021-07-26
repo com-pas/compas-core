@@ -96,21 +96,16 @@ SPDX-License-Identifier: Apache-2.0
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
                 <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.14.0</version>
-                <executions>
-                    <execution>
-                        <id>xjc</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
                     <generatePackage>org.lfenergy.compas.scl2007b.model</generatePackage>
                     <schemaDirectory>${project.build.directory}/xsd/SCL2007B</schemaDirectory>
                     <schemaIncludes>
                         <schemaInclude>SCL*.xsd</schemaInclude>
                     </schemaIncludes>
+                    <bindingDirectory>${project.basedir}/src/main/bindings</bindingDirectory>
+                    <bindingIncludes>
+                        <include>*.xjb</include>
+                    </bindingIncludes>
                 </configuration>
             </plugin>
         </plugins>
