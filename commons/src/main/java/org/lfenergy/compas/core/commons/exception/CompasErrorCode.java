@@ -19,4 +19,8 @@ public class CompasErrorCode {
 
     public static final String CONVERT_TO_STRING_ERROR = "CORE-1000";
     public static final String CONVERT_TO_ELEMENT_ERROR = "CORE-1001";
+
+    public static final String VALIDATION_ERROR = "CORE-8000";
+
+    public static final String UNKNOWN_EXCEPTION_ERROR = "CORE-9999";
 }

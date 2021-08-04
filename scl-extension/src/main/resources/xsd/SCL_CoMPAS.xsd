@@ -4,7 +4,7 @@ SPDX-FileCopyrightText: 2021 Alliander N.V.
 
 SPDX-License-Identifier: Apache-2.0
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.lfenergy.org/compas/v1" targetNamespace="https://www.lfenergy.org/compas/v1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.lfenergy.org/compas/extension/v1" targetNamespace="https://www.lfenergy.org/compas/extension/v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="v1">
 	<xs:annotation>
     	<xs:documentation xml:lang="en">
 			COPYRIGHT (c) 2021 Alliander N.V.

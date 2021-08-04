@@ -13,5 +13,5 @@ compas:
         namespace: "http://www.iec.ch/61850/2003/SCL"
         contextPath: "org.lfenergy.compas.scl2003.model"
       - xsdPath: "xsd/SCL_CoMPAS.xsd"
-        namespace: "https://www.lfenergy.org/compas/v1"
+        namespace: "https://www.lfenergy.org/compas/extension/v1"
         contextPath: "org.lfenergy.compas.scl.extensions.model"

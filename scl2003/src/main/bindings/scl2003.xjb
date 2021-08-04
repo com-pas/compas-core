@@ -10,7 +10,7 @@ SPDX-License-Identifier: Apache-2.0
               xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <jxb:bindings schemaLocation="../../../target/xsd/SCL2003/SCL.xsd" node="/xs:schema">
         <namespace:prefix name=""/>
-        <namespace:prefix name="compas" namespaceURI="https://www.lfenergy.org/compas/v1"/>
+        <namespace:prefix name="compas" namespaceURI="https://www.lfenergy.org/compas/extension/v1"/>
     </jxb:bindings>
     <jxb:bindings schemaLocation="../../../target/xsd/SCL2003/SCL_IED.xsd" node="/xs:schema">
         <jxb:bindings node="//xs:complexType[@name='tSMVSettings']//xs:attribute[@name='smpRate']">
