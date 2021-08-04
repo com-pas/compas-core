@@ -38,9 +38,6 @@ public class XmlAnyElementConstraintValidator implements ConstraintValidator<Xml
                                 !elementName.equals(element.getLocalName())
                                         || !elementNamespace.equals(element.getNamespaceURI()))
                         .count();
-        if (numberOfIncorrectElements > 0) {
-            return false;
-        }
-        return true;
+        return numberOfIncorrectElements == 0;
     }
 }
