@@ -65,6 +65,17 @@ class XmlAnyElementConstraintValidatorTest {
         assertEquals(1, violations.size());
     }
 
+    @Test
+    void isValid_WhenCalledWithMultipleElementAndOneIncorrectNS_ThenViolationFound() {
+        var simplePojo = new SimplePojo();
+        simplePojo.getElements().add(document.createElementNS("https://OtherNS.org", ELEMENT_NAME));
+        simplePojo.getElements().add(document.createElementNS(ELEMENT_NS, ELEMENT_NAME));
+        simplePojo.getElements().add(document.createElementNS(ELEMENT_NS, ELEMENT_NAME));
+
+        var violations = validator.validate(simplePojo);
+        assertEquals(1, violations.size());
+    }
+
     private static final class SimplePojo {
         @XmlAnyElementValid(elementName = ELEMENT_NAME, elementNamespace = ELEMENT_NS)
         private List<Element> elements = new ArrayList<>();
