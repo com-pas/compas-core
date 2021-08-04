@@ -12,8 +12,7 @@ public class CompasExtensionsConstants {
     }
 
     public static final String XML_DEFAULT_NS_PREFIX = "compas";
-    public static final String COMPAS_EXTENSION_NS_URI = "https://www.lfenergy.org/compas/v1";
+    public static final String COMPAS_EXTENSION_NS_URI = "https://www.lfenergy.org/compas/extension/v1";
     public static final String COMPAS_SCL_EXTENSION_TYPE = "compas-scl";
-    public static final String XML_DEFAULT_XSD_PATH = "classpath:xsd/SCL_CoMPAS.xsd";
     public static final String JAXB_CONTEXT_PATH = "org.lfenergy.compas.scl.extensions.model";
 }

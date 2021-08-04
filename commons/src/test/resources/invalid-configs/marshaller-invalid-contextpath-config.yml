@@ -8,5 +8,5 @@ compas:
   scl:
     schemas:
       - xsdPath: "xsd/xml-element.xsd"
-        namespace: "https://www.lfenergy.org/compas/v1"
+        namespace: "https://www.lfenergy.org/compas/extension/v1"
         contextPath: "org.lfenergy.compas.scl.extensions.model.unknown"
