@@ -19,7 +19,7 @@ SPDX-License-Identifier: Apache-2.0
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <compas.scl.xsd.version>0.0.1</compas.scl.xsd.version>
+        <compas.scl.xsd.version>0.0.2</compas.scl.xsd.version>
         <slf4j.version>1.7.31</slf4j.version>
         <jackson.version>2.12.4</jackson.version>
         <jaxb.bind.version>2.3.3</jaxb.bind.version>
