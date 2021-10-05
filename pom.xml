@@ -46,7 +46,7 @@ SPDX-License-Identifier: Apache-2.0
 
     <modules>
         <module>commons</module>
-        <module>rest-commons</module>
+        <module>jaxrs-commons</module>
         <module>scl-extension</module>
         <module>scl2003</module>
         <module>scl2007b</module>
