@@ -119,7 +119,7 @@ SPDX-License-Identifier: Apache-2.0
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-core</artifactId>
-                <version>4.7.2.Final</version>
+                <version>4.7.3.Final</version>
                 <scope>test</scope>
             </dependency>
 
