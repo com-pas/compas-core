@@ -5,7 +5,7 @@ package org.lfenergy.compas.scl2003.commons;
 
 import org.lfenergy.compas.scl.extensions.commons.AbstractCompasExtensionsManager;
 import org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField;
-import org.lfenergy.compas.scl.extensions.model.TSclFileType;
+import org.lfenergy.compas.scl.extensions.model.SclFileType;
 import org.lfenergy.compas.scl2003.model.SCL;
 import org.lfenergy.compas.scl2003.model.TPrivate;
 
@@ -31,8 +31,8 @@ public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
         return getCompasValue(compasPrivate, SCL_NAME_EXTENSION, String.class);
     }
 
-    public Optional<TSclFileType> getCompasSclFileType(TPrivate compasPrivate) {
-        return getCompasValue(compasPrivate, SCL_FILETYPE_EXTENSION, TSclFileType.class);
+    public Optional<SclFileType> getCompasSclFileType(TPrivate compasPrivate) {
+        return getCompasValue(compasPrivate, SCL_FILETYPE_EXTENSION, SclFileType.class);
     }
 
     private <T> Optional<T> getCompasValue(TPrivate compasPrivate, CompasExtensionsField field, Class<T> clazz) {

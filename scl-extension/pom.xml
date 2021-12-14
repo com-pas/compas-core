@@ -57,6 +57,10 @@ SPDX-License-Identifier: Apache-2.0
                 <configuration>
                     <schemaDirectory>src/main/resources/xsd</schemaDirectory>
                     <generatePackage>org.lfenergy.compas.scl.extensions.model</generatePackage>
+                    <bindingDirectory>${project.basedir}/src/main/bindings</bindingDirectory>
+                    <bindingIncludes>
+                        <include>*.xjb</include>
+                    </bindingIncludes>
                 </configuration>
             </plugin>
         </plugins>
