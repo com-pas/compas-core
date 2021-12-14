@@ -4,69 +4,76 @@ SPDX-FileCopyrightText: 2021 Alliander N.V.
 
 SPDX-License-Identifier: Apache-2.0
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.lfenergy.org/compas/extension/v1" targetNamespace="https://www.lfenergy.org/compas/extension/v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="v1">
-	<xs:annotation>
-    	<xs:documentation xml:lang="en">
-			COPYRIGHT (c) 2021 Alliander N.V.
-		</xs:documentation>
-		<xs:documentation xml:lang="en">
-			Version 1.0 Release 2021/06/16
-		</xs:documentation>
-	</xs:annotation>
-	<!-- 
-	SCL Name element.
-	-->
-	<xs:simpleType name="tSclName">
-		<xs:annotation>
-			<xs:documentation>Name of the SCL configuration, extension excluded</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:normalizedString"/>
-	</xs:simpleType>
-	<xs:element name="SclName" type="tSclName"/>
-	<!-- 
-	SCL File Type element.
-	-->
-	<xs:simpleType name="tSclFileType">
-		<xs:annotation>
-			<xs:documentation>File type of the SCL configuration file</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:Name">
-			<xs:enumeration value="SSD">
-				<xs:annotation>
-					<xs:documentation>Substation Specification Description</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="IID">
-				<xs:annotation>
-					<xs:documentation>IED Instance Description</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="ICD">
-				<xs:annotation>
-					<xs:documentation>IED Capability Description</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="SCD">
-				<xs:annotation>
-					<xs:documentation>Substation Configuration Description</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="CID">
-				<xs:annotation>
-					<xs:documentation>Configured IED Description</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="SED">
-				<xs:annotation>
-					<xs:documentation>System Exchange Description</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="ISD">
-				<xs:annotation>
-					<xs:documentation>IED Specification Description</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:element name="SclFileType" type="tSclFileType"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.lfenergy.org/compas/extension/v1"
+           targetNamespace="https://www.lfenergy.org/compas/extension/v1" elementFormDefault="qualified"
+           attributeFormDefault="unqualified" version="v1">
+    <xs:annotation>
+        <xs:documentation xml:lang="en">
+            COPYRIGHT (c) 2021 Alliander N.V.
+        </xs:documentation>
+        <xs:documentation xml:lang="en">
+            Version 1.0 Release 2021/06/16
+        </xs:documentation>
+    </xs:annotation>
+    <!--
+    SCL Name element.
+    -->
+    <xs:simpleType name="tSclName">
+        <xs:annotation>
+            <xs:documentation>Name of the SCL configuration, extension excluded</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:normalizedString"/>
+    </xs:simpleType>
+    <xs:element name="SclName" type="tSclName"/>
+    <!--
+    SCL File Type element.
+    -->
+    <xs:simpleType name="tSclFileType">
+        <xs:annotation>
+            <xs:documentation>File type of the SCL configuration file</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:Name">
+            <xs:enumeration value="SSD">
+                <xs:annotation>
+                    <xs:documentation>Substation Specification Description</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IID">
+                <xs:annotation>
+                    <xs:documentation>IED Instance Description</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ICD">
+                <xs:annotation>
+                    <xs:documentation>IED Capability Description</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SCD">
+                <xs:annotation>
+                    <xs:documentation>Substation Configuration Description</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CID">
+                <xs:annotation>
+                    <xs:documentation>Configured IED Description</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SED">
+                <xs:annotation>
+                    <xs:documentation>System Exchange Description</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ISD">
+                <xs:annotation>
+                    <xs:documentation>IED Specification Description</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="STD">
+                <xs:annotation>
+                    <xs:documentation>System Template Definition</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="SclFileType" type="tSclFileType"/>
 </xs:schema>
