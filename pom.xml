@@ -90,7 +90,7 @@ SPDX-License-Identifier: Apache-2.0
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
-                <version>6.2.0.Final</version>
+                <version>6.2.1.Final</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
