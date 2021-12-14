@@ -4,7 +4,14 @@
 
 name: SonarCloud Analysis
 
-on: push
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - 'main'
+      - 'develop'
 
 jobs:
   build:

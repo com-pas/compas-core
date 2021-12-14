@@ -4,7 +4,7 @@
 package org.lfenergy.compas.scl2007b.commons;
 
 import org.junit.jupiter.api.Test;
-import org.lfenergy.compas.scl.extensions.model.TSclFileType;
+import org.lfenergy.compas.scl.extensions.model.SclFileType;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsConstants.COMPAS_SCL_EXTENSION_TYPE;
@@ -95,7 +95,7 @@ class CompasExtensionsManagerTest {
             var compasElement = manager.getCompasElement(tPrivate, SCL_FILETYPE_EXTENSION);
 
             assertTrue(compasElement.isPresent());
-            assertEquals(TSclFileType.CID, compasElement.get().getValue());
+            assertEquals(SclFileType.CID, compasElement.get().getValue());
         }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
@@ -147,7 +147,7 @@ class CompasExtensionsManagerTest {
             var sclFileType = manager.getCompasSclFileType(tPrivate);
 
             assertTrue(sclFileType.isPresent());
-            assertEquals(TSclFileType.CID, sclFileType.get());
+            assertEquals(SclFileType.CID, sclFileType.get());
         }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 
