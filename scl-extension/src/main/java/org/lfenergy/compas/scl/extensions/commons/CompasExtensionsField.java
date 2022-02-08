@@ -5,16 +5,19 @@ package org.lfenergy.compas.scl.extensions.commons;
 
 /**
  * The CoMPAS Extension fields that exists. The fieldName is the name how the element is used in the XML.
+ * For a description of the fields, see the XSD.
  */
 public enum CompasExtensionsField {
-    /**
-     * The name of the SCL XML File, will be used in the search and when SCL XML File is saved to the filesystem.
-     */
     SCL_NAME_EXTENSION("SclName"),
-    /**
-     * The type of SCL XML File it is, like IID, SCD and more. TSclFileType indicates which values are allowed.
-     */
-    SCL_FILETYPE_EXTENSION("SclFileType");
+    SCL_FILETYPE_EXTENSION("SclFileType"),
+    FLOW("Flow"),
+    CONNECTIVITY_NODE("ConnectivityNode"),
+    BAY("Bay"),
+    L_DEVICE("LDevice"),
+    CRITERIA("Criteria"),
+    ICD_HEADER("ICDHeader"),
+    SYSTEM_VERSION("SystemVersion"),
+    FUNCTION("Function");
 
     private final String fieldName;
 
