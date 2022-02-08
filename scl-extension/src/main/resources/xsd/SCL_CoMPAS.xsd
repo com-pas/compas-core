@@ -19,7 +19,7 @@ SPDX-License-Identifier: Apache-2.0
     <!--
     SCL Name element.
     -->
-    <xs:simpleType name="tSclName">
+    <xs:simpleType name="tCompasSclName">
         <xs:annotation>
             <xs:documentation>Name of the SCL configuration, extension excluded</xs:documentation>
         </xs:annotation>
@@ -29,7 +29,7 @@ SPDX-License-Identifier: Apache-2.0
     <!--
     SCL File Type element.
     -->
-    <xs:simpleType name="tSclFileType">
+    <xs:simpleType name="tCompasSclFileType">
         <xs:annotation>
             <xs:documentation>File type of the SCL configuration file</xs:documentation>
         </xs:annotation>
@@ -263,8 +263,8 @@ SPDX-License-Identifier: Apache-2.0
         <xs:attribute name="CriteriaAssociationID" type="xs:string" use="optional"/>
     </xs:complexType>
 
-    <xs:element name="SclName" type="tSclName"/>
-    <xs:element name="SclFileType" type="tSclFileType"/>
+    <xs:element name="SclName" type="tCompasSclName"/>
+    <xs:element name="SclFileType" type="tCompasSclFileType"/>
     <xs:element name="Flow" type="tCompasFlow"/>
     <xs:element name="ConnectivityNode" type="tCompasConnectivityNode"/>
     <xs:element name="Bay" type="tCompasBay"/>
@@ -273,5 +273,4 @@ SPDX-License-Identifier: Apache-2.0
     <xs:element name="ICDHeader" type="tCompasICDHeader"/>
     <xs:element name="SystemVersion" type="tCompasSystemVersion"/>
     <xs:element name="Function" type="tCompasFunction"/>
-
 </xs:schema>
