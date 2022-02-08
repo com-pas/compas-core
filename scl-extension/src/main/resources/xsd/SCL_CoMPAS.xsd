@@ -226,8 +226,7 @@ SPDX-License-Identifier: Apache-2.0
     <xs:complexType name="tCompasSystemVersion">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Identify the SystemVersion to which the functional Bay and IED belongs to. This Private can be used in
-                /Bay in substation and in the /IED.
+                Identify the SystemVersion to which the functional Bay and IED belongs to. This Private can be used in /Bay in substation and in the /IED.
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="MainSystemVersion" type="xs:string" use="optional"/>
@@ -257,8 +256,7 @@ SPDX-License-Identifier: Apache-2.0
     <xs:complexType name="tCompasCriteria">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Identifies the Criteria linked to a Flow or LDevice or Function from the user specific catalog of
-                criteria
+                Identifies the Criteria linked to a Flow or LDevice or Function from the user specific catalog of criteria
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="ObjectID" type="xs:string" use="optional"/>
