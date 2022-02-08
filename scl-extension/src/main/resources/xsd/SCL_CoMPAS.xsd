@@ -106,8 +106,7 @@ SPDX-License-Identifier: Apache-2.0
     <xs:simpleType name="tCompasFlowStatus">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Define whether the Flow between two LDevice belonging to two ICDs with-in two System Version (identical
-                or different) are qualified (ACTIVE), not working (INACTIVE) or untested (UNTESTED)
+                Define whether the Flow between two LDevice belonging to two ICDs with-in two System Version (identical or different) are qualified (ACTIVE), not working (INACTIVE) or untested (UNTESTED)
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
@@ -120,8 +119,7 @@ SPDX-License-Identifier: Apache-2.0
     <xs:simpleType name="tCompasLDeviceStatus">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Define whether the LDevice belonging to one ICD with-in one System Version are qualified (ACTIVE), not
-                working (INACTIVE) or untested (UNTESTED)
+                Define whether the LDevice belonging to one ICD with-in one System Version are qualified (ACTIVE), not working (INACTIVE) or untested (UNTESTED)
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
@@ -148,8 +146,7 @@ SPDX-License-Identifier: Apache-2.0
     <xs:simpleType name="tCompasFlowKind">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Define whether the Flow is limited to the Bay(refering to the physical one or cubicles) to which belong
-                the IED (BAY_INTERNAL) or only going outside the BAY (BAY_EXTERNAL) or both (BAY_INTERNAL_EXTERNAL)
+                Define whether the Flow is limited to the Bay(refering to the physical one or cubicles) to which belong the IED (BAY_INTERNAL) or only going outside the BAY (BAY_EXTERNAL) or both (BAY_INTERNAL_EXTERNAL)
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
@@ -162,12 +159,9 @@ SPDX-License-Identifier: Apache-2.0
     <xs:complexType name="tCompasFlow">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Define the link between specific Compas attributes and one ExtRef within the STD file. The dataStreamKey
-                is the key with the ExtRef.desc. The ExtRef attributes are directly linked to the attributes of the
-                ExRef.
+                Define the link between specific Compas attributes and one ExtRef within the STD file. The dataStreamKey is the key with the ExtRef.desc. The ExtRef attributes are directly linked to the attributes of the ExRef.
                 The FlowID is used to link additional informations to the flow as the criteria.
-                The FlowStatus define whether if the flow is qualified, non qualified or untested accordingly to the
-                source IED which is bellonging to a define SystemVersion
+                The FlowStatus define whether if the flow is qualified, non qualified or untested accordingly to the source IED which is bellonging to a define SystemVersion
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="dataStreamKey" type="xs:string" use="optional"/>
@@ -184,8 +178,7 @@ SPDX-License-Identifier: Apache-2.0
     <xs:complexType name="tCompasBay">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Define the specific Compas attributes linked to the Bay. The Main and Second Labels are label of the bay
-                specific to each user. MainLabel and Version identify uniquely the instanciated Bay as the UUID
+                Define the specific Compas attributes linked to the Bay. The Main and Second Labels are label of the bay specific to each user. MainLabel and Version identify uniquely the instanciated Bay as the UUID
                 The BayCodif is specific to each user to identify the bay kind.
             </xs:documentation>
         </xs:annotation>
@@ -211,8 +204,7 @@ SPDX-License-Identifier: Apache-2.0
     <xs:complexType name="tCompasICDHeader" mixed="true">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Define specific Compas attributes to identify uniquely one ICD file with-in a SystemVersion for a given
-                IEDredundancy. The UUID of this combinaison is defined by the ICDSystemVersionUUID.
+                Define specific Compas attributes to identify uniquely one ICD file with-in a SystemVersion for a given IEDredundancy. The UUID of this combinaison is defined by the ICDSystemVersionUUID.
                 This private is intended to be used in the STD file (/IED level) and SSD (/LNode level)
             </xs:documentation>
         </xs:annotation>
