@@ -6,7 +6,9 @@ package org.lfenergy.compas.scl.extensions.model;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name = "tSclFileType", namespace = "https://www.lfenergy.org/compas/extension/v1")
+import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsConstants.COMPAS_EXTENSION_NS_URI;
+
+@XmlType(name = "tCompasSclFileType", namespace = COMPAS_EXTENSION_NS_URI)
 @XmlEnum
 public enum SclFileType {
     SSD("Substation Specification Description"),
