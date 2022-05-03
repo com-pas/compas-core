@@ -20,8 +20,8 @@ SPDX-License-Identifier: Apache-2.0
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <compas.scl.xsd.version>0.0.4</compas.scl.xsd.version>
-        <quarkus.platform.version>2.7.0.Final</quarkus.platform.version>
-        <slf4j.version>1.7.35</slf4j.version>
+        <quarkus.platform.version>2.8.2.Final</quarkus.platform.version>
+        <slf4j.version>1.7.36</slf4j.version>
         <jaxb.bind.version>2.3.6</jaxb.bind.version>
         <openpojo.version>0.9.1</openpojo.version>
     </properties>
@@ -115,13 +115,13 @@ SPDX-License-Identifier: Apache-2.0
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.jvnet.jaxb2.maven2</groupId>
                     <artifactId>maven-jaxb2-plugin</artifactId>
-                    <version>0.14.0</version>
+                    <version>0.15.1</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.jvnet.jaxb2_commons</groupId>
@@ -148,7 +148,7 @@ SPDX-License-Identifier: Apache-2.0
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.9.0</version>
+                    <version>3.10.1</version>
                 </plugin>
 
                 <plugin>
@@ -174,7 +174,7 @@ SPDX-License-Identifier: Apache-2.0
                 <sonar.language>java</sonar.language>
 
                 <!-- JaCoCo Properties -->
-                <jacoco.version>0.8.7</jacoco.version>
+                <jacoco.version>0.8.8</jacoco.version>
                 <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
             </properties>
 
@@ -236,7 +236,7 @@ SPDX-License-Identifier: Apache-2.0
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-javadoc-plugin</artifactId>
-                            <version>3.3.1</version>
+                            <version>3.4.0</version>
                             <executions>
                                 <execution>
                                     <id>attach-javadocs</id>
