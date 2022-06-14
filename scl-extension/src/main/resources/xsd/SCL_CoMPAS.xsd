@@ -12,12 +12,12 @@ SPDX-License-Identifier: Apache-2.0
         </xs:documentation>
         <xs:documentation xml:lang="en">
             Version 1.0 Release 2021/06/16
-			Version 1.1 Release 2022/01/21
+            Version 1.1 Release 2022/01/21
             Version 2.1 Release 2022/06/08
         </xs:documentation>
     </xs:annotation>
-	
-	<!--
+
+    <!--
     SCL Name element.
     -->
     <xs:simpleType name="tSclName">
@@ -94,68 +94,81 @@ SPDX-License-Identifier: Apache-2.0
             <xs:enumeration value="PX"/>
             <xs:enumeration value="PDIS"/>
             <xs:enumeration value="PDB"/>
-			<xs:enumeration value="AUT"/>
-			<xs:enumeration value="PDIF"/>
-			<xs:enumeration value="GRP"/>
-			<xs:enumeration value="GTW"/>
-			<xs:enumeration value="TG"/>
-			<xs:enumeration value="TOPO"/>
-			<xs:enumeration value="ADEFINIR"/>
+            <xs:enumeration value="AUT"/>
+            <xs:enumeration value="PDIF"/>
+            <xs:enumeration value="GRP"/>
+            <xs:enumeration value="GTW"/>
+            <xs:enumeration value="TG"/>
+            <xs:enumeration value="TOPO"/>
+            <xs:enumeration value="ADEFINIR"/>
         </xs:restriction>
     </xs:simpleType>
 
-	<xs:simpleType name="tCompasFlowStatus">
+    <xs:simpleType name="tCompasFlowStatus">
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Define whether the Flow between two LDevice belonging to two ICDs with-in two System Version (identical or different) are qualified (ACTIVE), not working (INACTIVE) or untested (UNTESTED)
             </xs:documentation>
         </xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="ACTIVE"/>
-			<xs:enumeration value="INACTIVE"/>
-			<xs:enumeration value="UNTESTED"/>
-		</xs:restriction>
-	</xs:simpleType>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ACTIVE"/>
+            <xs:enumeration value="INACTIVE"/>
+            <xs:enumeration value="UNTESTED"/>
+        </xs:restriction>
+    </xs:simpleType>
 
-	<xs:simpleType name="tCompasLDeviceStatus">
+    <xs:simpleType name="tCompasLDeviceStatus">
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Define whether the LDevice belonging to one ICD with-in one System Version are qualified (ACTIVE), not working (INACTIVE) or untested (UNTESTED)
             </xs:documentation>
         </xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="ACTIVE"/>
-			<xs:enumeration value="INACTIVE"/>
-			<xs:enumeration value="UNTESTED"/>
-		</xs:restriction>
-	</xs:simpleType>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ACTIVE"/>
+            <xs:enumeration value="INACTIVE"/>
+            <xs:enumeration value="UNTESTED"/>
+        </xs:restriction>
+    </xs:simpleType>
 
-	<xs:simpleType name="tCompasIEDRedundancy">
+    <xs:simpleType name="tCompasIEDRedundancy">
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Define whether the IED with-in one System Version is used as NOMINAL or BACKUP IED
             </xs:documentation>
         </xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="None"/>
-			<xs:enumeration value="A"/>
-			<xs:enumeration value="B"/>
-			<xs:enumeration value="C"/>
-		</xs:restriction>
-	</xs:simpleType>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="A"/>
+            <xs:enumeration value="B"/>
+            <xs:enumeration value="C"/>
+        </xs:restriction>
+    </xs:simpleType>
 
-	<xs:simpleType name="tCompasFlowKind">
+    <xs:simpleType name="tCompasFlowKind">
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Define whether the Flow is limited to the Bay(refering to the physical one or cubicles) to which belong the IED (BAY_INTERNAL) or only going outside the BAY (BAY_EXTERNAL) or both (BAY_INTERNAL_EXTERNAL)
             </xs:documentation>
         </xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="BAY_INTERNAL"/>
-			<xs:enumeration value="BAY_EXTERNAL"/>
-		</xs:restriction>
-	</xs:simpleType>
-	
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BAY_INTERNAL"/>
+            <xs:enumeration value="BAY_EXTERNAL"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="tCompasTopoNodeDirection">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                Define if a Node Direction is Up or Down
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Up"/>
+            <xs:enumeration value="Down"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
     <xs:complexType name="tCompasFlow">
         <xs:annotation>
             <xs:documentation xml:lang="en">
@@ -164,83 +177,74 @@ SPDX-License-Identifier: Apache-2.0
                 The FlowStatus define whether if the flow is qualified, non qualified or untested accordingly to the source IED which is bellonging to a define SystemVersion
             </xs:documentation>
         </xs:annotation>
-		<xs:attribute name="dataStreamKey" type="xs:string" use="optional"/>
-		<xs:attribute name="ExtRefiedName" type="xs:string" use="optional"/>
-		<xs:attribute name="ExtRefldinst" type="xs:string" use="optional"/>
-		<xs:attribute name="ExtRefprefix" type="xs:string" use="optional"/>
-		<xs:attribute name="ExtReflnClass" type="xs:string" use="optional"/>
-		<xs:attribute name="ExtReflnInst" type="xs:string" use="optional"/>
-		<xs:attribute name="FlowID" type="xs:string" use="optional"/>
-		<xs:attribute name="FlowStatus" type="tCompasFlowStatus" use="optional"/>
-		<xs:attribute name="FlowKind" type="tCompasFlowKind" use="optional"/>
+        <xs:attribute name="dataStreamKey" type="xs:string" use="optional"/>
+        <xs:attribute name="ExtRefiedName" type="xs:string" use="optional"/>
+        <xs:attribute name="ExtRefldinst" type="xs:string" use="optional"/>
+        <xs:attribute name="ExtRefprefix" type="xs:string" use="optional"/>
+        <xs:attribute name="ExtReflnClass" type="xs:string" use="optional"/>
+        <xs:attribute name="ExtReflnInst" type="xs:string" use="optional"/>
+        <xs:attribute name="FlowID" type="xs:string" use="optional"/>
+        <xs:attribute name="FlowStatus" type="tCompasFlowStatus" use="optional"/>
+        <xs:attribute name="FlowKind" type="tCompasFlowKind" use="optional"/>
     </xs:complexType>
-	
-	<xs:complexType name="tCompasBay">
+
+    <xs:complexType name="tCompasBay">
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Define the specific Compas attributes linked to the Bay. The Main and Second Labels are label of the bay specific to each user. MainLabel and Version identify uniquely the instanciated Bay as the UUID
                 The BayCodif is specific to each user to identify the bay kind.
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="BayCodif" type="xs:string" use="optional"/>
-		<xs:attribute name="UUID" type="xs:string" use="optional"/>
-		<xs:attribute name="Version" type="xs:string" use="optional"/>
-		<xs:attribute name="MainLabel" type="xs:string" use="optional"/>
-		<xs:attribute name="SecondLabel" type="xs:string" use="optional"/>
-		<xs:attribute name="NumBay" type="xs:string" use="optional"/>
-		<xs:attribute name="ZoneNumber" type="xs:string" use="optional"/>
-    </xs:complexType>
-	
-	<xs:complexType name="tCompasConnectivityNode">
-        <xs:annotation>
-            <xs:documentation xml:lang="en">
-                Define the specific busbarsection or zone of the connectivity node
-            </xs:documentation>
-        </xs:annotation>
         <xs:attribute name="UUID" type="xs:string" use="optional"/>
-		<xs:attribute name="ZoneNumber" type="xs:string" use="optional"/>
+        <xs:attribute name="Indice" type="xs:string" use="optional"/>
+        <xs:attribute name="Version" type="xs:string" use="optional"/>
+        <xs:attribute name="MainLabel" type="xs:string" use="optional"/>
+        <xs:attribute name="SecondLabel" type="xs:string" use="optional"/>
+        <xs:attribute name="BayCodif" type="xs:string" use="optional"/>
+        <xs:attribute name="NumBay" type="xs:integer" use="optional"/>
+        <xs:attribute name="BayCount" type="xs:integer" use="optional"/>
     </xs:complexType>
-	
-	<xs:complexType name="tCompasICDHeader" mixed="true">
+
+    <xs:complexType name="tCompasICDHeader" mixed="true">
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Define specific Compas attributes to identify uniquely one ICD file with-in a SystemVersion for a given IEDredundancy. The UUID of this combinaison is defined by the ICDSystemVersionUUID.
                 This private is intended to be used in the STD file (/IED level) and SSD (/LNode level)
             </xs:documentation>
         </xs:annotation>
-		<xs:attribute name="ICDSystemVersionUUID" type="xs:string" use="optional"/>
+        <xs:attribute name="ICDSystemVersionUUID" type="xs:string" use="optional"/>
         <xs:attribute name="IEDType" type="tCompasIEDType" use="required"/>
-		<xs:attribute name="IEDinstance" type="xs:string" use="optional"/>
-		<xs:attribute name="IEDName" type="xs:string" use="optional"/>
+        <xs:attribute name="IEDinstance" type="xs:string" use="optional"/>
+        <xs:attribute name="IEDName" type="xs:string" use="optional"/>
         <xs:attribute name="VendorName" type="xs:string" use="required"/>
         <xs:attribute name="IEDmodel" type="xs:string" use="required"/>
-		<xs:attribute name="IEDredundancy" type="tCompasIEDRedundancy" use="optional"/>
-		<xs:attribute name="BayLabel" type="xs:string" use="optional"/>	
+        <xs:attribute name="IEDredundancy" type="tCompasIEDRedundancy" use="optional"/>
+        <xs:attribute name="BayLabel" type="xs:string" use="optional"/>
         <xs:attribute name="hwRev" type="xs:string" use="required"/>
         <xs:attribute name="swRev" type="xs:string" use="required"/>
         <xs:attribute name="headerId" type="xs:string" use="required"/>
         <xs:attribute name="headerVersion" type="xs:string" use="optional"/>
         <xs:attribute name="headerRevision" type="xs:string" use="optional"/>
     </xs:complexType>
-	
-	<xs:complexType name="tCompasSystemVersion">
+
+    <xs:complexType name="tCompasSystemVersion">
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Identify the SystemVersion to which the functional Bay and IED belongs to. This Private can be used in /Bay in substation and in the /IED.
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="MainSystemVersion" type="xs:string" use="optional"/>
-		<xs:attribute name="MinorSystemVersion" type="xs:string" use="optional"/>
+        <xs:attribute name="MinorSystemVersion" type="xs:string" use="optional"/>
     </xs:complexType>
-	
-	<xs:complexType name="tCompasFunction">
+
+    <xs:complexType name="tCompasFunction">
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Identifies the Function from the user specific catalog of function
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="UUID" type="xs:string" use="optional"/>
-		<xs:attribute name="Label" type="xs:string" use="optional"/>
+        <xs:attribute name="Label" type="xs:string" use="optional"/>
     </xs:complexType>
 
     <xs:complexType name="tCompasLDevice">
@@ -250,7 +254,7 @@ SPDX-License-Identifier: Apache-2.0
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="LDeviceStatus" type="tCompasLDeviceStatus" use="optional"/>
-		<xs:attribute name="LDeviceID" type="xs:string" use="optional"/>
+        <xs:attribute name="LDeviceID" type="xs:string" use="optional"/>
     </xs:complexType>
 
     <xs:complexType name="tCompasCriteria">
@@ -260,18 +264,30 @@ SPDX-License-Identifier: Apache-2.0
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="ObjectID" type="xs:string" use="optional"/>
-		<xs:attribute name="CriteriaAssociationID" type="xs:string" use="optional"/>
+        <xs:attribute name="CriteriaAssociationID" type="xs:string" use="optional"/>
     </xs:complexType>
+
+    <xs:complexType name="tCompasTopo">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                Describe the connectivity node and layout order for a given Bay;can be multiple instanciated in case of bay which is connected to multiple nodes
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="Node" type="xs:string" use="required"/>
+        <xs:attribute name="NodeOrder" type="xs:integer" use="required"/>
+        <xs:attribute name="Direction" type="tCompasTopoNodeDirection" use="required"/>
+    </xs:complexType>
+
 
     <xs:element name="SclName" type="tSclName"/>
     <xs:element name="SclFileType" type="tSclFileType"/>
     <xs:element name="Flow" type="tCompasFlow"/>
-	<xs:element name="ConnectivityNode" type="tCompasConnectivityNode"/>
-	<xs:element name="Bay" type="tCompasBay"/>
-	<xs:element name="LDevice" type="tCompasLDevice"/>
-	<xs:element name="Criteria" type="tCompasCriteria"/>
-	<xs:element name="ICDHeader" type="tCompasICDHeader"/>
-	<xs:element name="SystemVersion" type="tCompasSystemVersion"/>
-	<xs:element name="Function" type="tCompasFunction"/>
+    <xs:element name="Bay" type="tCompasBay"/>
+    <xs:element name="LDevice" type="tCompasLDevice"/>
+    <xs:element name="Criteria" type="tCompasCriteria"/>
+    <xs:element name="ICDHeader" type="tCompasICDHeader"/>
+    <xs:element name="SystemVersion" type="tCompasSystemVersion"/>
+    <xs:element name="Function" type="tCompasFunction"/>
+    <xs:element name="Topo" type="tCompasTopo"/>
 
 </xs:schema>
