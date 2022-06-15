@@ -13,14 +13,14 @@ SPDX-License-Identifier: Apache-2.0
         <xs:documentation xml:lang="en">
             Version 1.0 Release 2021/06/16
             Version 1.1 Release 2022/01/21
-            Version 2.1 Release 2022/06/08
+            Version 1.2 Release 2022/06/08
         </xs:documentation>
     </xs:annotation>
 
     <!--
     SCL Name element.
     -->
-    <xs:simpleType name="tSclName">
+    <xs:simpleType name="tCompasSclName">
         <xs:annotation>
             <xs:documentation>Name of the SCL configuration, extension excluded</xs:documentation>
         </xs:annotation>
@@ -30,7 +30,7 @@ SPDX-License-Identifier: Apache-2.0
     <!--
     SCL File Type element.
     -->
-    <xs:simpleType name="tSclFileType">
+    <xs:simpleType name="tCompasSclFileType">
         <xs:annotation>
             <xs:documentation>File type of the SCL configuration file</xs:documentation>
         </xs:annotation>
@@ -279,8 +279,8 @@ SPDX-License-Identifier: Apache-2.0
     </xs:complexType>
 
 
-    <xs:element name="SclName" type="tSclName"/>
-    <xs:element name="SclFileType" type="tSclFileType"/>
+    <xs:element name="SclName" type="tCompasSclName"/>
+    <xs:element name="SclFileType" type="tCompasSclFileType"/>
     <xs:element name="Flow" type="tCompasFlow"/>
     <xs:element name="Bay" type="tCompasBay"/>
     <xs:element name="LDevice" type="tCompasLDevice"/>

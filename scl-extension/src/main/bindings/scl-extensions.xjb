@@ -8,7 +8,7 @@ SPDX-License-Identifier: Apache-2.0
               xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
               version="2.1">
     <jxb:bindings schemaLocation="../resources/xsd/SCL_CoMPAS.xsd">
-        <jxb:bindings node="//xs:simpleType[@name='tSclFileType']">
+        <jxb:bindings node="//xs:simpleType[@name='tCompasSclFileType']">
             <jxb:typesafeEnumClass ref="org.lfenergy.compas.scl.extensions.model.SclFileType"/>
         </jxb:bindings>
     </jxb:bindings>
