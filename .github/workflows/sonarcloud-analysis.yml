@@ -79,5 +79,5 @@ jobs:
         run: |
           ./mvnw -B -s custom_maven_settings.xml -Psonar \
             ${{ steps.set_env.outputs.sonar_opts }} \
-            -Dsonar.branch.name=${{ github.ref_name }}
+            -Dsonar.branch.name=${{ github.ref_name }} \
             verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
