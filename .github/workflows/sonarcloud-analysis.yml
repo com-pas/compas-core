@@ -33,6 +33,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
+
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
@@ -45,6 +46,13 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
+      - name: set SonarEnv for Pull Requests
+        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
+        run: echo ::set-env name=SONAR_OPTS::$(echo -Dsonar.pullrequest.branch=${{ github.ref_name }} -Dsonar.pullrequest.key=${{ github.event.pull_request.number }} -Dsonar.pullrequest.base=${{ github.base_ref }} -Dsonar.scm.revision=${{ github.event.pull_request.head.sha }})
+      - name: set SonarEnv for Push
+        if: github.event_name == 'push'
+        run: echo ::set-env name=SONAR_OPTS::$(echo -Dsonar.branch.name=${{ github.ref_name }})
       - name: Create custom Maven Settings.xml
         uses: whelk-io/maven-settings-xml-action@v20
         with:
@@ -59,5 +67,5 @@ jobs:
             -Dsonar.projectKey=com-pas_compas-core \
             -Dsonar.organization=com-pas \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.pullrequest.key=${{ github.event.pull_request.number }} \
+            ${SONAR_OPTS} \
             verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
