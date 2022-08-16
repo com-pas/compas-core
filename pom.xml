@@ -171,6 +171,9 @@ SPDX-License-Identifier: Apache-2.0
             <id>sonar</id>
 
             <properties>
+                <sonar.projectKey>com-pas_compas-core</sonar.projectKey>
+                <sonar.organization>com-pas</sonar.organization>
+                <sonar.host.url>https://sonarcloud.io</sonar.host.url>
                 <sonar.language>java</sonar.language>
 
                 <!-- JaCoCo Properties -->
