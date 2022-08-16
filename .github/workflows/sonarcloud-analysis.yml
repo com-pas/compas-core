@@ -47,27 +47,34 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: set SonarEnv for Pull Requests
+      - name: Set Common Sonar Variables
         id: set_env
-        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
-        run: echo "##[set-output name=sonar_opts;]$(echo -Dsonar.pullrequest.branch=${{ github.ref_name }} -Dsonar.pullrequest.key=${{ github.event.pull_request.number }} -Dsonar.pullrequest.base=${{ github.base_ref }} -Dsonar.scm.revision=${{ github.event.pull_request.head.sha }})
-      - name: set SonarEnv for Push
-        id: set_env
-        if: github.event_name == 'push'
-        run: echo "##[set-output name=sonar_opts;]$(echo -Dsonar.branch.name=${{ github.ref_name }})
+        run: echo "##[set-output name=sonar_opts;]$(echo -Dsonar.projectKey=com-pas_compas-core -Dsonar.organization=com-pas -Dsonar.host.url=https://sonarcloud.io)
       - name: Create custom Maven Settings.xml
         uses: whelk-io/maven-settings-xml-action@v20
         with:
           output_file: custom_maven_settings.xml
           servers: '[{ "id": "github-packages-compas", "username": "OWNER", "password": "${{ secrets.GITHUB_TOKEN }}" }]'
-      - name: Build and analyze
+      - name: Build and analyze (Pull Request)
+        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           ./mvnw -B -s custom_maven_settings.xml -Psonar \
-            -Dsonar.projectKey=com-pas_compas-core \
-            -Dsonar.organization=com-pas \
-            -Dsonar.host.url=https://sonarcloud.io \
-            ${{ steps.set_env.outputs.sonar_opts }}
+            ${{ steps.set_env.outputs.sonar_opts }} \
+            -Dsonar.pullrequest.branch=${{ github.ref_name }} \
+            -Dsonar.pullrequest.key=${{ github.event.pull_request.number }} \
+            -Dsonar.pullrequest.base=${{ github.base_ref }} \
+            -Dsonar.scm.revision=${{ github.event.pull_request.head.sha }} \
+            verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+      - name: Build and analyze (Push)
+        if: github.event_name == 'push'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          ./mvnw -B -s custom_maven_settings.xml -Psonar \
+            ${{ steps.set_env.outputs.sonar_opts }} \
+            -Dsonar.branch.name=${{ github.ref_name }}
             verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
