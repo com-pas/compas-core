@@ -49,7 +49,7 @@ jobs:
 
       - name: Set Common Sonar Variables
         id: set_env
-        run: echo "##[set-output name=sonar_opts;]$(echo -Dsonar.projectKey=com-pas_compas-core -Dsonar.organization=com-pas -Dsonar.host.url=https://sonarcloud.io)
+        run: echo "##[set-output name=sonar_opts;]$(echo -Dsonar.projectKey=com-pas_compas-core -Dsonar.organization=com-pas -Dsonar.host.url=https://sonarcloud.io)"
       - name: Create custom Maven Settings.xml
         uses: whelk-io/maven-settings-xml-action@v20
         with:
