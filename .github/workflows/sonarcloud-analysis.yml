@@ -48,7 +48,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Set Common Sonar Variables
-        id: set_env
+        id: sonar_env
         run: |
           echo "##[set-output name=sonar_opts;]$(echo -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.projectKey=com-pas_compas-core \
@@ -65,7 +65,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           ./mvnw -B -s custom_maven_settings.xml -Psonar \
-            ${{ steps.set_env.outputs.sonar_opts }} \
+            ${{ steps.sonar_env.outputs.sonar_opts }} \
             -Dsonar.pullrequest.branch=${{ github.ref_name }} \
             -Dsonar.pullrequest.key=${{ github.event.pull_request.number }} \
             -Dsonar.pullrequest.base=${{ github.base_ref }} \
@@ -78,6 +78,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           ./mvnw -B -s custom_maven_settings.xml -Psonar \
-            ${{ steps.set_env.outputs.sonar_opts }} \
+            ${{ steps.sonar_env.outputs.sonar_opts }} \
             -Dsonar.branch.name=${{ github.ref_name }} \
             verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
