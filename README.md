@@ -12,5 +12,8 @@ SPDX-License-Identifier: Apache-2.0
 
 # Core components
 
-Interested in contributing? Please read carefully the [CONTRIBUTING guidelines](https://github.com/com-pas/contributing/blob/master/CONTRIBUTING.md).
+CoMPAS Core contains re-usable code for the other CoMPAS Repositories, like a Java model of the SCL XSDs.
+Also, it contains a custom extension for the SCL Schema specific for CoMPAS.
+
+Interested in contributing? Please read carefully the [CONTRIBUTING guidelines](https://com-pas.github.io/contributing/).
 
