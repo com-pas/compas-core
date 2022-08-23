@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2021 Alliander N.V.
+# SPDX-FileCopyrightText: 2022 Alliander N.V.
 #
 # SPDX-License-Identifier: Apache-2.0
 
@@ -15,17 +15,21 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Extract tag name
         id: extract_tagname
         shell: bash
-        # Extra the tagname form the git reference, value of GITHUB_REF will be something like refs/tags/<tag_name>.
+        # Extract the tag name from the git reference, value of GITHUB_REF will be something like refs/tags/<tag_name>.
         run: echo "##[set-output name=tagname;]$(echo ${GITHUB_REF##*/})"
+
       - name: Set up JDK 1.11
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '11'
+
       - name: Create custom Maven Settings.xml
         uses: whelk-io/maven-settings-xml-action@v20
         with:
