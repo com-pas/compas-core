@@ -14,6 +14,7 @@ SPDX-License-Identifier: Apache-2.0
             Version 1.0 Release 2021/06/16
             Version 1.1 Release 2022/01/21
             Version 1.2 Release 2022/06/08
+            Version 1.3 Release 2022/09/08
         </xs:documentation>
     </xs:annotation>
 
@@ -24,7 +25,9 @@ SPDX-License-Identifier: Apache-2.0
         <xs:annotation>
             <xs:documentation>Name of the SCL configuration, extension excluded</xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:normalizedString"/>
+        <xs:restriction base="xs:normalizedString">
+            <xs:minLength value="1"/>
+        </xs:restriction>
     </xs:simpleType>
 
     <!--
@@ -77,6 +80,25 @@ SPDX-License-Identifier: Apache-2.0
             </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:simpleType name="tCompasLabel">
+        <xs:annotation>
+            <xs:documentation>Label added to the SCL File to filter on</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:normalizedString">
+            <xs:minLength value="1"/>
+            <xs:pattern value="[A-Za-z][0-9A-Za-z_-]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="tCompasLabels">
+        <xs:annotation>
+            <xs:documentation>List of Labels belonging to the SCL File to filter on with a maximum number</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Label" type="tCompasLabel" minOccurs="0" maxOccurs="20"/>
+        </xs:sequence>
+    </xs:complexType>
 
     <xs:simpleType name="tCompasIEDType">
         <xs:annotation>
@@ -281,6 +303,8 @@ SPDX-License-Identifier: Apache-2.0
 
     <xs:element name="SclName" type="tCompasSclName"/>
     <xs:element name="SclFileType" type="tCompasSclFileType"/>
+    <xs:element name="Labels" type="tCompasLabels"/>
+    
     <xs:element name="Flow" type="tCompasFlow"/>
     <xs:element name="Bay" type="tCompasBay"/>
     <xs:element name="LDevice" type="tCompasLDevice"/>
