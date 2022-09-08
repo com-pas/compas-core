@@ -20,8 +20,8 @@ SPDX-License-Identifier: Apache-2.0
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <compas.scl.xsd.version>0.0.4</compas.scl.xsd.version>
-        <quarkus.platform.version>2.10.0.Final</quarkus.platform.version>
-        <slf4j.version>1.7.36</slf4j.version>
+        <quarkus.platform.version>2.12.1.Final</quarkus.platform.version>
+        <slf4j.version>2.0.0</slf4j.version>
         <jaxb.bind.version>2.3.6</jaxb.bind.version>
         <openpojo.version>0.9.1</openpojo.version>
     </properties>
@@ -236,7 +236,7 @@ SPDX-License-Identifier: Apache-2.0
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-javadoc-plugin</artifactId>
-                            <version>3.4.0</version>
+                            <version>3.4.1</version>
                             <executions>
                                 <execution>
                                     <id>attach-javadocs</id>
