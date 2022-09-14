@@ -35,7 +35,7 @@ public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
         return getCompasValue(compasPrivate, SCL_FILE_TYPE, SclFileType.class);
     }
 
-    public Optional<TCompasLabels> getLabels(TPrivate compasPrivate) {
+    public Optional<TCompasLabels> getCompasLabels(TPrivate compasPrivate) {
         return getCompasValue(compasPrivate, LABELS, TCompasLabels.class);
     }
 

@@ -164,19 +164,19 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getLabels_WhenCalledNullPassed_ThenNoLabelsReturned() {
-        var value = manager.getLabels(null);
+    void getCompasLabels_WhenCalledNullPassed_ThenNoLabelsReturned() {
+        var value = manager.getCompasLabels(null);
 
         assertFalse(value.isPresent());
     }
 
     @Test
-    void getLabels_WhenCalledWithLabels_ThenLabelsReturned() {
+    void getCompasLabels_WhenCalledWithLabels_ThenLabelsReturned() {
         var scl = readSCL("scl_with_compas_private.scd");
         var compasPrivate = manager.getCompasPrivate(scl);
 
         compasPrivate.ifPresentOrElse(tPrivate -> {
-            var labels = manager.getLabels(tPrivate);
+            var labels = manager.getCompasLabels(tPrivate);
 
             assertTrue(labels.isPresent());
             assertEquals("Label1", labels.get().getLabel().get(0));
@@ -184,12 +184,12 @@ class CompasExtensionsManagerTest {
     }
 
     @Test
-    void getLabels_WhenCalledWithoutLabels_ThenNoLabelsReturned() {
+    void getCompasLabels_WhenCalledWithoutLabels_ThenNoLabelsReturned() {
         var scl = readSCL("scl_without_labels_compas_private.scd");
 
         var compasPrivate = manager.getCompasPrivate(scl);
         compasPrivate.ifPresentOrElse(tPrivate -> {
-            var labels = manager.getLabels(tPrivate);
+            var labels = manager.getCompasLabels(tPrivate);
 
             assertFalse(labels.isPresent());
         }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));

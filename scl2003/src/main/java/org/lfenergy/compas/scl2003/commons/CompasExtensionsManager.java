@@ -27,7 +27,7 @@ public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
         return Optional.empty();
     }
 
-    public Optional<TCompasLabels> getLabels(TPrivate compasPrivate) {
+    public Optional<TCompasLabels> getCompasLabels(TPrivate compasPrivate) {
         return getCompasValue(compasPrivate, LABELS, TCompasLabels.class);
     }
 
