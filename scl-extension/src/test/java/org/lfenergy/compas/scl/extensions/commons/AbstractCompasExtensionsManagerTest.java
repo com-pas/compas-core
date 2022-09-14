@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_NAME_EXTENSION;
+import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_NAME;
 
 class AbstractCompasExtensionsManagerTest {
     private AbstractCompasExtensionsManager manager = new AbstractCompasExtensionsManager() {
@@ -19,7 +19,7 @@ class AbstractCompasExtensionsManagerTest {
 
     @Test
     void getCompasElement_WhenNullPassedAsList_ThenEmptyOptionalReturned() {
-        var result = manager.getCompasElement(null, SCL_NAME_EXTENSION);
+        var result = manager.getCompasElement(null, SCL_NAME);
 
         assertFalse(result.isPresent());
     }
@@ -27,7 +27,7 @@ class AbstractCompasExtensionsManagerTest {
     @Test
     void getCompasElement_WhenCalledWithListContainingSclName_ThenSclNameReturned() {
         var elements = createElements(true);
-        var result = manager.getCompasElement(elements, SCL_NAME_EXTENSION);
+        var result = manager.getCompasElement(elements, SCL_NAME);
 
         assertTrue(result.isPresent());
         assertEquals("project", result.get().getValue());
@@ -36,14 +36,14 @@ class AbstractCompasExtensionsManagerTest {
     @Test
     void getCompasElement_WhenCalledWithListNotContainingSclName_ThenEmptyOptionalReturned() {
         var elements = createElements(false);
-        var result = manager.getCompasElement(elements, SCL_NAME_EXTENSION);
+        var result = manager.getCompasElement(elements, SCL_NAME);
 
         assertFalse(result.isPresent());
     }
 
     @Test
     void getCompasValue_WhenNullPassedAsList_ThenEmptyOptionalReturned() {
-        var result = manager.getCompasValue(null, SCL_NAME_EXTENSION, String.class);
+        var result = manager.getCompasValue(null, SCL_NAME, String.class);
 
         assertFalse(result.isPresent());
     }
@@ -51,7 +51,7 @@ class AbstractCompasExtensionsManagerTest {
     @Test
     void getCompasValue_WhenCalledWithListContainingSclName_ThenSclNameReturned() {
         var elements = createElements(true);
-        var result = manager.getCompasValue(elements, SCL_NAME_EXTENSION, String.class);
+        var result = manager.getCompasValue(elements, SCL_NAME, String.class);
 
         assertTrue(result.isPresent());
         assertEquals("project", result.get());
@@ -60,7 +60,7 @@ class AbstractCompasExtensionsManagerTest {
     @Test
     void getCompasValue_WhenCalledWithListNotContainingSclName_ThenEmptyOptionalReturned() {
         var elements = createElements(false);
-        var result = manager.getCompasValue(elements, SCL_NAME_EXTENSION, String.class);
+        var result = manager.getCompasValue(elements, SCL_NAME, String.class);
 
         assertFalse(result.isPresent());
     }
@@ -69,7 +69,7 @@ class AbstractCompasExtensionsManagerTest {
         var elements = new ArrayList<>();
 
         if (withSclName) {
-            var qname = new QName(CompasExtensionsConstants.COMPAS_EXTENSION_NS_URI, SCL_NAME_EXTENSION.getFieldName());
+            var qname = new QName(CompasExtensionsConstants.COMPAS_EXTENSION_NS_URI, SCL_NAME.getFieldName());
             var jaxbElement = new JAXBElement<>(qname, String.class, "project");
             elements.add(jaxbElement);
         }

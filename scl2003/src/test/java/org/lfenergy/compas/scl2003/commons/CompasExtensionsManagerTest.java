@@ -8,8 +8,8 @@ import org.lfenergy.compas.scl.extensions.model.SclFileType;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsConstants.COMPAS_SCL_EXTENSION_TYPE;
-import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_FILETYPE_EXTENSION;
-import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_NAME_EXTENSION;
+import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_FILE_TYPE;
+import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_NAME;
 import static org.lfenergy.compas.scl2003.util.ReadTestFile.readSCL;
 
 class CompasExtensionsManagerTest {
@@ -44,7 +44,7 @@ class CompasExtensionsManagerTest {
 
     @Test
     void getCompasElement_WhenCalledNullPassed_ThenNoNameReturned() {
-        var compasElement = manager.getCompasElement(null, SCL_NAME_EXTENSION);
+        var compasElement = manager.getCompasElement(null, SCL_NAME);
 
         assertFalse(compasElement.isPresent());
     }
@@ -55,7 +55,7 @@ class CompasExtensionsManagerTest {
 
         var compasPrivate = manager.getCompasPrivate(scl);
         compasPrivate.ifPresentOrElse(tPrivate -> {
-            var compasElement = manager.getCompasElement(tPrivate, SCL_NAME_EXTENSION);
+            var compasElement = manager.getCompasElement(tPrivate, SCL_NAME);
 
             assertFalse(compasElement.isPresent());
         }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
@@ -67,7 +67,7 @@ class CompasExtensionsManagerTest {
 
         var compasPrivate = manager.getCompasPrivate(scl);
         compasPrivate.ifPresentOrElse(tPrivate -> {
-            var compasElement = manager.getCompasElement(tPrivate, SCL_NAME_EXTENSION);
+            var compasElement = manager.getCompasElement(tPrivate, SCL_NAME);
 
             assertTrue(compasElement.isPresent());
             assertEquals("project", compasElement.get().getValue().toString());
@@ -80,7 +80,7 @@ class CompasExtensionsManagerTest {
 
         var compasPrivate = manager.getCompasPrivate(scl);
         compasPrivate.ifPresentOrElse(tPrivate -> {
-            var compasElement = manager.getCompasElement(tPrivate, SCL_FILETYPE_EXTENSION);
+            var compasElement = manager.getCompasElement(tPrivate, SCL_FILE_TYPE);
 
             assertFalse(compasElement.isPresent());
         }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
@@ -92,7 +92,7 @@ class CompasExtensionsManagerTest {
 
         var compasPrivate = manager.getCompasPrivate(scl);
         compasPrivate.ifPresentOrElse(tPrivate -> {
-            var compasElement = manager.getCompasElement(tPrivate, SCL_FILETYPE_EXTENSION);
+            var compasElement = manager.getCompasElement(tPrivate, SCL_FILE_TYPE);
 
             assertTrue(compasElement.isPresent());
             assertEquals(SclFileType.CID, compasElement.get().getValue());
@@ -160,6 +160,38 @@ class CompasExtensionsManagerTest {
             var sclFileType = manager.getCompasSclFileType(tPrivate);
 
             assertFalse(sclFileType.isPresent());
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
+    }
+
+    @Test
+    void getLabels_WhenCalledNullPassed_ThenNoLabelsReturned() {
+        var value = manager.getLabels(null);
+
+        assertFalse(value.isPresent());
+    }
+
+    @Test
+    void getLabels_WhenCalledWithLabels_ThenLabelsReturned() {
+        var scl = readSCL("scl_with_compas_private.scd");
+        var compasPrivate = manager.getCompasPrivate(scl);
+
+        compasPrivate.ifPresentOrElse(tPrivate -> {
+            var labels = manager.getLabels(tPrivate);
+
+            assertTrue(labels.isPresent());
+            assertEquals("Label1", labels.get().getLabel().get(0));
+        }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
+    }
+
+    @Test
+    void getLabels_WhenCalledWithoutLabels_ThenNoLabelsReturned() {
+        var scl = readSCL("scl_without_labels_compas_private.scd");
+
+        var compasPrivate = manager.getCompasPrivate(scl);
+        compasPrivate.ifPresentOrElse(tPrivate -> {
+            var labels = manager.getLabels(tPrivate);
+
+            assertFalse(labels.isPresent());
         }, () -> fail(COMPAS_PRIVATE_NOT_FOUND));
     }
 

@@ -8,8 +8,9 @@ package org.lfenergy.compas.scl.extensions.commons;
  * For a description of the fields, see the XSD.
  */
 public enum CompasExtensionsField {
-    SCL_NAME_EXTENSION("SclName"),
-    SCL_FILETYPE_EXTENSION("SclFileType"),
+    SCL_NAME("SclName"),
+    SCL_FILE_TYPE("SclFileType"),
+    LABELS("Labels"),
     FLOW("Flow"),
     CONNECTIVITY_NODE("ConnectivityNode"),
     BAY("Bay"),
