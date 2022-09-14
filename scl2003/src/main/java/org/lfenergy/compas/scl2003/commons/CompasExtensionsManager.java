@@ -27,16 +27,16 @@ public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
         return Optional.empty();
     }
 
-    public Optional<String> getCompasSclName(TPrivate compasPrivate) {
-        return getCompasValue(compasPrivate, SCL_NAME, String.class);
+    public Optional<TCompasLabels> getLabels(TPrivate compasPrivate) {
+        return getCompasValue(compasPrivate, LABELS, TCompasLabels.class);
     }
 
     public Optional<SclFileType> getCompasSclFileType(TPrivate compasPrivate) {
         return getCompasValue(compasPrivate, SCL_FILE_TYPE, SclFileType.class);
     }
 
-    public Optional<TCompasLabels> getLabels(TPrivate compasPrivate) {
-        return getCompasValue(compasPrivate, LABELS, TCompasLabels.class);
+    public Optional<String> getCompasSclName(TPrivate compasPrivate) {
+        return getCompasValue(compasPrivate, SCL_NAME, String.class);
     }
 
     private <T> Optional<T> getCompasValue(TPrivate compasPrivate, CompasExtensionsField field, Class<T> clazz) {
