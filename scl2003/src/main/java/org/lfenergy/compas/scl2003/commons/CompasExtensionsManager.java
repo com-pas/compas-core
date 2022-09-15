@@ -6,6 +6,7 @@ package org.lfenergy.compas.scl2003.commons;
 import org.lfenergy.compas.scl.extensions.commons.AbstractCompasExtensionsManager;
 import org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField;
 import org.lfenergy.compas.scl.extensions.model.SclFileType;
+import org.lfenergy.compas.scl.extensions.model.TCompasLabels;
 import org.lfenergy.compas.scl2003.model.SCL;
 import org.lfenergy.compas.scl2003.model.TPrivate;
 
@@ -13,8 +14,7 @@ import javax.xml.bind.JAXBElement;
 import java.util.Optional;
 
 import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsConstants.COMPAS_SCL_EXTENSION_TYPE;
-import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_FILETYPE_EXTENSION;
-import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_NAME_EXTENSION;
+import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.*;
 
 public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
     public Optional<TPrivate> getCompasPrivate(SCL scl) {
@@ -27,12 +27,16 @@ public class CompasExtensionsManager extends AbstractCompasExtensionsManager {
         return Optional.empty();
     }
 
-    public Optional<String> getCompasSclName(TPrivate compasPrivate) {
-        return getCompasValue(compasPrivate, SCL_NAME_EXTENSION, String.class);
+    public Optional<TCompasLabels> getCompasLabels(TPrivate compasPrivate) {
+        return getCompasValue(compasPrivate, LABELS, TCompasLabels.class);
     }
 
     public Optional<SclFileType> getCompasSclFileType(TPrivate compasPrivate) {
-        return getCompasValue(compasPrivate, SCL_FILETYPE_EXTENSION, SclFileType.class);
+        return getCompasValue(compasPrivate, SCL_FILE_TYPE, SclFileType.class);
+    }
+
+    public Optional<String> getCompasSclName(TPrivate compasPrivate) {
+        return getCompasValue(compasPrivate, SCL_NAME, String.class);
     }
 
     private <T> Optional<T> getCompasValue(TPrivate compasPrivate, CompasExtensionsField field, Class<T> clazz) {
