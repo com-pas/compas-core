@@ -6,19 +6,12 @@ package org.lfenergy.compas.core.websocket;
 import org.lfenergy.compas.core.commons.exception.CompasException;
 import org.lfenergy.compas.core.commons.model.ErrorResponse;
 
-import javax.websocket.Decoder;
-import javax.websocket.EndpointConfig;
 import javax.xml.bind.JAXBContext;
 import java.io.StringReader;
 
 import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.WEBSOCKET_DECODER_ERROR_CODE;
 
-public class ErrorResponseDecoder implements Decoder.Text<ErrorResponse> {
-    @Override
-    public void init(EndpointConfig endpointConfig) {
-        // do nothing.
-    }
-
+public class ErrorResponseDecoder extends AbstractDecoder<ErrorResponse> {
     @Override
     public boolean willDecode(String message) {
         return (message != null);
@@ -36,10 +29,5 @@ public class ErrorResponseDecoder implements Decoder.Text<ErrorResponse> {
                     "Error unmarshalling Error Response from Websockets.",
                     exp);
         }
-    }
-
-    @Override
-    public void destroy() {
-        // do nothing.
     }
 }
