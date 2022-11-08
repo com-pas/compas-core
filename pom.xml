@@ -250,11 +250,6 @@ SPDX-License-Identifier: Apache-2.0
             <id>release</id>
 
             <build>
-                <pluginManagement>
-                    <plugins>
-                    </plugins>
-                </pluginManagement>
-
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
