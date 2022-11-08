@@ -5,8 +5,9 @@ package org.lfenergy.compas.core.websocket;
 
 import org.lfenergy.compas.core.commons.model.ErrorResponse;
 
-public class ErrorResponseEncoder extends AbstractJaxbEncoder<ErrorResponse> {
-    public ErrorResponseEncoder() {
-        super(ErrorResponse.class);
+public class ErrorResponseEncoder extends AbstractEncoder<ErrorResponse> {
+    @Override
+    public String encode(ErrorResponse jaxbObject) {
+        return WebsocketSupport.encode(jaxbObject, ErrorResponse.class);
     }
 }

@@ -5,8 +5,14 @@ package org.lfenergy.compas.core.websocket;
 
 import org.lfenergy.compas.core.commons.model.ErrorResponse;
 
-public class ErrorResponseDecoder extends AbstractJaxbDecoder<ErrorResponse> {
-    public ErrorResponseDecoder() {
-        super(ErrorResponse.class);
+public class ErrorResponseDecoder extends AbstractDecoder<ErrorResponse> {
+    @Override
+    public boolean willDecode(String message) {
+        return (message != null);
+    }
+
+    @Override
+    public ErrorResponse decode(String message) {
+        return WebsocketSupport.decode(message, ErrorResponse.class);
     }
 }
