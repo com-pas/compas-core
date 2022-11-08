@@ -17,6 +17,10 @@ public class CompasErrorCode {
     public static final String MARSHAL_ERROR_CODE = "CORE-0007";
     public static final String INVALID_YML_ERROR_CODE = "CORE-0008";
 
+    public static final String WEBSOCKET_DECODER_ERROR_CODE = "CORE-0100";
+    public static final String WEBSOCKET_ENCODER_ERROR_CODE = "CORE-0101";
+    public static final String WEBSOCKET_GENERAL_ERROR_CODE = "CORE-0102";
+
     public static final String CONVERT_TO_STRING_ERROR = "CORE-1000";
     public static final String CONVERT_TO_ELEMENT_ERROR = "CORE-1001";
 

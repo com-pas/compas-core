@@ -20,9 +20,9 @@ SPDX-License-Identifier: Apache-2.0
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <compas.scl.xsd.version>0.0.4</compas.scl.xsd.version>
-        <quarkus.platform.version>2.12.2.Final</quarkus.platform.version>
-        <slf4j.version>2.0.0</slf4j.version>
-        <jaxb.bind.version>2.3.6</jaxb.bind.version>
+        <quarkus.platform.version>2.13.3.Final</quarkus.platform.version>
+        <slf4j.version>2.0.3</slf4j.version>
+        <jaxb.bind.version>2.3.7</jaxb.bind.version>
         <openpojo.version>0.9.1</openpojo.version>
     </properties>
 
@@ -44,7 +44,8 @@ SPDX-License-Identifier: Apache-2.0
 
     <modules>
         <module>commons</module>
-        <module>jaxrs-commons</module>
+        <module>rest-commons</module>
+        <module>websocket-commons</module>
         <module>scl-extension</module>
         <module>scl2003</module>
         <module>scl2007b</module>
@@ -160,7 +161,7 @@ SPDX-License-Identifier: Apache-2.0
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.2</version>
+                    <version>3.3.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
