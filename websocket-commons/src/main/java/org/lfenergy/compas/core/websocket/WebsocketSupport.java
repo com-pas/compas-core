@@ -4,13 +4,14 @@
 package org.lfenergy.compas.core.websocket;
 
 import org.lfenergy.compas.core.commons.exception.CompasException;
+import org.lfenergy.compas.core.commons.model.ErrorResponse;
 
+import javax.websocket.Session;
 import javax.xml.bind.JAXBContext;
 import java.io.StringReader;
 import java.io.StringWriter;
 
-import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.WEBSOCKET_DECODER_ERROR_CODE;
-import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.WEBSOCKET_ENCODER_ERROR_CODE;
+import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.*;
 
 public final class WebsocketSupport {
     WebsocketSupport() {
@@ -45,4 +46,13 @@ public final class WebsocketSupport {
         }
     }
 
+    public static void handleException(Session session, Throwable throwable) {
+        var response = new ErrorResponse();
+        if (throwable instanceof CompasException) {
+            response.addErrorMessage(((CompasException) throwable).getErrorCode(), throwable.getMessage());
+        } else {
+            response.addErrorMessage(WEBSOCKET_GENERAL_ERROR_CODE, throwable.getMessage());
+        }
+        session.getAsyncRemote().sendObject(response);
+    }
 }
