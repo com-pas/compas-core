@@ -20,7 +20,6 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class WebsocketHandlerTest {
-
     @Test
     void execute_WhenCalledSuccessful_ThenResponseSendToWebsocket() {
         var message = "Some message";
