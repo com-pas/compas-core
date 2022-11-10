@@ -46,12 +46,12 @@ public final class WebsocketSupport {
         }
     }
 
-    public static void handleException(Session session, RuntimeException re) {
+    public static void handleException(Session session, Throwable throwable) {
         var response = new ErrorResponse();
-        if (re instanceof CompasException) {
-            response.addErrorMessage(((CompasException) re).getErrorCode(), re.getMessage());
+        if (throwable instanceof CompasException) {
+            response.addErrorMessage(((CompasException) throwable).getErrorCode(), throwable.getMessage());
         } else {
-            response.addErrorMessage(WEBSOCKET_GENERAL_ERROR_CODE, re.getMessage());
+            response.addErrorMessage(WEBSOCKET_GENERAL_ERROR_CODE, throwable.getMessage());
         }
         session.getAsyncRemote().sendObject(response);
     }
