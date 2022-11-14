@@ -6,6 +6,8 @@ package org.lfenergy.compas.core.websocket;
 import org.lfenergy.compas.core.commons.exception.CompasException;
 import org.lfenergy.compas.core.commons.model.ErrorResponse;
 
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validation;
 import javax.websocket.Session;
 import javax.xml.bind.JAXBContext;
 import java.io.StringReader;
@@ -38,7 +40,19 @@ public final class WebsocketSupport {
             var jaxbContext = JAXBContext.newInstance(jaxbClass);
             var unmarshaller = jaxbContext.createUnmarshaller();
             var reader = new StringReader(message);
-            return jaxbClass.cast(unmarshaller.unmarshal(reader));
+            var jaxbObject = jaxbClass.cast(unmarshaller.unmarshal(reader));
+
+            try (var factory = Validation.buildDefaultValidatorFactory()) {
+                var validator = factory.getValidator();
+                var constraintViolations = validator.validate(jaxbObject);
+                if (!constraintViolations.isEmpty()) {
+                    throw new ConstraintViolationException(constraintViolations);
+                }
+            }
+
+            return jaxbObject;
+        } catch (ConstraintViolationException exp) {
+            throw exp;
         } catch (Exception exp) {
             throw new CompasException(WEBSOCKET_DECODER_ERROR_CODE,
                     "Error unmarshalling to class '" + jaxbClass.getName() + "' from Websockets.",
@@ -49,7 +63,15 @@ public final class WebsocketSupport {
     public static void handleException(Session session, Throwable throwable) {
         var response = new ErrorResponse();
         if (throwable instanceof CompasException) {
-            response.addErrorMessage(((CompasException) throwable).getErrorCode(), throwable.getMessage());
+            var ce = (CompasException) throwable;
+            response.addErrorMessage(ce.getErrorCode(), ce.getMessage());
+        } else if (throwable instanceof ConstraintViolationException) {
+            var cve = (ConstraintViolationException) throwable;
+            cve.getConstraintViolations()
+                    .forEach(constraintViolation ->
+                            response.addErrorMessage(VALIDATION_ERROR,
+                                    constraintViolation.getMessage(),
+                                    constraintViolation.getPropertyPath().toString()));
         } else {
             response.addErrorMessage(WEBSOCKET_GENERAL_ERROR_CODE, throwable.getMessage());
         }
