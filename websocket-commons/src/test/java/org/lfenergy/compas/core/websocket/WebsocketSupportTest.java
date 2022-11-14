@@ -3,14 +3,20 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.lfenergy.compas.core.websocket;
 
+import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.lfenergy.compas.core.commons.exception.CompasException;
 import org.lfenergy.compas.core.commons.model.ErrorResponse;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.websocket.RemoteEndpoint;
 import javax.websocket.Session;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.lfenergy.compas.core.commons.CommonConstants.COMPAS_COMMONS_V1_NS_URI;
@@ -18,6 +24,7 @@ import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.*;
 import static org.lfenergy.compas.core.websocket.WebsocketSupport.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class WebsocketSupportTest {
     @Test
     void constructor_WhenConstructorCalled_ThenShouldThrowExceptionCauseForbidden() {
@@ -72,6 +79,18 @@ class WebsocketSupportTest {
         assertEquals(errorMessage, message.getMessage());
     }
 
+    @Test
+    void decode_WhenCalledWithValidationErrors_ThenConstraintViolationExceptionThrown() {
+        var xmlMessage = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<compas-commons:ErrorResponse xmlns:compas-commons=\"" + COMPAS_COMMONS_V1_NS_URI + "\">" +
+                "<compas-commons:ErrorMessage>" +
+                "<compas-commons:Message>Some message</compas-commons:Message>" +
+                "</compas-commons:ErrorMessage>" +
+                "</compas-commons:ErrorResponse>";
+
+        var exception = assertThrows(ConstraintViolationException.class, () -> decode(xmlMessage, ErrorResponse.class));
+        assertEquals(1, exception.getConstraintViolations().size());
+    }
 
     @Test
     void decode_WhenCalledWithInvalidXML_ThenExceptionThrown() {
@@ -96,6 +115,24 @@ class WebsocketSupportTest {
     }
 
     @Test
+    void handleException_WhenCalledWithConstraintViolationException_ThenErrorResponseSendToSession() {
+        var session = mockSession();
+
+        var errorMessage = "Error Message";
+        var path = PathImpl.createRootPath();
+
+        ConstraintViolation<String> constraintViolation = mock(ConstraintViolation.class);
+        when(constraintViolation.getMessage()).thenReturn(errorMessage);
+        when(constraintViolation.getPropertyPath()).thenReturn(path);
+
+        var exception = new ConstraintViolationException(Set.of(constraintViolation));
+
+        handleException(session, exception);
+
+        verifyErrorResponse(session, VALIDATION_ERROR, errorMessage);
+    }
+
+    @Test
     void handleException_WhenCalledWithRuntimeException_ThenErrorResponseSendToSession() {
         var errorMessage = "Error Message";
         var session = mockSession();
@@ -115,7 +152,7 @@ class WebsocketSupportTest {
     private void verifyErrorResponse(Session session, String errorCode, String errorMessage) {
         verify(session, times(1)).getAsyncRemote();
         ArgumentCaptor<ErrorResponse> captor = ArgumentCaptor.forClass(ErrorResponse.class);
-        verify(session.getAsyncRemote(), times(1)).sendObject(captor.capture());
+        verify(session.getAsyncRemote()).sendObject(captor.capture());
         var response = captor.getValue();
         assertEquals(1, response.getErrorMessages().size());
         var message = response.getErrorMessages().get(0);
