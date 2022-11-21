@@ -21,8 +21,8 @@ SPDX-License-Identifier: Apache-2.0
 
         <compas.scl.xsd.version>0.0.4</compas.scl.xsd.version>
         <quarkus.platform.version>2.14.0.Final</quarkus.platform.version>
-        <slf4j.version>2.0.3</slf4j.version>
         <jaxb.bind.version>2.3.7</jaxb.bind.version>
+        <log4j2.version>2.19.0</log4j2.version>
         <openpojo.version>0.9.1</openpojo.version>
     </properties>
 
@@ -91,14 +91,14 @@ SPDX-License-Identifier: Apache-2.0
             </dependency>
 
             <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j2.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
-                <version>${slf4j.version}</version>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j2.version}</version>
             </dependency>
 
             <dependency>

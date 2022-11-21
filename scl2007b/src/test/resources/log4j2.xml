@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration strict="true" name="TestConfiguration">
+  <Appenders>
+    <Appender type="Console" name="STDOUT">
+      <Layout type="PatternLayout" pattern="%d %p  %C{3.} [%t] %m%n"/>
+    </Appender>
+  </Appenders>
+
+  <Loggers>
+    <Logger name="org.lfenergy.compas" level="debug" additivity="false">
+      <AppenderRef ref="STDOUT"/>
+    </Logger>
+
+    <Root level="debug">
+      <AppenderRef ref="STDOUT"/>
+    </Root>
+  </Loggers>
+ </Configuration>

@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.lfenergy.compas.core.rest.exception;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lfenergy.compas.core.commons.model.ErrorResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -15,7 +15,7 @@ import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.UNKNOWN
 
 @Provider
 public class GenericExceptionHandler implements ExceptionMapper<Throwable> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GenericExceptionHandler.class);
+    private static final Logger LOGGER = LogManager.getLogger(GenericExceptionHandler.class);
 
     public static final String ERROR_MESSAGE = "Unknown exception occurred.";
 
