@@ -108,13 +108,13 @@ SPDX-License-Identifier: Apache-2.0
         </xs:annotation>
         <xs:restriction base="xs:string">
            <xs:enumeration value="SCU"/>
-	<xs:enumeration value="SCU-MCB"/>
-	<xs:enumeration value="SCU-TG"/>
-	<xs:enumeration value="SCU-ORG"/>
+           <xs:enumeration value="SCU-MCB"/>
+           <xs:enumeration value="SCU-TG"/>
+           <xs:enumeration value="SCU-ORG"/>
            <xs:enumeration value="BCU"/>
-	<xs:enumeration value="BCU-LIGNE"/>
-	<xs:enumeration value="BCU-CBO"/>
-	<xs:enumeration value="BPU"/>
+           <xs:enumeration value="BCU-LIGNE"/>
+           <xs:enumeration value="BCU-CBO"/>
+           <xs:enumeration value="BPU"/>
            <xs:enumeration value="MU"/>
            <xs:enumeration value="SAMU"/>
            <xs:enumeration value="PROT"/>
@@ -122,14 +122,14 @@ SPDX-License-Identifier: Apache-2.0
            <xs:enumeration value="PX"/>
            <xs:enumeration value="PDIS"/>
            <xs:enumeration value="PDB"/>
-	<xs:enumeration value="AUT"/>
-	<xs:enumeration value="PDIF"/>
-	<xs:enumeration value="GRP"/>
-	<xs:enumeration value="GW"/>
-	<xs:enumeration value="TG"/>
-	<xs:enumeration value="TOPO"/>
-	<xs:enumeration value="ADEFINIR"/>
-	<xs:enumeration value="IEDTEST"/>
+           <xs:enumeration value="AUT"/>
+           <xs:enumeration value="PDIF"/>
+           <xs:enumeration value="GRP"/>
+           <xs:enumeration value="GW"/>
+           <xs:enumeration value="TG"/>
+           <xs:enumeration value="TOPO"/>
+           <xs:enumeration value="ADEFINIR"/>
+           <xs:enumeration value="IEDTEST"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -217,22 +217,22 @@ SPDX-License-Identifier: Apache-2.0
         <xs:attribute name="FlowKind" type="tCompasFlowKind" use="optional"/>
     </xs:complexType>
 
-<xs:complexType name="tCompasBay">
+    <xs:complexType name="tCompasBay">
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Define the specific Compas attributes linked to the Bay. The Main and Second Labels are label of the bay specific to each user. MainLabel and Version identify uniquely the instanciated Bay as the UUID
                 The BayCodif is specific to each user to identify the bay kind.
             </xs:documentation>
         </xs:annotation>
-                      <xs:attribute name="UUID" type="xs:string" use="optional"/>
-		<xs:attribute name="Indice" type="xs:string" use="optional"/>
-		<xs:attribute name="Version" type="xs:string" use="optional"/>
-		<xs:attribute name="MainShortLabel" type="xs:string" use="optional"/>
-		<xs:attribute name="MainLongLabel" type="xs:string" use="optional"/>
-		<xs:attribute name="SecondLabel" type="xs:string" use="optional"/>
-		<xs:attribute name="BayCodif" type="xs:string" use="optional"/>
-		<xs:attribute name="NumBay" type="xs:integer" use="optional"/>
-		<xs:attribute name="BayCount" type="xs:integer" use="optional"/>
+        <xs:attribute name="UUID" type="xs:string" use="optional"/>
+        <xs:attribute name="Indice" type="xs:string" use="optional"/>
+        <xs:attribute name="Version" type="xs:string" use="optional"/>
+        <xs:attribute name="MainShortLabel" type="xs:string" use="optional"/>
+        <xs:attribute name="MainLongLabel" type="xs:string" use="optional"/>
+        <xs:attribute name="SecondLabel" type="xs:string" use="optional"/>
+        <xs:attribute name="BayCodif" type="xs:string" use="optional"/>
+        <xs:attribute name="NumBay" type="xs:integer" use="optional"/>
+        <xs:attribute name="BayCount" type="xs:integer" use="optional"/>
     </xs:complexType>
 
     <xs:complexType name="tCompasICDHeader" mixed="true">
@@ -297,18 +297,17 @@ SPDX-License-Identifier: Apache-2.0
         <xs:attribute name="CriteriaAssociationID" type="xs:string" use="optional"/>
     </xs:complexType>
 
-<xs:complexType name="tCompasTopo">
-        <xs:annotation>
-            <xs:documentation xml:lang="en">
-                Describe the connectivity node and layout order for a given Bay;can be multiple instanciated in case of bay which is connected to multiple nodes
-            </xs:documentation>
-        </xs:annotation>
-        <xs:attribute name="Node" type="xs:string" use="required"/>
-		<xs:attribute name="NodeOrder" type="xs:integer" use="required"/>
-		<xs:attribute name="BusBarSectionOrder" type="xs:integer" use="optional"/>
-		<xs:attribute name="Direction" type="tCompasTopoNodeDirection" use="required"/>
+    <xs:complexType name="tCompasTopo">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">
+            Describe the connectivity node and layout order for a given Bay;can be multiple instanciated in case of bay which is connected to multiple nodes
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="Node" type="xs:string" use="required"/>
+      <xs:attribute name="NodeOrder" type="xs:integer" use="required"/>
+      <xs:attribute name="BusBarSectionOrder" type="xs:integer" use="optional"/>
+      <xs:attribute name="Direction" type="tCompasTopoNodeDirection" use="required"/>
     </xs:complexType>
-
 
     <xs:element name="SclName" type="tCompasSclName"/>
     <xs:element name="SclFileType" type="tCompasSclFileType"/>
@@ -322,5 +321,4 @@ SPDX-License-Identifier: Apache-2.0
     <xs:element name="SystemVersion" type="tCompasSystemVersion"/>
     <xs:element name="Function" type="tCompasFunction"/>
     <xs:element name="Topo" type="tCompasTopo"/>
-
 </xs:schema>
