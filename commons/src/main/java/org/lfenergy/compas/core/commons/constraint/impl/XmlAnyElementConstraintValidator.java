@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.lfenergy.compas.core.commons.constraint.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lfenergy.compas.core.commons.constraint.XmlAnyElementValid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
 import javax.validation.ConstraintValidator;
@@ -17,7 +17,7 @@ import java.util.List;
  * element are correct and also if the element(s) in the list have the correct Local Name and the correct Namespace.
  */
 public class XmlAnyElementConstraintValidator implements ConstraintValidator<XmlAnyElementValid, List<Element>> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(XmlAnyElementConstraintValidator.class);
+    private static final Logger LOGGER = LogManager.getLogger(XmlAnyElementConstraintValidator.class);
 
     private String elementName;
     private String elementNamespace;

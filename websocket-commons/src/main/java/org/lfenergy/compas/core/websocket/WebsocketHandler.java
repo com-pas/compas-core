@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.lfenergy.compas.core.websocket;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lfenergy.compas.core.commons.model.ErrorResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.websocket.Session;
 
@@ -18,7 +18,7 @@ import static org.lfenergy.compas.core.websocket.WebsocketSupport.handleExceptio
  * @param <T> The type of response returned from the Executor and send to the Websocket client.
  */
 public class WebsocketHandler<T> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(WebsocketHandler.class);
+    private static final Logger LOGGER = LogManager.getLogger(WebsocketHandler.class);
 
     public void execute(Session session, EventExecutor<T> executor) {
         try {
