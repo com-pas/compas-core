@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.lfenergy.compas.core.commons;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lfenergy.compas.core.commons.exception.CompasException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -27,7 +27,7 @@ import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.CONVERT
 import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.CONVERT_TO_STRING_ERROR;
 
 public class ElementConverter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ElementConverter.class);
+    private static final Logger LOGGER = LogManager.getLogger(ElementConverter.class);
 
     public String convertToString(Element element) {
         return convertToString(element, true);

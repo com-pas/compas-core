@@ -7,9 +7,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lfenergy.compas.core.commons.exception.CompasException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.*;
 
 public abstract class MarshallerWrapper<T> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(MarshallerWrapper.class);
+    private static final Logger LOGGER = LogManager.getLogger(MarshallerWrapper.class);
 
     private final Unmarshaller jaxbUnmarshaller;
     private final Marshaller jaxbMarshaller;
