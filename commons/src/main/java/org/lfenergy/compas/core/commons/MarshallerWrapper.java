@@ -144,7 +144,7 @@ public abstract class MarshallerWrapper<T> {
             // Convert the SchemaConfig List to a List containing only the ContextPaths.
             return schemaConfigs.stream()
                     .map(SchemaConfig::getContextPath)
-                    .collect(Collectors.toList());
+                    .toList();
         }
 
         private String getImportStatements(List<SchemaConfig> schemaConfigs) {
