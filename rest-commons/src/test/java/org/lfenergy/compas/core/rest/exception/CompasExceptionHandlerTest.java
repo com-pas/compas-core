@@ -18,11 +18,12 @@ class CompasExceptionHandlerTest {
         var exception = new CompasException(NO_CLASS_LOADER_ERROR_CODE, "Some message that will only be logged");
         var handler = new CompasExceptionHandler();
 
-        var result = handler.toResponse(exception);
-        assertEquals(INTERNAL_SERVER_ERROR.getStatusCode(), result.getStatus());
-        var errorMessage = ((ErrorResponse) result.getEntity()).getErrorMessages().get(0);
-        assertEquals(exception.getErrorCode(), errorMessage.getCode());
-        assertEquals(exception.getMessage(), errorMessage.getMessage());
-        assertNull(errorMessage.getProperty());
+        try (var result = handler.toResponse(exception)) {
+            assertEquals(INTERNAL_SERVER_ERROR.getStatusCode(), result.getStatus());
+            var errorMessage = ((ErrorResponse) result.getEntity()).getErrorMessages().get(0);
+            assertEquals(exception.getErrorCode(), errorMessage.getCode());
+            assertEquals(exception.getMessage(), errorMessage.getMessage());
+            assertNull(errorMessage.getProperty());
+        }
     }
 }

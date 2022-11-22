@@ -18,11 +18,12 @@ class GenericExceptionHandlerTest {
         var exception = new Exception("Some message that will only be logged");
         var handler = new GenericExceptionHandler();
 
-        var result = handler.toResponse(exception);
-        assertEquals(INTERNAL_SERVER_ERROR.getStatusCode(), result.getStatus());
-        var errorMessage = ((ErrorResponse) result.getEntity()).getErrorMessages().get(0);
-        assertEquals(UNKNOWN_EXCEPTION_ERROR, errorMessage.getCode());
-        assertEquals(ERROR_MESSAGE, errorMessage.getMessage());
-        assertNull(errorMessage.getProperty());
+        try (var result = handler.toResponse(exception)) {
+            assertEquals(INTERNAL_SERVER_ERROR.getStatusCode(), result.getStatus());
+            var errorMessage = ((ErrorResponse) result.getEntity()).getErrorMessages().get(0);
+            assertEquals(UNKNOWN_EXCEPTION_ERROR, errorMessage.getCode());
+            assertEquals(ERROR_MESSAGE, errorMessage.getMessage());
+            assertNull(errorMessage.getProperty());
+        }
     }
 }

@@ -28,7 +28,7 @@ public class Resources {
             classLoader = Resources.class.getClassLoader();
         }
         if (classLoader == null) {
-            throw new CompasException(NO_CLASS_LOADER_ERROR_CODE, "Unable to get ClassLoader for loading resouces");
+            throw new CompasException(NO_CLASS_LOADER_ERROR_CODE, "Unable to get ClassLoader for loading resources");
         }
         return classLoader;
     }

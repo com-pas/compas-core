@@ -71,12 +71,11 @@ public abstract class MarshallerWrapper<T> {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private T cast(Object result) {
         if (!result.getClass().isAssignableFrom(getResultClass())) {
             throw new CompasException(UNMARSHAL_ERROR_CODE, "Error unmarshalling to the Class. Invalid class");
         }
-        return (T) result;
+        return getResultClass().cast(result);
     }
 
     public abstract static class Builder<W extends MarshallerWrapper<T>, T> {

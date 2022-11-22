@@ -32,8 +32,9 @@ class XmlAnyElementConstraintValidatorTest {
         var documentBuilder = documentFactory.newDocumentBuilder();
         document = documentBuilder.newDocument();
 
-        var factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+        try (var factory = Validation.buildDefaultValidatorFactory()) {
+            validator = factory.getValidator();
+        }
     }
 
     @Test
@@ -78,7 +79,7 @@ class XmlAnyElementConstraintValidatorTest {
 
     private static final class SimplePojo {
         @XmlAnyElementValid(elementName = ELEMENT_NAME, elementNamespace = ELEMENT_NS)
-        private List<Element> elements = new ArrayList<>();
+        private final List<Element> elements = new ArrayList<>();
 
         public List<Element> getElements() {
             return elements;

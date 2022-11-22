@@ -18,8 +18,9 @@ class FilenameConstraintValidatorTest {
 
     @BeforeEach
     void setupValidator() {
-        var factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+        try (var factory = Validation.buildDefaultValidatorFactory()) {
+            validator = factory.getValidator();
+        }
     }
 
     @Test
@@ -53,16 +54,6 @@ class FilenameConstraintValidatorTest {
         assertEquals(1, violations.size());
     }
 
-    private static final class SimplePojo {
-        @FilenameValid
-        private final String name;
-
-        public SimplePojo(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
+    private record SimplePojo(@FilenameValid String name) {
     }
 }

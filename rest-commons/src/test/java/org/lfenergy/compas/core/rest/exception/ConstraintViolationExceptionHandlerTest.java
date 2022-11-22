@@ -42,13 +42,14 @@ class ConstraintViolationExceptionHandlerTest {
         var exception = new ConstraintViolationException(constraintViolations);
         var handler = new ConstraintViolationExceptionHandler();
 
-        var result = handler.toResponse(exception);
-        assertEquals(BAD_REQUEST.getStatusCode(), result.getStatus());
-        var errorMessage = ((ErrorResponse) result.getEntity()).getErrorMessages().get(0);
-        assertEquals(VALIDATION_ERROR, errorMessage.getCode());
-        assertEquals(MESSAGE, errorMessage.getMessage());
-        assertEquals(PROPERTY, errorMessage.getProperty());
-        verifyNoMoreInteractions(constraintViolation, propertyPath);
+        try (var result = handler.toResponse(exception)) {
+            assertEquals(BAD_REQUEST.getStatusCode(), result.getStatus());
+            var errorMessage = ((ErrorResponse) result.getEntity()).getErrorMessages().get(0);
+            assertEquals(VALIDATION_ERROR, errorMessage.getCode());
+            assertEquals(MESSAGE, errorMessage.getMessage());
+            assertEquals(PROPERTY, errorMessage.getProperty());
+            verifyNoMoreInteractions(constraintViolation, propertyPath);
+        }
     }
 
     @Test
@@ -57,10 +58,11 @@ class ConstraintViolationExceptionHandlerTest {
         var exception = new ConstraintViolationException(constraintViolations);
         var handler = new ConstraintViolationExceptionHandler();
 
-        var result = handler.toResponse(exception);
-        assertEquals(BAD_REQUEST.getStatusCode(), result.getStatus());
-        var response = (ErrorResponse) result.getEntity();
-        assertTrue(response.getErrorMessages().isEmpty());
-        verifyNoInteractions(constraintViolation, propertyPath);
+        try (var result = handler.toResponse(exception)) {
+            assertEquals(BAD_REQUEST.getStatusCode(), result.getStatus());
+            var response = (ErrorResponse) result.getEntity();
+            assertTrue(response.getErrorMessages().isEmpty());
+            verifyNoInteractions(constraintViolation, propertyPath);
+        }
     }
 }
