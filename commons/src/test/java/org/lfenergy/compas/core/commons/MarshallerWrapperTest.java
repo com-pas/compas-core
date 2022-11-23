@@ -46,7 +46,7 @@ class MarshallerWrapperTest {
                 new XmlElementPojoMarshallerWrapper.Builder().withProperties("invalid-configs/marshaller-empty-config.yml");
 
         // Expected that creation to fail, because there are no schemas configured.
-        var exception = assertThrows(CompasException.class, () -> marshallerWrapperBuilder.build());
+        var exception = assertThrows(CompasException.class, marshallerWrapperBuilder::build);
         assertEquals(CONFIGURATION_ERROR_CODE, exception.getErrorCode());
     }
 
@@ -56,7 +56,7 @@ class MarshallerWrapperTest {
                 new XmlElementPojoMarshallerWrapper.Builder().withProperties("invalid-configs/marshaller-invalid-config.yml");
 
         // Expected that creation to fail, because this configuration is invalid.
-        var exception = assertThrows(CompasException.class, () -> marshallerWrapperBuilder.build());
+        var exception = assertThrows(CompasException.class, marshallerWrapperBuilder::build);
         assertEquals(PROPERTY_ERROR_ERROR_CODE, exception.getErrorCode());
     }
 
@@ -66,7 +66,7 @@ class MarshallerWrapperTest {
                 new XmlElementPojoMarshallerWrapper.Builder().withProperties("invalid-configs/marshaller-invalid-contextpath-config.yml");
 
         // Expected that creation to fail, because this configuration is invalid.
-        var exception = assertThrows(CompasException.class, () -> marshallerWrapperBuilder.build());
+        var exception = assertThrows(CompasException.class, marshallerWrapperBuilder::build);
         assertEquals(CREATION_ERROR_CODE, exception.getErrorCode());
     }
 
@@ -76,7 +76,7 @@ class MarshallerWrapperTest {
                 new XmlElementPojoMarshallerWrapper.Builder().withProperties("invalid-configs/marshaller-invalid-xsdpath-config.yml");
 
         // Expected that creation to fail, because this configuration is invalid.
-        var exception = assertThrows(CompasException.class, () -> marshallerWrapperBuilder.build());
+        var exception = assertThrows(CompasException.class, marshallerWrapperBuilder::build);
         assertEquals(RESOURCE_NOT_FOUND_ERROR_CODE, exception.getErrorCode());
     }
 

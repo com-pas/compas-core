@@ -7,7 +7,6 @@ import org.lfenergy.compas.core.commons.exception.CompasException;
 import org.lfenergy.compas.core.commons.model.ErrorResponse;
 
 import javax.validation.ConstraintViolationException;
-import javax.validation.Validation;
 import javax.websocket.Session;
 import javax.xml.bind.JAXBContext;
 import java.io.StringReader;
@@ -40,19 +39,7 @@ public final class WebsocketSupport {
             var jaxbContext = JAXBContext.newInstance(jaxbClass);
             var unmarshaller = jaxbContext.createUnmarshaller();
             var reader = new StringReader(message);
-            var jaxbObject = jaxbClass.cast(unmarshaller.unmarshal(reader));
-
-            try (var factory = Validation.buildDefaultValidatorFactory()) {
-                var validator = factory.getValidator();
-                var constraintViolations = validator.validate(jaxbObject);
-                if (!constraintViolations.isEmpty()) {
-                    throw new ConstraintViolationException(constraintViolations);
-                }
-            }
-
-            return jaxbObject;
-        } catch (ConstraintViolationException exp) {
-            throw exp;
+            return jaxbClass.cast(unmarshaller.unmarshal(reader));
         } catch (Exception exp) {
             throw new CompasException(WEBSOCKET_DECODER_ERROR_CODE,
                     "Error unmarshalling to class '" + jaxbClass.getName() + "' from Websockets.",
@@ -62,11 +49,9 @@ public final class WebsocketSupport {
 
     public static void handleException(Session session, Throwable throwable) {
         var response = new ErrorResponse();
-        if (throwable instanceof CompasException) {
-            var ce = (CompasException) throwable;
+        if (throwable instanceof CompasException ce) {
             response.addErrorMessage(ce.getErrorCode(), ce.getMessage());
-        } else if (throwable instanceof ConstraintViolationException) {
-            var cve = (ConstraintViolationException) throwable;
+        } else if (throwable instanceof ConstraintViolationException cve) {
             cve.getConstraintViolations()
                     .forEach(constraintViolation ->
                             response.addErrorMessage(VALIDATION_ERROR,

@@ -71,12 +71,11 @@ public abstract class MarshallerWrapper<T> {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private T cast(Object result) {
         if (!result.getClass().isAssignableFrom(getResultClass())) {
             throw new CompasException(UNMARSHAL_ERROR_CODE, "Error unmarshalling to the Class. Invalid class");
         }
-        return (T) result;
+        return getResultClass().cast(result);
     }
 
     public abstract static class Builder<W extends MarshallerWrapper<T>, T> {
@@ -145,7 +144,7 @@ public abstract class MarshallerWrapper<T> {
             // Convert the SchemaConfig List to a List containing only the ContextPaths.
             return schemaConfigs.stream()
                     .map(SchemaConfig::getContextPath)
-                    .collect(Collectors.toList());
+                    .toList();
         }
 
         private String getImportStatements(List<SchemaConfig> schemaConfigs) {

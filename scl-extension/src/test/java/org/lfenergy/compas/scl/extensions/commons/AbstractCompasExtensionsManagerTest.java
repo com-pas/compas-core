@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsField.SCL_NAME;
 
 class AbstractCompasExtensionsManagerTest {
-    private AbstractCompasExtensionsManager manager = new AbstractCompasExtensionsManager() {
+    private final AbstractCompasExtensionsManager manager = new AbstractCompasExtensionsManager() {
     };
 
     @Test
