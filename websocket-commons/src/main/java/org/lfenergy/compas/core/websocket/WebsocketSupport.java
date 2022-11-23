@@ -62,11 +62,9 @@ public final class WebsocketSupport {
 
     public static void handleException(Session session, Throwable throwable) {
         var response = new ErrorResponse();
-        if (throwable instanceof CompasException) {
-            var ce = (CompasException) throwable;
+        if (throwable instanceof CompasException ce) {
             response.addErrorMessage(ce.getErrorCode(), ce.getMessage());
-        } else if (throwable instanceof ConstraintViolationException) {
-            var cve = (ConstraintViolationException) throwable;
+        } else if (throwable instanceof ConstraintViolationException cve) {
             cve.getConstraintViolations()
                     .forEach(constraintViolation ->
                             response.addErrorMessage(VALIDATION_ERROR,

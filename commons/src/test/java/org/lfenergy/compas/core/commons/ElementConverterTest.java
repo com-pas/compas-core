@@ -22,7 +22,7 @@ class ElementConverterTest {
                     "<SCL xmlns=\"" + SIMPLE_SCL_NS + "\" version=\"2007\" revision=\"B\" release=\"4\">" +
                     "</SCL>";
 
-    private ElementConverter converter = new ElementConverter();
+    private final ElementConverter converter = new ElementConverter();
 
     @Test
     void convertToString_WhenCalledWithXMLElementWithoutDeclaration_ThenElementConvertedToAString() throws ParserConfigurationException {
