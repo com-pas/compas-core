@@ -28,13 +28,6 @@ updates:
       interval: "daily"
     open-pull-requests-limit: 5
     ignore:
-      # Next two dependencies shouldn't be upgrade, because Quarkus isn't using newer version of EL.
-      - dependency-name: org.hibernate.validator:hibernate-validator
-        versions: [ "[7.0,)" ]
-      - dependency-name: org.glassfish:jakarta.el
-        versions: [ "[4.0,)" ]
-      # Next two dependencies shouldn't be upgrade, because RestEasy isn't using newer version. (2.3.X)
-      - dependency-name: jakarta.xml.bind:jakarta.xml.bind-api
-        versions: [ "[3.0,)" ]
+      # Next dependencies shouldn't be upgrade, because RestEasy isn't using newer version. (2.3.X)
       - dependency-name: com.sun.xml.bind:jaxb-impl
         versions: [ "[3.0,)" ]

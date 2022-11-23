@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.lfenergy.compas.core.websocket;
 
-import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.lfenergy.compas.core.commons.exception.CompasException;
@@ -14,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import javax.validation.Path;
 import javax.websocket.RemoteEndpoint;
 import javax.websocket.Session;
 import java.util.Set;
@@ -80,19 +80,6 @@ class WebsocketSupportTest {
     }
 
     @Test
-    void decode_WhenCalledWithValidationErrors_ThenConstraintViolationExceptionThrown() {
-        var xmlMessage = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
-                "<compas-commons:ErrorResponse xmlns:compas-commons=\"" + COMPAS_COMMONS_V1_NS_URI + "\">" +
-                "<compas-commons:ErrorMessage>" +
-                "<compas-commons:Message>Some message</compas-commons:Message>" +
-                "</compas-commons:ErrorMessage>" +
-                "</compas-commons:ErrorResponse>";
-
-        var exception = assertThrows(ConstraintViolationException.class, () -> decode(xmlMessage, ErrorResponse.class));
-        assertEquals(1, exception.getConstraintViolations().size());
-    }
-
-    @Test
     void decode_WhenCalledWithInvalidXML_ThenExceptionThrown() {
         var xmlMessage = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<compas-commons:InvalidResponse xmlns:compas-commons=\"" + COMPAS_COMMONS_V1_NS_URI + "\">" +
@@ -119,9 +106,9 @@ class WebsocketSupportTest {
         var session = mockSession();
 
         var errorMessage = "Error Message";
-        var path = PathImpl.createRootPath();
 
         ConstraintViolation<String> constraintViolation = mock(ConstraintViolation.class);
+        Path path = mock(Path.class);
         when(constraintViolation.getMessage()).thenReturn(errorMessage);
         when(constraintViolation.getPropertyPath()).thenReturn(path);
 
