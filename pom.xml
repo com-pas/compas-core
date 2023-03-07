@@ -19,9 +19,9 @@ SPDX-License-Identifier: Apache-2.0
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <compas.scl.xsd.version>0.0.4</compas.scl.xsd.version>
-        <quarkus.platform.version>2.14.1.Final</quarkus.platform.version>
-        <jaxb.bind.version>2.3.7</jaxb.bind.version>
-        <log4j2.version>2.19.0</log4j2.version>
+        <quarkus.platform.version>2.16.3.Final</quarkus.platform.version>
+        <jaxb.bind.version>2.3.8</jaxb.bind.version>
+        <log4j2.version>2.20.0</log4j2.version>
         <openpojo.version>0.9.1</openpojo.version>
     </properties>
 
@@ -115,13 +115,13 @@ SPDX-License-Identifier: Apache-2.0
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.5.0</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.jvnet.jaxb2.maven2</groupId>
                     <artifactId>maven-jaxb2-plugin</artifactId>
-                    <version>0.15.1</version>
+                    <version>0.15.2</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.jvnet.jaxb2_commons</groupId>
@@ -180,7 +180,7 @@ SPDX-License-Identifier: Apache-2.0
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.4.1</version>
+                    <version>3.5.0</version>
                     <executions>
                         <execution>
                             <id>attach-javadocs</id>
