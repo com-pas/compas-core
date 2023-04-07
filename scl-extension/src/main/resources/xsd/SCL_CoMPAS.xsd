@@ -16,6 +16,7 @@ SPDX-License-Identifier: Apache-2.0
             Version 1.2 Release 2022/06/08
             Version 1.3 Release 2022/09/08
             Version 1.4 Release 2023/02/28
+            Version 1.5 Release 2023/04/05
         </xs:documentation>
     </xs:annotation>
 
@@ -199,11 +200,11 @@ SPDX-License-Identifier: Apache-2.0
         </xs:restriction>
     </xs:simpleType>
 
-
     <xs:complexType name="tCompasFlow">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Define the link between specific Compas attributes and one ExtRef within the STD file. The dataStreamKey is the key with the ExtRef.desc. The ExtRef attributes are directly linked to the attributes of the ExRef.
+                Define the link between specific Compas attributes and one ExtRef within the STD file. The dataStreamKey is the key with the ExtRef.desc.
+                The ExtRef attributes are directly linked to the attributes of the ExRef.
                 The FlowID is used to link additional informations to the flow as the criteria.
                 The FlowStatus define whether if the flow is qualified, non qualified or untested accordingly to the source IED which is bellonging to a define SystemVersion
             </xs:documentation>
@@ -222,19 +223,20 @@ SPDX-License-Identifier: Apache-2.0
     <xs:complexType name="tCompasBay">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Define the specific Compas attributes linked to the Bay. The Main and Second Labels are label of the bay specific to each user. MainLabel and Version identify uniquely the instanciated Bay as the UUID
+                Define the specific Compas attributes linked to the Bay. The Main and Second Labels are label of the bay specific to each user.
+                MainLabel and Version identify uniquely the instanciated Bay as the UUID
                 The BayCodif is specific to each user to identify the bay kind.
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="UUID" type="xs:string" use="optional"/>
         <xs:attribute name="Indice" type="xs:string" use="optional"/>
         <xs:attribute name="Version" type="xs:string" use="optional"/>
-        <xs:attribute name="MainShortLabel" type="xs:string" use="optional"/>
+        <xs:attribute name="MainShortLabel" type="xs:string" use="required"/>
         <xs:attribute name="MainLongLabel" type="xs:string" use="optional"/>
         <xs:attribute name="SecondLabel" type="xs:string" use="optional"/>
-        <xs:attribute name="BayCodif" type="xs:string" use="optional"/>
-        <xs:attribute name="NumBay" type="xs:integer" use="optional"/>
-        <xs:attribute name="BayCount" type="xs:integer" use="optional"/>
+        <xs:attribute name="BayCodif" type="xs:string" use="required"/>
+        <xs:attribute name="NumBay" type="xs:integer" use="required"/>
+        <xs:attribute name="BayCount" type="xs:integer" use="required"/>
     </xs:complexType>
 
     <xs:complexType name="tCompasICDHeader" mixed="true">
@@ -243,20 +245,22 @@ SPDX-License-Identifier: Apache-2.0
                 Define specific Compas attributes to identify uniquely one IED with-in a SystemVersion for a given ICD, IEDredundancy, IEDSystemVersionInstance
                 The IEDType defines the set of LD which are supported by the hardware
                 The VendorName, IEDmodel, hwRev, swRev, headerId, headerVersion, headerRevision are issued from the ICD file
-                The UUID of this combination is defined by the ICDSystemVersionUUID.
+                The UUID of this combinaison is defined by the ICDSystemVersionUUID.
+                The IEDSubstationinstance is defining the instance number of the IED at the substation.
+                The IEDSystemVersioninstance is defining the instance number of the IED within a bay which is defined for a given MinorSystemVersion and MajorSystemVersion
                 This private is intended to be used in the STD file (/IED level) and SSD (/LNode level)
                 At LNode level it defines the link between the Function, the associated LD, LN and the implementation in a given IED
                 At IED level, it defines the link of the IED within the SystemVersion
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="ICDSystemVersionUUID" type="xs:string" use="optional"/>
+        <xs:attribute name="ICDSystemVersionUUID" type="xs:string" use="required"/>
         <xs:attribute name="IEDType" type="tCompasIEDType" use="required"/>
         <xs:attribute name="IEDSubstationinstance" type="xs:integer" use="optional"/>
-        <xs:attribute name="IEDSystemVersioninstance" type="xs:integer" use="optional"/>
+        <xs:attribute name="IEDSystemVersioninstance" type="xs:integer" use="required"/>
         <xs:attribute name="IEDName" type="xs:string" use="optional"/>
         <xs:attribute name="VendorName" type="xs:string" use="required"/>
         <xs:attribute name="IEDmodel" type="xs:string" use="required"/>
-        <xs:attribute name="IEDredundancy" type="tCompasIEDRedundancy" use="optional"/>
+        <xs:attribute name="IEDredundancy" type="tCompasIEDRedundancy" use="required"/>
         <xs:attribute name="BayLabel" type="xs:string" use="optional"/>
         <xs:attribute name="hwRev" type="xs:string" use="required"/>
         <xs:attribute name="swRev" type="xs:string" use="required"/>
@@ -270,7 +274,7 @@ SPDX-License-Identifier: Apache-2.0
             <xs:documentation xml:lang="en">
                 Identify the SystemVersion to which the functional Bay and IED belongs to. This Private can be used in /Bay in substation and in the /IED.
                 The MainSystemVersion refers to a set of functional requirements and functions
-                The MinorSystemVersion is linked to a given bayKind and defines uniquely the set of ICD which are qualified
+                The MinorSystemVersion is linked to a given baykind and defines uniquely the set of ICD which are qualified
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="MainSystemVersion" type="xs:string" use="optional"/>
