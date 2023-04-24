@@ -206,7 +206,7 @@ SPDX-License-Identifier: Apache-2.0
                 <sonar.language>java</sonar.language>
 
                 <!-- JaCoCo Properties -->
-                <jacoco.version>0.8.8</jacoco.version>
+                <jacoco.version>0.8.9</jacoco.version>
                 <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
             </properties>
 
