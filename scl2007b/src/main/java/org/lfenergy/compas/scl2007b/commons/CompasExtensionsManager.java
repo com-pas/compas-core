@@ -10,7 +10,7 @@ import org.lfenergy.compas.scl.extensions.model.TCompasLabels;
 import org.lfenergy.compas.scl2007b.model.SCL;
 import org.lfenergy.compas.scl2007b.model.TPrivate;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import java.util.Optional;
 
 import static org.lfenergy.compas.scl.extensions.commons.CompasExtensionsConstants.COMPAS_SCL_EXTENSION_TYPE;

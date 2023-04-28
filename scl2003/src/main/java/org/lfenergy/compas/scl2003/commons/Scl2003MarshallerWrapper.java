@@ -6,8 +6,8 @@ package org.lfenergy.compas.scl2003.commons;
 import org.lfenergy.compas.core.commons.MarshallerWrapper;
 import org.lfenergy.compas.scl2003.model.SCL;
 
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 
 public class Scl2003MarshallerWrapper extends MarshallerWrapper<SCL> {
     public Scl2003MarshallerWrapper(Unmarshaller jaxbUnmarshaller, Marshaller jaxbMarshaller) {

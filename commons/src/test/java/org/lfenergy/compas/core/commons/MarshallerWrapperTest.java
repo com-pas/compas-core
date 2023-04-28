@@ -8,8 +8,8 @@ import org.lfenergy.compas.core.commons.exception.CompasException;
 import org.lfenergy.compas.core.commons.model.XmlElementAPojo;
 import org.lfenergy.compas.core.commons.model.XmlElementBPojo;
 
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
