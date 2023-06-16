@@ -228,7 +228,7 @@ SPDX-License-Identifier: Apache-2.0
                 The BayCodif is specific to each user to identify the bay kind.
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="UUID" type="xs:string" use="optional"/>
+        <xs:attribute name="UUID" type="xs:string" use="required"/>
         <xs:attribute name="Indice" type="xs:string" use="optional"/>
         <xs:attribute name="Version" type="xs:string" use="optional"/>
         <xs:attribute name="MainShortLabel" type="xs:string" use="required"/>
