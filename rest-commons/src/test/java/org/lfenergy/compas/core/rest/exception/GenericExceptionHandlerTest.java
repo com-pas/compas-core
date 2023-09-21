@@ -6,7 +6,7 @@ package org.lfenergy.compas.core.rest.exception;
 import org.junit.jupiter.api.Test;
 import org.lfenergy.compas.core.commons.model.ErrorResponse;
 
-import static javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
+import static jakarta.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.UNKNOWN_EXCEPTION_ERROR;

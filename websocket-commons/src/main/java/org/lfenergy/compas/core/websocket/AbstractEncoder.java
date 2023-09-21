@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.lfenergy.compas.core.websocket;
 
-import javax.websocket.Encoder;
-import javax.websocket.EndpointConfig;
+import jakarta.websocket.Encoder;
+import jakarta.websocket.EndpointConfig;
 
 /**
  * Simple abstract class to save some boilerplate code with common implementations.

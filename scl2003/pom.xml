@@ -40,9 +40,10 @@ SPDX-License-Identifier: Apache-2.0
             <artifactId>jakarta.xml.bind-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
             <scope>provided</scope>
+            <version>4.0.2</version>
         </dependency>
 
         <dependency>
@@ -94,8 +95,8 @@ SPDX-License-Identifier: Apache-2.0
             </plugin>
 
             <plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
+                <groupId>com.helger.maven</groupId>
+                <artifactId>jaxb40-maven-plugin</artifactId>
                 <configuration>
                     <generatePackage>org.lfenergy.compas.scl2003.model</generatePackage>
                     <schemaDirectory>${project.build.directory}/xsd/SCL2003</schemaDirectory>

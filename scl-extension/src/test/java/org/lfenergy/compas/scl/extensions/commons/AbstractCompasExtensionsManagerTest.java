@@ -5,7 +5,7 @@ package org.lfenergy.compas.scl.extensions.commons;
 
 import org.junit.jupiter.api.Test;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.lfenergy.compas.core.commons.model;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "XmlElementBPojo")

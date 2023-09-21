@@ -11,8 +11,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.websocket.RemoteEndpoint;
-import javax.websocket.Session;
+import jakarta.websocket.RemoteEndpoint;
+import jakarta.websocket.Session;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.lfenergy.compas.core.commons.exception.CompasErrorCode.WEBSOCKET_GENERAL_ERROR_CODE;
