@@ -8,8 +8,8 @@ import org.apache.logging.log4j.Logger;
 import org.lfenergy.compas.core.commons.constraint.XmlAnyElementValid;
 import org.w3c.dom.Element;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import java.util.List;
 
 /**

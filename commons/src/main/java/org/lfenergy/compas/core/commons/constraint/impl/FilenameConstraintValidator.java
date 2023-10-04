@@ -5,8 +5,8 @@ package org.lfenergy.compas.core.commons.constraint.impl;
 
 import org.lfenergy.compas.core.commons.constraint.FilenameValid;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

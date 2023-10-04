@@ -9,8 +9,8 @@ import org.lfenergy.compas.core.commons.constraint.XmlAnyElementValid;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.ArrayList;

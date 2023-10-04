@@ -8,9 +8,9 @@ import org.apache.logging.log4j.Logger;
 import org.lfenergy.compas.core.commons.exception.CompasException;
 import org.lfenergy.compas.core.commons.model.ErrorResponse;
 
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.ExceptionMapper;
+import jakarta.ws.rs.ext.Provider;
 
 @Provider
 public class CompasExceptionHandler implements ExceptionMapper<CompasException> {

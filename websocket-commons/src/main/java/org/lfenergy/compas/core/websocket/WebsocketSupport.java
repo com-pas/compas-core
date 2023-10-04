@@ -6,9 +6,9 @@ package org.lfenergy.compas.core.websocket;
 import org.lfenergy.compas.core.commons.exception.CompasException;
 import org.lfenergy.compas.core.commons.model.ErrorResponse;
 
-import javax.validation.ConstraintViolationException;
-import javax.websocket.Session;
-import javax.xml.bind.JAXBContext;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.websocket.Session;
+import jakarta.xml.bind.JAXBContext;
 import java.io.StringReader;
 import java.io.StringWriter;
 
