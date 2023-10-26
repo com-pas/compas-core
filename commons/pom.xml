@@ -51,7 +51,7 @@ SPDX-License-Identifier: Apache-2.0
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
             <scope>provided</scope>
-            <version>4.0.3</version>
+            <version>4.0.4</version>
         </dependency>
 
         <dependency>
