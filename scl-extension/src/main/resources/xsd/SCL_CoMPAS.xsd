@@ -27,9 +27,7 @@ SPDX-License-Identifier: Apache-2.0
         <xs:annotation>
             <xs:documentation>Name of the SCL configuration, extension excluded</xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:normalizedString">
-            <xs:minLength value="1"/>
-        </xs:restriction>
+        <xs:restriction base="xs:normalizedString"/>
     </xs:simpleType>
 
     <!--
@@ -113,6 +111,7 @@ SPDX-License-Identifier: Apache-2.0
             <xs:enumeration value="SCU-MCB"/>
             <xs:enumeration value="SCU-TG"/>
             <xs:enumeration value="SCU-ORG"/>
+            <xs:enumeration value="STD"/>
             <xs:enumeration value="BCU"/>
             <xs:enumeration value="BCU-LIGNE"/>
             <xs:enumeration value="BCU-CBO"/>
@@ -139,6 +138,7 @@ SPDX-License-Identifier: Apache-2.0
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Define whether the Flow between two LDevice belonging to two ICDs with-in two System Version (identical or different) are qualified (ACTIVE), not working (INACTIVE) or untested (UNTESTED)
+                The INACTIVE or UNTESTED Flows cannot be used.
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
@@ -152,6 +152,7 @@ SPDX-License-Identifier: Apache-2.0
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Define whether the LDevice belonging to one ICD with-in one System Version are qualified (ACTIVE), not working (INACTIVE) or untested (UNTESTED)
+                The INACTIVE or UNTESTED LDevice cannot be used.
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
@@ -165,6 +166,11 @@ SPDX-License-Identifier: Apache-2.0
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Define whether the IED with-in one System Version is used as NOMINAL or BACKUP IED
+                "A" defines the nominal IED instance when a redundancy IED exists
+                "B" defines the backup IED instance when a nominal IED exists
+                "C" defines the second backup IED instance when a nominal and backup IEDs exist (used for teleaction)
+                "D" defines the third backup IED instance when a nominal, backup and second backup IEDs exist (used for teleaction)
+                "None" is used when there is no backup IED instance
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
@@ -172,13 +178,14 @@ SPDX-License-Identifier: Apache-2.0
             <xs:enumeration value="A"/>
             <xs:enumeration value="B"/>
             <xs:enumeration value="C"/>
+            <xs:enumeration value="D"/>
         </xs:restriction>
     </xs:simpleType>
 
     <xs:simpleType name="tCompasFlowKind">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Define whether the Flow is limited to the Bay(refering to the physical one or cubicles) to which belong the IED (BAY_INTERNAL) or only going outside the BAY (BAY_EXTERNAL) or both (BAY_INTERNAL_EXTERNAL)
+                Define whether the Flow is limited to the Bay(refering to the physical one or cubicles) to which belong the IED (BAY_INTERNAL) or only going outside the BAY (BAY_EXTERNAL)
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
@@ -190,7 +197,8 @@ SPDX-License-Identifier: Apache-2.0
     <xs:simpleType name="tCompasTopoNodeDirection">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Define if a Node Direction is Up or Down
+                Define if a bay Direction is Up or Down regarding the busbarsections
+                For controlbusbar bay the N/A is used to refer that there is no graphical object for this bay.
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
@@ -207,6 +215,29 @@ SPDX-License-Identifier: Apache-2.0
                 The ExtRef attributes are directly linked to the attributes of the ExRef.
                 The FlowID is used to link additional informations to the flow as the criteria.
                 The FlowStatus define whether if the flow is qualified, non qualified or untested accordingly to the source IED which is bellonging to a define SystemVersion
+                The FlowSourceBayKind is the kind of bay (line feeder LI, CB busbarcontrol...) from which the DO to bind is located
+                The FlowSourceIEDType is the IED type which can be binded; if missing any IED Type can be binded
+                The FlowSourceIEDredundancy is the IED redundancy which can be binded; if missing any IED redundancy can be binded
+                The FlowSourceBayNum is the instance number of the bay for a given baykind within the whole substation
+                The FLOWSourceBayNode is the node on 3 digits where the bay from which the IED send the DO is connected to
+                The FlowSourceNumBayBusBarSectionOrder define the number of the bay which are connected to the same BayNode from left to right
+                Example
+                _(busbarsection disconnector)
+                ||(busbarsection switchbreaker)
+                BFx BayFeederx
+                BF1, 3, 7 and 9 are Transformer Feeder bay, FlowSourceBayKind = TR, FlowSourceBayNum=1 for BF1, 2 for BF3, 3 for BF7 and 4 for BF9
+                Other BFx are Line Feeder bay, FlowSourceBayKind = LI, FlowSourceBayNum=1 for BF2, 3 for BF4, 4 for BF5, 5 for BF6, 6 for BF8...
+
+                The BF1 and BF2 are connected to the FLOWSourceBayNode = 110, FlowSourceNumBayBusBarSectionOrder = 1 for BF1 and FlowSourceNumBayBusBarSectionOrder = 2 for BF2
+                The BF3 and BF4 are connected to the FLOWSourceBayNode = 121, FlowSourceNumBayBusBarSectionOrder = 1 for BF3 and FlowSourceNumBayBusBarSectionOrder = 2 for BF4
+                The BF5 is connected to the FLOWSourceBayNode = 122, FlowSourceNumBayBusBarSectionOrder = 1 for BF5
+                The BF7 and BF8 are connected to the FLOWSourceBayNode = 210, FlowSourceNumBayBusBarSectionOrder = 1 for BF7 and FlowSourceNumBayBusBarSectionOrder = 2 for BF8
+                The BF9 and BF10 are connected to the FLOWSourceBayNode = 221, FlowSourceNumBayBusBarSectionOrder = 1 for BF9 and FlowSourceNumBayBusBarSectionOrder = 2 for BF10
+                The BF11 is connected to the FLOWSourceBayNode = 222, FlowSourceNumBayBusBarSectionOrder = 1 for BF11
+
+                BusBar1 --BF1---BF2-----||--BF3---BF4--------_----BF5------
+                BusBar2 --BF7---BF8-----||--BF9---BF10-------_----BF11-----
+
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="dataStreamKey" type="xs:string" use="optional"/>
@@ -215,6 +246,12 @@ SPDX-License-Identifier: Apache-2.0
         <xs:attribute name="ExtRefprefix" type="xs:string" use="optional"/>
         <xs:attribute name="ExtReflnClass" type="xs:string" use="optional"/>
         <xs:attribute name="ExtReflnInst" type="xs:string" use="optional"/>
+        <xs:attribute name="FlowSourceIEDType" type="tCompasIEDType" use="optional"/>
+        <xs:attribute name="FlowSourceIEDredundancy" type="tCompasIEDRedundancy" use="optional"/>
+        <xs:attribute name="FlowSourceBayKind" type="xs:string" use="optional"/>
+        <xs:attribute name="FlowSourceBayNum" type="xs:integer" use="optional"/>
+        <xs:attribute name="FlowSourceBayNode" type="xs:integer" use="optional"/>
+        <xs:attribute name="FlowSourceNumBayBusBarSectionOrder" type="xs:integer" use="optional"/>
         <xs:attribute name="FlowID" type="xs:string" use="optional"/>
         <xs:attribute name="FlowStatus" type="tCompasFlowStatus" use="optional"/>
         <xs:attribute name="FlowKind" type="tCompasFlowKind" use="optional"/>
@@ -223,44 +260,48 @@ SPDX-License-Identifier: Apache-2.0
     <xs:complexType name="tCompasBay">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Define the specific Compas attributes linked to the Bay. The Main and Second Labels are label of the bay specific to each user.
+                Define the specific Compas attributes linked to the Bay.
+                The UUID defines the unique ID of the Bay
+                The Main and Long Labels are label of the bay
                 MainLabel and Version identify uniquely the instanciated Bay as the UUID
-                The BayCodif is specific to each user to identify the bay kind.
+                The BayCodif is identifying the bay kind (i.e LI for line feeder)
+                The NumBay is the bay number for a given baykind. It's used for the dataflow binding in the FlowSourceBayNum
+                The BayCount is the bay number whatever the kind. As a consequence it's unique accross the substation
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="UUID" type="xs:string" use="required"/>
+        <xs:attribute name="UUID" type="xs:string" use="optional"/>
         <xs:attribute name="Indice" type="xs:string" use="optional"/>
         <xs:attribute name="Version" type="xs:string" use="optional"/>
-        <xs:attribute name="MainShortLabel" type="xs:string" use="required"/>
+        <xs:attribute name="MainShortLabel" type="xs:string" use="optional"/>
         <xs:attribute name="MainLongLabel" type="xs:string" use="optional"/>
         <xs:attribute name="SecondLabel" type="xs:string" use="optional"/>
-        <xs:attribute name="BayCodif" type="xs:string" use="required"/>
-        <xs:attribute name="NumBay" type="xs:integer" use="required"/>
-        <xs:attribute name="BayCount" type="xs:integer" use="required"/>
+        <xs:attribute name="BayCodif" type="xs:string" use="optional"/>
+        <xs:attribute name="NumBay" type="xs:integer" use="optional"/>
+        <xs:attribute name="BayCount" type="xs:integer" use="optional"/>
     </xs:complexType>
 
-    <xs:complexType name="tCompasICDHeader" mixed="true">
+    <xs:complexType name="tCompasICDHeader">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Define specific Compas attributes to identify uniquely one IED with-in a SystemVersion for a given ICD, IEDredundancy, IEDSystemVersionInstance
-                The IEDType defines the set of LD which are supported by the hardware
-                The VendorName, IEDmodel, hwRev, swRev, headerId, headerVersion, headerRevision are issued from the ICD file
+                Define specific Compas attributes to identify uniquely one ICD file with-in a SystemVersion for a given IEDType, IEDredundancy and IEDinstance.
                 The UUID of this combinaison is defined by the ICDSystemVersionUUID.
-                The IEDSubstationinstance is defining the instance number of the IED at the substation.
-                The IEDSystemVersioninstance is defining the instance number of the IED within a bay which is defined for a given MinorSystemVersion and MajorSystemVersion
+                The ICDSystemVersionUUID is unique within the whole SystemVersion and identify a given instance of a hardware
+                The IEDType defines the set of LDevice which are supported by a given type of IED hardware
+                The IEDSubstationinstance identify with a number the IED. This number is unique accross the substation
+                The IEDName is used to replace the /IED@name = ICDSystemVersionUUID of the IED which is defined in the STDfile by the /IED@name = IEDName of this private
+                The VendorName, IEDmodel, hwRev, swRev, headerId, headerVersion, headerRevision are issued from the ICD file thanks to the LPHD0.PhyNam DA and the Header attributes of the ICD
+                The bayLabel defines the bay name where the IED is located; it can be different from the bay name where the Function and LDevice are associated to
                 This private is intended to be used in the STD file (/IED level) and SSD (/LNode level)
-                At LNode level it defines the link between the Function, the associated LD, LN and the implementation in a given IED
-                At IED level, it defines the link of the IED within the SystemVersion
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="ICDSystemVersionUUID" type="xs:string" use="required"/>
+        <xs:attribute name="ICDSystemVersionUUID" type="xs:string" use="optional"/>
         <xs:attribute name="IEDType" type="tCompasIEDType" use="required"/>
         <xs:attribute name="IEDSubstationinstance" type="xs:integer" use="optional"/>
-        <xs:attribute name="IEDSystemVersioninstance" type="xs:integer" use="required"/>
+        <xs:attribute name="IEDSystemVersioninstance" type="xs:integer" use="optional"/>
         <xs:attribute name="IEDName" type="xs:string" use="optional"/>
         <xs:attribute name="VendorName" type="xs:string" use="required"/>
         <xs:attribute name="IEDmodel" type="xs:string" use="required"/>
-        <xs:attribute name="IEDredundancy" type="tCompasIEDRedundancy" use="required"/>
+        <xs:attribute name="IEDredundancy" type="tCompasIEDRedundancy" use="optional"/>
         <xs:attribute name="BayLabel" type="xs:string" use="optional"/>
         <xs:attribute name="hwRev" type="xs:string" use="required"/>
         <xs:attribute name="swRev" type="xs:string" use="required"/>
@@ -272,9 +313,9 @@ SPDX-License-Identifier: Apache-2.0
     <xs:complexType name="tCompasSystemVersion">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Identify the SystemVersion to which the functional Bay and IED belongs to. This Private can be used in /Bay in substation and in the /IED.
-                The MainSystemVersion refers to a set of functional requirements and functions
-                The MinorSystemVersion is linked to a given baykind and defines uniquely the set of ICD which are qualified
+                Identify the SystemVersion to which the functional Bay and IED belongs to. This Private can be used in /Bay in substation and in the /IED
+                The MainSystemVersion is common to all the bays of the substation (i.e. XX = 01 and YY = 01 => 01.01) XX refers to a technical environment YY refers to functional perimeter so to a set of specification
+                The MinorSystemVersion is specific for each bay of the substation (i.e. 01.02.03 for the second line feeder bay with the third IED combinatory)
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="MainSystemVersion" type="xs:string" use="optional"/>
@@ -314,13 +355,21 @@ SPDX-License-Identifier: Apache-2.0
     <xs:complexType name="tCompasTopo">
         <xs:annotation>
             <xs:documentation xml:lang="en">
-                Describe the connectivity node and layout order for a given Bay;can be multiple instanciated in case of bay which is connected to multiple nodes
+                Describe the connectivity node and layout order for a given Bay;can be multiple instanciated in case of bay which is connected to multiple nodes or the busbarcontrol bay
+                The private is intended to be defined at /Bay leel
+                Same logic applies for the :
+                - Node and FLOWSourceBayNode
+                - NodeOrder and FlowSourceNumBayBusBarSectionOrder
+                BusBarSectionOrder is defined once only in the BusBarControlBay to define the order of busbarsections within a given busbar
+                The Direction defines whether the bay feeder shall be represented graphically up or down
+                The ConnectivityNodeName defines the link beetween the bay and electrical node to which it's connected to
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="Node" type="xs:string" use="required"/>
-        <xs:attribute name="NodeOrder" type="xs:integer" use="required"/>
+        <xs:attribute name="NodeOrder" type="xs:integer" use="optional"/>
+        <xs:attribute name="ConnectivityNodeName" type="xs:string" use="optional"/>
         <xs:attribute name="BusBarSectionOrder" type="xs:integer" use="optional"/>
-        <xs:attribute name="Direction" type="tCompasTopoNodeDirection" use="required"/>
+        <xs:attribute name="Direction" type="tCompasTopoNodeDirection" use="optional"/>
     </xs:complexType>
 
     <xs:element name="SclName" type="tCompasSclName"/>
