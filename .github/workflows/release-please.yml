@@ -1,19 +1,36 @@
-# SPDX-FileCopyrightText: 2022 Alliander N.V.
+# SPDX-FileCopyrightText: 2023 Alliander N.V.
 #
 # SPDX-License-Identifier: Apache-2.0
-
-name: Release Project
-
 on:
-  release:
-    types: [ released ]
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+name: release-please
 
 jobs:
-  publish:
+  release_please:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          release-type: maven
+          package-name: compas-core
+  # The logic below handles the github packages publication:
+  publish:
+    needs: release_please
+    if: needs.release_please.outputs.release_created == "true"
+    name: Build and publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
