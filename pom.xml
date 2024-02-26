@@ -17,8 +17,8 @@ SPDX-License-Identifier: Apache-2.0
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <compas.scl.xsd.version>0.0.4</compas.scl.xsd.version>
-        <quarkus.platform.version>3.7.1</quarkus.platform.version>
-        <log4j2.version>2.22.1</log4j2.version>
+        <quarkus.platform.version>3.7.4</quarkus.platform.version>
+        <log4j2.version>2.23.0</log4j2.version>
         <openpojo.version>0.9.1</openpojo.version>
     </properties>
 
