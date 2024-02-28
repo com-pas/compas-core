@@ -19,7 +19,7 @@ jobs:
         run: cat $GITHUB_EVENT_PATH
       - name: Download PR number artifact
         if: github.event.workflow_run.event == 'pull_request'
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v3
         with:
           workflow: SonarCloud Build
           run_id: ${{ github.event.workflow_run.id }}
@@ -54,13 +54,13 @@ jobs:
           git checkout ${{ github.event.workflow_run.head_branch }}
           git clean -ffdx && git reset --hard HEAD
       - name: Cache SonarCloud packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
       - name: Cache Maven packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
@@ -79,7 +79,7 @@ jobs:
             -Dsonar.projectKey=com-pas_compas-core \
             -Dsonar.organization=com-pas )"
       - name: Create custom Maven Settings.xml
-        uses: whelk-io/maven-settings-xml-action@v21
+        uses: whelk-io/maven-settings-xml-action@v22
         with:
           output_file: custom_maven_settings.xml
           servers: '[{ "id": "github-packages-compas", "username": "OWNER", "password": "${{ secrets.GITHUB_TOKEN }}" }]'

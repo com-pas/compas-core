@@ -18,6 +18,7 @@ SPDX-License-Identifier: Apache-2.0
             Version 1.4 Release 2023/02/28
             Version 1.5 Release 2023/04/05
             Version 1.6 Release 2023/12/06
+            Version 1.7 Release 2024/02/07
         </xs:documentation>
     </xs:annotation>
 
@@ -127,10 +128,19 @@ SPDX-License-Identifier: Apache-2.0
             <xs:enumeration value="AUT"/>
             <xs:enumeration value="PDIF"/>
             <xs:enumeration value="GRP"/>
+            <xs:enumeration value="GRPR"/>
             <xs:enumeration value="ASLD"/>
             <xs:enumeration value="GW"/>
             <xs:enumeration value="TG"/>
             <xs:enumeration value="TOPO"/>
+            <xs:enumeration value="SWC"/>
+            <xs:enumeration value="SWT"/>
+            <xs:enumeration value="SW"/>
+            <xs:enumeration value="OUT"/>
+            <xs:enumeration value="CLUS"/>
+            <xs:enumeration value="VIRT"/>
+            <xs:enumeration value="ICT"/>
+            <xs:enumeration value="SYN"/>
             <xs:enumeration value="ADEFINIR"/>
             <xs:enumeration value="IEDTEST"/>
         </xs:restriction>
