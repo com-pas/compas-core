@@ -19,6 +19,7 @@ SPDX-License-Identifier: Apache-2.0
             Version 1.5 Release 2023/04/05
             Version 1.6 Release 2023/12/06
             Version 1.7 Release 2024/02/07
+            Version 1.8 Release 2024/05/16
         </xs:documentation>
     </xs:annotation>
 
@@ -250,6 +251,17 @@ SPDX-License-Identifier: Apache-2.0
                 BusBar1 --BF1---BF2-----||--BF3---BF4--------_----BF5------
                 BusBar2 --BF7---BF8-----||--BF9---BF10-------_----BF11-----
 
+                Example values :
+                FlowSourceVoltageLevel -> HT or THT or voltageLevel.name (3, 4, 5, 6 or 7)
+                FlowSourceIEDType -> BCU, SCU-LIGNE, SCU-TG, TOPO....
+                FlowSourceBayKind -> Bay Kind of the Bay (CB, TR, LI, TG, AP...) same meaning as Bay@BayCodif of the Compas:Bay node
+                FlowSourceBayNum -> BayNum of the bay same meaning as Bay@NumBay of the Compas:Bay node
+                FlowSourceBayNode -> BayNum of the bay same meaning as Bay@NumBay of the Compas:Topo@Node attribute
+                FlowSourceBayNodeOrder -> There are multiple cases
+                Case 1 FlowSourceBayKind +AND+ FlowSourceBayNum have values (not empty); the source IED is searched within a unique bay defined by bay attributes
+                Case 2 FlowSourceBayNode +AND+ FlowSourceBayNodeOrder have values (not empty); the source IED is searched within a unique bay defined by bay attributes
+                Case (1 +OR+ 2) AND (FlowSourceIEDType (not empty) +OR + FlowSourceIEDredundancy (not empty) +OR+ FlowIEDSystemVersioninstance (not empty)); the source IED is searched within a predefined bay and for given IED attributes
+                Case 3 FlowSourceIEDType (not empty) +OR + FlowSourceIEDredundancy (not empty) +OR+ FlowIEDSystemVersioninstance (not empty); the source IED is searched for a given and unique bay and for given IED attributs
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="dataStreamKey" type="xs:string" use="optional"/>
@@ -266,6 +278,7 @@ SPDX-License-Identifier: Apache-2.0
         <xs:attribute name="FlowSourceBayNode" type="xs:integer" use="optional"/>
         <xs:attribute name="FlowSourceBayNodeOrder" type="xs:integer" use="optional"/>
         <xs:attribute name="FlowSourceNumBayBusBarSectionOrder" type="xs:integer" use="optional"/>
+        <xs:attribute name="FlowIEDSystemVersioninstance" type="xs:integer" use="optional"/>
         <xs:attribute name="FlowID" type="xs:string" use="optional"/>
         <xs:attribute name="FlowStatus" type="tCompasFlowStatus" use="optional"/>
         <xs:attribute name="FlowKind" type="tCompasFlowKind" use="optional"/>
