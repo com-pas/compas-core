@@ -17,8 +17,8 @@ SPDX-License-Identifier: Apache-2.0
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <compas.scl.xsd.version>0.0.4</compas.scl.xsd.version>
-        <quarkus.platform.version>3.7.4</quarkus.platform.version>
-        <log4j2.version>2.23.0</log4j2.version>
+        <quarkus.platform.version>3.9.2</quarkus.platform.version>
+        <log4j2.version>2.23.1</log4j2.version>
         <openpojo.version>0.9.1</openpojo.version>
     </properties>
 
@@ -139,7 +139,7 @@ SPDX-License-Identifier: Apache-2.0
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.12.1</version>
+                    <version>3.13.0</version>
                 </plugin>
 
                 <plugin>
@@ -157,7 +157,7 @@ SPDX-License-Identifier: Apache-2.0
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.3.1</version>
                     <executions>
                         <execution>
                             <id>attach-sources</id>
@@ -197,7 +197,7 @@ SPDX-License-Identifier: Apache-2.0
                 <sonar.language>java</sonar.language>
 
                 <!-- JaCoCo Properties -->
-                <jacoco.version>0.8.11</jacoco.version>
+                <jacoco.version>0.8.12</jacoco.version>
                 <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
             </properties>
 
