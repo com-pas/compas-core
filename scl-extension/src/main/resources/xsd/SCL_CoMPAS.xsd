@@ -20,6 +20,7 @@ SPDX-License-Identifier: Apache-2.0
             Version 1.6 Release 2023/12/06
             Version 1.7 Release 2024/02/07
             Version 1.8 Release 2024/05/16
+            Version 1.9 Release 2024/06/25
         </xs:documentation>
     </xs:annotation>
 
@@ -142,6 +143,7 @@ SPDX-License-Identifier: Apache-2.0
             <xs:enumeration value="VIRT"/>
             <xs:enumeration value="ICT"/>
             <xs:enumeration value="SYN"/>
+            <xs:enumeration value="OND"/>
             <xs:enumeration value="ADEFINIR"/>
             <xs:enumeration value="IEDTEST"/>
         </xs:restriction>
@@ -399,6 +401,25 @@ SPDX-License-Identifier: Apache-2.0
         <xs:attribute name="Direction" type="tCompasTopoNodeDirection" use="optional"/>
     </xs:complexType>
 
+    <xs:simpleType name="tCompasLNodeStatus">
+        <xs:annotation>
+            <xs:documentation>Status of the LNode on or off</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:Name">
+            <xs:enumeration value="on">
+                <xs:annotation>
+                    <xs:documentation>IED/LD/LN.Mod associated to LNode has to be turned on</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="off">
+                <xs:annotation>
+                    <xs:documentation>IED/LD/LN.Mod associated to LNode has to be turned off</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="LNodeStatus" type="tCompasLNodeStatus"/>
     <xs:element name="SclName" type="tCompasSclName"/>
     <xs:element name="SclFileType" type="tCompasSclFileType"/>
     <xs:element name="Labels" type="tCompasLabels"/>
