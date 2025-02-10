@@ -18,7 +18,8 @@ public enum SclFileType {
     CID("Configured IED Description"),
     SED("System Exchange Description"),
     ISD("IED Specification Description"),
-    STD("System Template Definition");
+    STD("System Template Definition"),
+    FSD("Function Specification Description");
 
     private final String description;
 
@@ -30,3 +31,4 @@ public enum SclFileType {
         return description;
     }
 }
+
