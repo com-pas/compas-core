@@ -31,4 +31,3 @@ public enum SclFileType {
         return description;
     }
 }
-
