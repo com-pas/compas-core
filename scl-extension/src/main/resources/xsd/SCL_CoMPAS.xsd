@@ -21,6 +21,7 @@ SPDX-License-Identifier: Apache-2.0
             Version 1.7 Release 2024/02/07
             Version 1.8 Release 2024/05/16
             Version 1.9 Release 2024/06/25
+            Version 2.0 Release 2026/02/04
         </xs:documentation>
     </xs:annotation>
 
@@ -42,6 +43,11 @@ SPDX-License-Identifier: Apache-2.0
             <xs:documentation>File type of the SCL configuration file</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:Name">
+            <xs:enumeration value="SCL">
+                <xs:annotation>
+                    <xs:documentation>ICD generic template definition with datamodel</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
             <xs:enumeration value="SSD">
                 <xs:annotation>
                     <xs:documentation>Substation Specification Description</xs:documentation>
@@ -104,50 +110,6 @@ SPDX-License-Identifier: Apache-2.0
         </xs:sequence>
     </xs:complexType>
 
-    <xs:simpleType name="tCompasIEDType">
-        <xs:annotation>
-            <xs:documentation xml:lang="en">
-                IED type to be used to identity the set of LDevice.inst handled by the IED
-            </xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="SCU"/>
-            <xs:enumeration value="SCU-MCB"/>
-            <xs:enumeration value="SCU-TG"/>
-            <xs:enumeration value="SCU-ORG"/>
-            <xs:enumeration value="STD"/>
-            <xs:enumeration value="BCU"/>
-            <xs:enumeration value="BCU-LIGNE"/>
-            <xs:enumeration value="BCU-CBO"/>
-            <xs:enumeration value="BPU"/>
-            <xs:enumeration value="MU"/>
-            <xs:enumeration value="SAMU"/>
-            <xs:enumeration value="PROT"/>
-            <xs:enumeration value="TAC"/>
-            <xs:enumeration value="PX"/>
-            <xs:enumeration value="PDIS"/>
-            <xs:enumeration value="PDB"/>
-            <xs:enumeration value="AUT"/>
-            <xs:enumeration value="PDIF"/>
-            <xs:enumeration value="GRP"/>
-            <xs:enumeration value="GRPR"/>
-            <xs:enumeration value="ASLD"/>
-            <xs:enumeration value="GW"/>
-            <xs:enumeration value="TG"/>
-            <xs:enumeration value="TOPO"/>
-            <xs:enumeration value="SWC"/>
-            <xs:enumeration value="SWT"/>
-            <xs:enumeration value="SW"/>
-            <xs:enumeration value="OUT"/>
-            <xs:enumeration value="CLUS"/>
-            <xs:enumeration value="VIRT"/>
-            <xs:enumeration value="ICT"/>
-            <xs:enumeration value="SYN"/>
-            <xs:enumeration value="OND"/>
-            <xs:enumeration value="ADEFINIR"/>
-            <xs:enumeration value="IEDTEST"/>
-        </xs:restriction>
-    </xs:simpleType>
 
     <xs:simpleType name="tCompasFlowStatus">
         <xs:annotation>
@@ -222,70 +184,6 @@ SPDX-License-Identifier: Apache-2.0
             <xs:enumeration value="N/A"/>
         </xs:restriction>
     </xs:simpleType>
-
-    <xs:complexType name="tCompasFlow">
-        <xs:annotation>
-            <xs:documentation xml:lang="en">
-                Define the link between specific Compas attributes and one ExtRef within the STD file. The dataStreamKey is the key with the ExtRef.desc.
-                The ExtRef attributes are directly linked to the attributes of the ExRef.
-                The FlowID is used to link additional informations to the flow as the criteria.
-                The FlowStatus define whether if the flow is qualified, non qualified or untested accordingly to the source IED which is bellonging to a define SystemVersion
-                The FlowSourceBayKind is the kind of bay (line feeder LI, CB busbarcontrol...) from which the DO to bind is located
-                The FlowSourceIEDType is the IED type which can be binded; if missing any IED Type can be binded
-                The FlowSourceIEDredundancy is the IED redundancy which can be binded; if missing any IED redundancy can be binded
-                The FlowSourceBayNum is the instance number of the bay for a given baykind within the whole substation
-                The FLOWSourceBayNode is the node on 3 digits where the bay from which the IED send the DO is connected to
-                The FlowSourceNumBayBusBarSectionOrder define the number of the bay which are connected to the same BayNode from left to right
-                Example
-                _(busbarsection disconnector)
-                ||(busbarsection switchbreaker)
-                BFx BayFeederx
-                BF1, 3, 7 and 9 are Transformer Feeder bay, FlowSourceBayKind = TR, FlowSourceBayNum=1 for BF1, 2 for BF3, 3 for BF7 and 4 for BF9
-                Other BFx are Line Feeder bay, FlowSourceBayKind = LI, FlowSourceBayNum=1 for BF2, 3 for BF4, 4 for BF5, 5 for BF6, 6 for BF8...
-
-                The BF1 and BF2 are connected to the FLOWSourceBayNode = 110, FlowSourceNumBayBusBarSectionOrder = 1 for BF1 and FlowSourceNumBayBusBarSectionOrder = 2 for BF2
-                The BF3 and BF4 are connected to the FLOWSourceBayNode = 121, FlowSourceNumBayBusBarSectionOrder = 1 for BF3 and FlowSourceNumBayBusBarSectionOrder = 2 for BF4
-                The BF5 is connected to the FLOWSourceBayNode = 122, FlowSourceNumBayBusBarSectionOrder = 1 for BF5
-                The BF7 and BF8 are connected to the FLOWSourceBayNode = 210, FlowSourceNumBayBusBarSectionOrder = 1 for BF7 and FlowSourceNumBayBusBarSectionOrder = 2 for BF8
-                The BF9 and BF10 are connected to the FLOWSourceBayNode = 221, FlowSourceNumBayBusBarSectionOrder = 1 for BF9 and FlowSourceNumBayBusBarSectionOrder = 2 for BF10
-                The BF11 is connected to the FLOWSourceBayNode = 222, FlowSourceNumBayBusBarSectionOrder = 1 for BF11
-
-                BusBar1 --BF1---BF2-----||--BF3---BF4--------_----BF5------
-                BusBar2 --BF7---BF8-----||--BF9---BF10-------_----BF11-----
-
-                Example values :
-                FlowSourceVoltageLevel -> HT or THT or voltageLevel.name (3, 4, 5, 6 or 7)
-                FlowSourceIEDType -> BCU, SCU-LIGNE, SCU-TG, TOPO....
-                FlowSourceBayKind -> Bay Kind of the Bay (CB, TR, LI, TG, AP...) same meaning as Bay@BayCodif of the Compas:Bay node
-                FlowSourceBayNum -> BayNum of the bay same meaning as Bay@NumBay of the Compas:Bay node
-                FlowSourceBayNode -> BayNum of the bay same meaning as Bay@NumBay of the Compas:Topo@Node attribute
-                FlowSourceBayNodeOrder -> There are multiple cases
-                Case 1 FlowSourceBayKind +AND+ FlowSourceBayNum have values (not empty); the source IED is searched within a unique bay defined by bay attributes
-                Case 2 FlowSourceBayNode +AND+ FlowSourceBayNodeOrder have values (not empty); the source IED is searched within a unique bay defined by bay attributes
-                Case (1 +OR+ 2) AND (FlowSourceIEDType (not empty) +OR + FlowSourceIEDredundancy (not empty) +OR+ FlowIEDSystemVersioninstance (not empty)); the source IED is searched within a predefined bay and for given IED attributes
-                Case 3 FlowSourceIEDType (not empty) +OR + FlowSourceIEDredundancy (not empty) +OR+ FlowIEDSystemVersioninstance (not empty); the source IED is searched for a given and unique bay and for given IED attributs
-            </xs:documentation>
-        </xs:annotation>
-        <xs:attribute name="dataStreamKey" type="xs:string" use="optional"/>
-        <xs:attribute name="ExtRefiedName" type="xs:string" use="optional"/>
-        <xs:attribute name="ExtRefldinst" type="xs:string" use="optional"/>
-        <xs:attribute name="ExtRefprefix" type="xs:string" use="optional"/>
-        <xs:attribute name="ExtReflnClass" type="xs:string" use="optional"/>
-        <xs:attribute name="ExtReflnInst" type="xs:string" use="optional"/>
-        <xs:attribute name="FlowSourceVoltageLevel" type="xs:string" use="optional"/>
-        <xs:attribute name="FlowSourceIEDType" type="tCompasIEDType" use="optional"/>
-        <xs:attribute name="FlowSourceIEDredundancy" type="tCompasIEDRedundancy" use="optional"/>
-        <xs:attribute name="FlowSourceBayKind" type="xs:string" use="optional"/>
-        <xs:attribute name="FlowSourceBayNum" type="xs:integer" use="optional"/>
-        <xs:attribute name="FlowSourceBayNode" type="xs:integer" use="optional"/>
-        <xs:attribute name="FlowSourceBayNodeOrder" type="xs:integer" use="optional"/>
-        <xs:attribute name="FlowSourceNumBayBusBarSectionOrder" type="xs:integer" use="optional"/>
-        <xs:attribute name="FlowIEDSystemVersioninstance" type="xs:integer" use="optional"/>
-        <xs:attribute name="FlowID" type="xs:string" use="optional"/>
-        <xs:attribute name="FlowStatus" type="tCompasFlowStatus" use="optional"/>
-        <xs:attribute name="FlowKind" type="tCompasFlowKind" use="optional"/>
-    </xs:complexType>
-
     <xs:complexType name="tCompasBay">
         <xs:annotation>
             <xs:documentation xml:lang="en">
@@ -324,7 +222,7 @@ SPDX-License-Identifier: Apache-2.0
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="ICDSystemVersionUUID" type="xs:string" use="optional"/>
-        <xs:attribute name="IEDType" type="tCompasIEDType" use="required"/>
+        <xs:attribute name="IEDType" type="xs:string" use="required"/>
         <xs:attribute name="IEDSubstationinstance" type="xs:integer" use="optional"/>
         <xs:attribute name="IEDSystemVersioninstance" type="xs:integer" use="optional"/>
         <xs:attribute name="IEDName" type="xs:string" use="optional"/>
@@ -371,16 +269,6 @@ SPDX-License-Identifier: Apache-2.0
         <xs:attribute name="LDeviceID" type="xs:string" use="optional"/>
     </xs:complexType>
 
-    <xs:complexType name="tCompasCriteria">
-        <xs:annotation>
-            <xs:documentation xml:lang="en">
-                Identifies the Criteria linked to a Flow or LDevice or Function from the user specific catalog of criteria
-            </xs:documentation>
-        </xs:annotation>
-        <xs:attribute name="ObjectID" type="xs:string" use="optional"/>
-        <xs:attribute name="CriteriaAssociationID" type="xs:string" use="optional"/>
-    </xs:complexType>
-
     <xs:complexType name="tCompasTopo">
         <xs:annotation>
             <xs:documentation xml:lang="en">
@@ -401,34 +289,85 @@ SPDX-License-Identifier: Apache-2.0
         <xs:attribute name="Direction" type="tCompasTopoNodeDirection" use="optional"/>
     </xs:complexType>
 
-    <xs:simpleType name="tCompasLNodeStatus">
-        <xs:annotation>
-            <xs:documentation>Status of the LNode on or off</xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:Name">
-            <xs:enumeration value="on">
-                <xs:annotation>
-                    <xs:documentation>IED/LD/LN.Mod associated to LNode has to be turned on</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="off">
-                <xs:annotation>
-                    <xs:documentation>IED/LD/LN.Mod associated to LNode has to be turned off</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:element name="LNodeStatus" type="tCompasLNodeStatus"/>
     <xs:element name="SclName" type="tCompasSclName"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="SCL"/>
+                <xs:enumeration value="ICD"/>
+                <xs:enumeration value="SCD"/>
+            </xs:restriction>
+        </xs:appinfo>
+    </xs:annotation>
     <xs:element name="SclFileType" type="tCompasSclFileType"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="SCL"/>
+                <xs:enumeration value="ICD"/>
+                <xs:enumeration value="SCD"/>
+                <xs:enumeration value="SCDPROXY"/>
+            </xs:restriction>
+        </xs:appinfo>
+    </xs:annotation>
     <xs:element name="Labels" type="tCompasLabels"/>
-    <xs:element name="Flow" type="tCompasFlow"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="SCL"/>
+                <xs:enumeration value="ICD"/>
+                <xs:enumeration value="SCD"/>
+            </xs:restriction>
+        </xs:appinfo>
+    </xs:annotation>
     <xs:element name="Bay" type="tCompasBay"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="SCD"/>
+            </xs:restriction>
+        </xs:appinfo>
+    </xs:annotation>
     <xs:element name="LDevice" type="tCompasLDevice"/>
-    <xs:element name="Criteria" type="tCompasCriteria"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="SCL"/>
+                <xs:enumeration value="ICD"/>
+                <xs:enumeration value="SCD"/>
+            </xs:restriction>
+        </xs:appinfo>
+    </xs:annotation>
     <xs:element name="ICDHeader" type="tCompasICDHeader"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="SCD"/>
+            </xs:restriction>
+        </xs:appinfo>
+    </xs:annotation>
     <xs:element name="SystemVersion" type="tCompasSystemVersion"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="SCD"/>
+            </xs:restriction>
+        </xs:appinfo>
+    </xs:annotation>
     <xs:element name="Function" type="tCompasFunction"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="SCD"/>
+            </xs:restriction>
+        </xs:appinfo>
+    </xs:annotation>
     <xs:element name="Topo" type="tCompasTopo"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="SCD"/>
+            </xs:restriction>
+        </xs:appinfo>
+    </xs:annotation>
 </xs:schema>
