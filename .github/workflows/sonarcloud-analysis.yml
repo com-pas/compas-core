@@ -44,7 +44,7 @@ jobs:
         full_name: ${{ github.event.repository.full_name }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v6
       with:
         fetch-depth: 0
     - name: Download build artifacts
